@@ -1,0 +1,89 @@
+//
+//  SignInViewController.swift
+//  SSACCommu
+//
+//  Created by 성민주민주 on 2022/01/03.
+//
+
+import UIKit
+
+class SignInViewController: BaseViewController {
+    
+    var mainView = SignInView()
+    var viewModel = SignInViewModel()
+    
+    
+    override func loadView() {
+        self.view = mainView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupNavigationBar()
+        bind()
+        addAction()
+        
+        
+        
+    }
+    
+    func setupNavigationBar() {
+        self.navigationItem.title = "새싹농장 입장하기"
+        self.navigationItem.backButtonTitle = ""
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.fill"), style: .done, target: self, action: #selector(back))
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc func back() {
+        self.navigationController?.popViewController(animated: true)
+        
+    }
+    
+    func bind() {
+        viewModel.email.bind { text in
+            print(text)
+            self.mainView.emailTextField.text = text
+        }
+        
+        viewModel.password.bind { text in
+            print(text)
+            self.mainView.passwordTextField.text = text
+        }
+    }
+    
+    func addAction() {
+        
+        self.mainView.emailTextField.addTarget(self, action: #selector(
+            emailTextFieldDidChange(_:)), for: .editingChanged)
+        
+        self.mainView.passwordTextField.addTarget(self, action: #selector(
+            passwordTextFieldDidChange(_:)), for: .editingChanged)
+        
+        self.mainView.signButton.addTarget(self, action: #selector(signInButtonClicked), for: .touchUpInside)
+        
+    }
+    
+    @objc func emailTextFieldDidChange(_ textfield: UITextField) {
+        viewModel.email.value = textfield.text ?? ""
+    }
+    
+    @objc func passwordTextFieldDidChange(_ textfield: UITextField) {
+        viewModel.password.value = textfield.text ?? ""
+    }
+    
+    @objc func signInButtonClicked() {
+        print(#function)
+        viewModel.postUserSignIn {
+            DispatchQueue.main.async {
+                
+                
+                guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+                    return
+                }
+                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: PostViewController())
+                windowScene.windows.first?.makeKeyAndVisible()
+            }
+        }
+    }
+}
