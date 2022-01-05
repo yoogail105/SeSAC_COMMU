@@ -34,8 +34,6 @@ class SignUpView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configure()
-        constraints()
     }
 
     
@@ -45,9 +43,6 @@ class SignUpView: UIView {
         passwordTextField.setupTextField(placeholderText: "비밀번호")
         confirmPasswordTextField.setupTextField(placeholderText: "비밀번호 확인")
         signButton.setupButton(title: "가입하기")
-    
-        
-        
     }
     
     

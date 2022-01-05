@@ -11,7 +11,7 @@ import UIKit
 extension UIButton {
     func setupButton(title: String) {
         self.layer.cornerRadius = 5
-        self.backgroundColor = UIColor(named: "SSACColor")
+        self.backgroundColor = UIColor(named: "SSACGreen")
         self.setTitle(title, for: .normal)
         self.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         self.setTitleColor(.white, for: .normal)

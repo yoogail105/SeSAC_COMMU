@@ -74,7 +74,7 @@ class MainView: UIView {
         signInButton.setTitle("로그인", for: .normal)
         //signInButton.titleLabel?.font = UIFont.systemFont(ofSize: 10)
         signInButton.titleLabel?.font = UIFont.systemFont(ofSize: 10, weight: .medium)
-        signInButton.setTitleColor(UIColor(named: "SSACColor"), for: .normal)
+        signInButton.setTitleColor(UIColor(named: "SSACGreen"), for: .normal)
     }
     
     

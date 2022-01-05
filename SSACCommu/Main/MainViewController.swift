@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: BaseViewController {
     
-    
+    let userDefaults = UserDefaults.standard
     var mainView = MainView()
     
     override func loadView() {
@@ -20,9 +20,8 @@ class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        printUserData()
         mainView.signUpButton.addTarget(self, action: #selector(signUpButtonClicked), for: .touchUpInside)
-        
-        
         mainView.signInButton.addTarget(self, action: #selector(signInButtonClicked), for: .touchUpInside)
         
     }
@@ -35,5 +34,15 @@ class MainViewController: BaseViewController {
     @objc func signInButtonClicked() {
         let vc = SignInViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func printUserData() {
+        print(#function)
+        print("validToken:",self.userDefaults.validToken)
+        print("token:",self.userDefaults.token)
+        print("id:", self.userDefaults.id)
+        print("nickname:", self.userDefaults.nickname)
+        print("email:", self.userDefaults.email)
+        print("confirmed:", self.userDefaults.confirmed)
     }
 }

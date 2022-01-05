@@ -10,11 +10,19 @@ import SnapKit
 
 class PostView: UIView {
     
-    let label: UILabel = {
-       let label = UILabel()
-        label.text = "board뷰"
-        label.textColor = .red
-        return label
+    let headerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .green
+        return view
+    }()
+
+    
+    var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .cyan
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        return tableView
     }()
     
     
@@ -26,8 +34,7 @@ class PostView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configure()
-        constraints()
+        print(fatalError())
     }
     
     func configure() {
@@ -35,14 +42,23 @@ class PostView: UIView {
     }
     
     func constraints() {
+        [headerView, tableView].forEach {
+            addSubview($0)
+        }
         
-        self.addSubview(label)
-        label.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview()
+        headerView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.height.equalTo(44)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+        }
+        
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(headerView)
+            $0.bottom.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
         
     }
-    
-    
 }

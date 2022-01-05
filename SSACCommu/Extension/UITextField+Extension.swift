@@ -20,7 +20,7 @@ extension UITextField {
     func setupTextField(placeholderText: String) {
         
         self.layer.borderWidth = 1.5
-        self.layer.borderColor = UIColor(named: "borderGray")?.cgColor
+        self.layer.borderColor = UIColor(named: "SSACGray")?.cgColor
         self.layer.backgroundColor = UIColor.white.cgColor
         self.layer.cornerRadius = 5
         self.placeholder = placeholderText
