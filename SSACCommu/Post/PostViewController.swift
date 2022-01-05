@@ -14,7 +14,15 @@ class PostViewController: BaseViewController {
     
     let postView = PostView()
     let viewModel = PostViewModel()
-    
+    var validToken = UserDefaults.standard.validToken {
+        didSet {
+            print("토큰 설정 바뀜")
+            if !validToken {
+                invalidToken()
+                print(validToken)
+            }
+        }
+    }
     
     override func loadView() {
         self.view = postView
@@ -42,6 +50,19 @@ class PostViewController: BaseViewController {
         addAction()
         printUserData()
         
+        viewModel.getPosts {
+            print("postViewmModel:",#function)
+        }
+      
+        
+    }
+    
+    func invalidToken() {
+        print(#function)
+        let vc = MainViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+       
     }
     
     //self.mainView.emailTextField.addTarget(self, action: #selector(
@@ -69,6 +90,7 @@ class PostViewController: BaseViewController {
     
     @objc func addPostButtonClicked() {
         let vc = PostEditViewController()
+        vc.isNewPost = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

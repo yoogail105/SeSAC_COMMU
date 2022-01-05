@@ -43,4 +43,3 @@ struct Role: Codable {
         case type
     }
 }
-

@@ -25,6 +25,7 @@ class SignInViewModel {
             guard let userData = userData else {
                 return
             }
+            
             self.userDefaults.validToken = true
             self.userDefaults.token = userData.jwt
             self.userDefaults.id = userData.user.id

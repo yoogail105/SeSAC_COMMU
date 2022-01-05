@@ -68,8 +68,6 @@ class SignInViewController: BaseViewController {
         print(#function)
         viewModel.postUserSignIn {
             DispatchQueue.main.async {
-                
-                
                 guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
                     return
                 }

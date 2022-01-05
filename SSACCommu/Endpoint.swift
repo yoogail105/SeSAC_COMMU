@@ -93,10 +93,12 @@ extension URLSession {
                 guard response.statusCode == 200 else {
                     if response.statusCode == 401 {
                         print("토큰만료: 로그아웃합니다.")
-                        UserDefaults.standard.validToken = false
-                        UserDefaults.standard.token = ""
+                        completion(nil, .unAuthorized)
                         return
+                    } else {
+                        completion(nil, .failed)
                     }
+                    
                     // 오류 확인
                     do {
                         print("statusCode: ", response.statusCode)
@@ -112,13 +114,12 @@ extension URLSession {
                         return
                     }
                 }
-                
-                
+
                 
                 do {
                     let decoder = JSONDecoder()
-                    let userData = try decoder.decode(T.self, from: data)
-                    completion(userData, nil)
+                    let result = try decoder.decode(T.self, from: data)
+                    completion(result, nil)
                 } catch {
                     print("do-catch: 여기오류")
                     completion(nil, .invalidData)

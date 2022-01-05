@@ -9,4 +9,22 @@ import Foundation
 
 class PostViewModel {
     
+//    var posts: Observable<Post> = Observable(Post)
+    
+    func getPosts(completion: @escaping () -> Void) {
+        print(#function)
+        
+        APIService.loadPosts { post, error in
+            if error == APIError.unAuthorized {
+                UserDefaults.standard.validToken = false
+                
+            }
+            
+            guard let post = post else {
+                return
+            }
+
+            completion()
+        }
+    }
 }

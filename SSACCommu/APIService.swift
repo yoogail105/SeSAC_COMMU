@@ -12,6 +12,8 @@ enum APIError: Error {
     case noData
     case failed
     case invalidData
+    case unAuthorized
+    
 }
 
 
@@ -50,10 +52,12 @@ class APIService {
     }
     
     // MARK: 포스트 조회(전체 포스트 조회)
-    static func checkPosts(confirmNewPassword: String, completion: @escaping (User?, APIError?) -> Void) {
+    static func loadPosts(completion: @escaping (Post?, APIError?) -> Void) {
         
         var request = URLRequest(url: Endpoint.posts.url)
+        let token = UserDefaults.standard.token!
         request.httpMethod = Method.GET.rawValue
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         URLSession.request(endpoint: request, completion: completion)
     }
@@ -70,7 +74,7 @@ class APIService {
 //
 //
     
-    static func loadPost(text: String, completion: @escaping (User?, APIError?) -> Void) {
+    static func addPosts(text: String, completion: @escaping (User?, APIError?) -> Void) {
         
         
         var request = URLRequest(url: Endpoint.posts.url)

@@ -46,6 +46,8 @@
 		23C3ECAD2785E85A0044B44B /* ChangePWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3ECAC2785E85A0044B44B /* ChangePWViewController.swift */; };
 		23C3ECAF2785F8060044B44B /* PostEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3ECAE2785F8060044B44B /* PostEditViewController.swift */; };
 		23C3ECB12785F84F0044B44B /* PostEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3ECB02785F84F0044B44B /* PostEditViewModel.swift */; };
+		23C3ECB42785FD490044B44B /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = 23C3ECB32785FD490044B44B /* RxKeyboard */; };
+		23C3ECB627860EA50044B44B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3ECB527860EA50044B44B /* Post.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,7 @@
 		23C3ECAC2785E85A0044B44B /* ChangePWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePWViewController.swift; sourceTree = "<group>"; };
 		23C3ECAE2785F8060044B44B /* PostEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditViewController.swift; sourceTree = "<group>"; };
 		23C3ECB02785F84F0044B44B /* PostEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditViewModel.swift; sourceTree = "<group>"; };
+		23C3ECB527860EA50044B44B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23C3EC76278333E70044B44B /* RxSwift in Frameworks */,
+				23C3ECB42785FD490044B44B /* RxKeyboard in Frameworks */,
 				23C3EC74278333E70044B44B /* RxCocoa in Frameworks */,
 				23C3EC242782285B0044B44B /* SnapKit in Frameworks */,
 			);
@@ -129,8 +133,7 @@
 				23C3EC25278229420044B44B /* LoginViewController.swift */,
 				23C3EC7E278368380044B44B /* Endpoint.swift */,
 				23C3EC7C278366BE0044B44B /* APIService.swift */,
-				23C3EC9427844BF60044B44B /* ErrorDetail.swift */,
-				23C3EC8B278410D00044B44B /* User.swift */,
+				23C3ECB727860EB00044B44B /* Model */,
 				23C3EC6F278333B00044B44B /* Observable.swift */,
 				23C3ECA92785E8430044B44B /* Profile */,
 				23C3EC92278415DA0044B44B /* Post */,
@@ -219,6 +222,16 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		23C3ECB727860EB00044B44B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				23C3EC9427844BF60044B44B /* ErrorDetail.swift */,
+				23C3EC8B278410D00044B44B /* User.swift */,
+				23C3ECB527860EA50044B44B /* Post.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -239,6 +252,7 @@
 				23C3EC232782285B0044B44B /* SnapKit */,
 				23C3EC73278333E70044B44B /* RxCocoa */,
 				23C3EC75278333E70044B44B /* RxSwift */,
+				23C3ECB32785FD490044B44B /* RxKeyboard */,
 			);
 			productName = SSACCommu;
 			productReference = 23185DEC2780535F0004FBFF /* SSACCommu.app */;
@@ -271,6 +285,7 @@
 			packageReferences = (
 				23C3EC222782285B0044B44B /* XCRemoteSwiftPackageReference "SnapKit" */,
 				23C3EC72278333E70044B44B /* XCRemoteSwiftPackageReference "RxSwift" */,
+				23C3ECB22785FD490044B44B /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 			);
 			productRefGroup = 23185DED2780535F0004FBFF /* Products */;
 			projectDirPath = "";
@@ -317,6 +332,7 @@
 				23C3EC2E2782316A0044B44B /* UIButton+Extension.swift in Sources */,
 				23C3EC7F278368380044B44B /* Endpoint.swift in Sources */,
 				23C3ECB12785F84F0044B44B /* PostEditViewModel.swift in Sources */,
+				23C3ECB627860EA50044B44B /* Post.swift in Sources */,
 				23C3EC9527844BF60044B44B /* ErrorDetail.swift in Sources */,
 				23C3EC2C27822FE00044B44B /* UITextField+Extension.swift in Sources */,
 				23C3ECAF2785F8060044B44B /* PostEditViewController.swift in Sources */,
@@ -559,6 +575,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		23C3ECB22785FD490044B44B /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:RxSwiftCommunity/RxKeyboard.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -576,6 +600,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 23C3EC72278333E70044B44B /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		23C3ECB32785FD490044B44B /* RxKeyboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 23C3ECB22785FD490044B44B /* XCRemoteSwiftPackageReference "RxKeyboard" */;
+			productName = RxKeyboard;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
