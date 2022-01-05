@@ -19,26 +19,18 @@ class SignInViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupNavigationBar()
+
         bind()
         addAction()
-        
-        
-        
     }
     
-    func setupNavigationBar() {
+
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         self.navigationItem.title = "새싹농장 입장하기"
-        self.navigationItem.backButtonTitle = ""
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.fill"), style: .done, target: self, action: #selector(back))
-        self.navigationItem.leftBarButtonItem = backButton
-    }
-    
-    @objc func back() {
-        self.navigationController?.popViewController(animated: true)
         
     }
+    
     
     func bind() {
         viewModel.email.bind { text in

@@ -25,15 +25,10 @@ class SignUpViewController: BaseViewController {
         addAction()
     }
     
-      @objc func back() {
-            self.navigationController?.popViewController(animated: true)
-        }
 
-    func setupNavigationBar() {
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         self.navigationItem.title = "새싹농장 가입하기"
-        self.navigationItem.backButtonTitle = ""
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.fill"), style: .done, target: self, action: #selector(back))
-        self.navigationItem.leftBarButtonItem = backButton
     }
     
     func bind() {

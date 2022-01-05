@@ -20,17 +20,26 @@ class PostViewController: BaseViewController {
         self.view = postView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         postView.tableView.delegate = self
         postView.tableView.dataSource = self
-        
         postView.tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
-        postView.tableView.rowHeight = UITableView.automaticDimension
-        
-        postView.tableView.backgroundColor = UIColor(named: "SSACGray")
-        
+        postView.tableView.backgroundColor = .white
+        addAction()
         printUserData()
         
     }
@@ -48,10 +57,19 @@ class PostViewController: BaseViewController {
         print("confirmed:", self.userDefaults.confirmed)
     }
     
-    
-    
+    func addAction() {
+        self.postView.profileButton.addTarget(self, action: #selector(profileButtonClicked), for: .touchUpInside)
+        self.postView.addPostButton.addTarget(self, action: #selector(addPostButtonClicked), for: .touchUpInside)
+    }
     @objc func profileButtonClicked() {
-        
+        // 비밀번호 변경페이지로 이동
+        let vc = ChangePWViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func addPostButtonClicked() {
+        let vc = PostEditViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -78,6 +96,7 @@ extension PostViewController: UITableViewDataSource {
 extension PostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         print("select: \(indexPath.row)")
+        //postDetailView로 이동하기
     }
     
 }

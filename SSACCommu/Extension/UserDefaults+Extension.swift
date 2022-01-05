@@ -8,13 +8,19 @@
 import Foundation
 
 extension UserDefaults {
-    private enum UserDefaultsKeys: String {
+    private enum UserDefaultsKeys: String, CaseIterable {
         case validToken
         case token
         case id
         case nickname
         case email
         case confirmed
+    }
+    
+    func reset() {
+        UserDefaultsKeys.allCases.forEach {
+            removeObject(forKey: $0.rawValue)
+        }
     }
     
     var validToken: Bool {

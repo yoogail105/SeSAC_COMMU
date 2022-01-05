@@ -16,4 +16,13 @@ extension UIButton {
         self.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         self.setTitleColor(.white, for: .normal)
     }
+    
+    func greenButtonImageSize(imageName: String, size: Int) {
+        
+        let config = UIImage.SymbolConfiguration(pointSize: CGFloat(size), weight: .light, scale: .default)
+        let image = UIImage(systemName: imageName, withConfiguration: config)
+        self.setImage(image, for: .normal)
+        self.tintColor = UIColor(named: "SSACGreen")
+    }
+    
 }

@@ -8,12 +8,56 @@
 import UIKit
 import SnapKit
 
-class PostEditView: UIView {
+class PostDetailView: UIView {
     
-    let textField: UITextField = {
-       let textField = UITextField()
-        return textField
+    let headerView: UIView = {
+        let view = UIView()
+        return view
     }()
+    
+    let contentView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    
+    let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        return imageView
+    }()
+    
+    let nicknameLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    let dateLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    let headerBottomLineView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    
+    let contentLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    let contentBottomLineView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    let commentBottomLineView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,8 +67,6 @@ class PostEditView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-
-        print(fatalError())
     }
     
     func configure() {
@@ -32,19 +74,34 @@ class PostEditView: UIView {
     }
     
     func constraints() {
-        [textField].forEach {
+        [profileImageView, nicknameLabel, dateLabel, headerBottomLineView].forEach {
+            headerView.addSubview($0)
+        }
+        
+        [profileImageView, nicknameLabel, dateLabel].forEach {
+            contentView.addSubview($0)
+        }
+        [headerView, contentView].forEach {
             addSubview($0)
         }
         
-        textField.snp.makeConstraints {
+        
+        
+        headerView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
-            $0.leading.equalToSuperview().offset(10)
-            $0.trailing.equalToSuperview().offset(10)
-            $0.height.equalTo(200)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(60)
         }
+        
+        profileImageView.snp.makeConstraints {
+            $0.leading.equalToSuperview()
+            $0.top.equalToSuperview().offset(5)
+            $0.bottom.equalToSuperview().offset(-5)
+        }
+        
+        
+        
+        
     }
-    
-    
-    
-    
 }

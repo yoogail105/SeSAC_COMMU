@@ -1,14 +1,13 @@
 //
-//  PostDetailView.swift
+//  UIVeiw+Extension.swift
 //  SSACCommu
 //
 //  Created by 성민주민주 on 2022/01/05.
 //
 
-import SnapKit
+import Foundation
 import UIKit
 
-class PostDetailView: UIView {
-    
+extension UIView {
     
 }
