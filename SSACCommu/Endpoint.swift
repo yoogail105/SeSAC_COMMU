@@ -70,7 +70,8 @@ extension URLSession {
     
     static func request<T: Decodable>(_ session: URLSession = .shared, endpoint: URLRequest, completion: @escaping (T?, APIError?) -> Void) {
             session.dataTask(endpoint) { data, response, error in
-            
+            print(data)
+                
             DispatchQueue.main.async {
                 guard error == nil else {
                     completion(nil, .failed)
@@ -118,8 +119,9 @@ extension URLSession {
                 
                 do {
                     let decoder = JSONDecoder()
-                    let result = try decoder.decode(T.self, from: data)
-                    completion(result, nil)
+                    let userData = try decoder.decode(T.self, from: data)
+                    completion(userData, nil)
+                    print("Ok")
                 } catch {
                     print("do-catch: 여기오류")
                     completion(nil, .invalidData)

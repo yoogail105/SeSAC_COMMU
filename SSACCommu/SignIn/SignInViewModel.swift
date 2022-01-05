@@ -11,7 +11,7 @@ class SignInViewModel {
    
     let userDefaults = UserDefaults.standard
     var email: Observable<String> = Observable("")
-    var password: Observable<String> = Observable("")
+    var password:Observable<String> = Observable("")
     
     
     func postUserSignIn(completion: @escaping () -> Void) {

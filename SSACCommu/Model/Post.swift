@@ -8,11 +8,10 @@
 
 import Foundation
 
-// MARK: - Post
 struct Post: Codable {
     let id: Int
     let text: String
-    let user: UserData
+    let user: User2
     let createdAt, updatedAt: String
     let comments: [Comment]
 
@@ -37,3 +36,26 @@ struct Comment: Codable {
         case updatedAt = "updated_at"
     }
 }
+
+// MARK: - User
+struct User2: Codable {
+    let id: Int
+    let username, email: String
+    let provider: Provider
+    let confirmed: Bool
+    let blocked: Bool?
+    let role: Int
+    let createdAt, updatedAt: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, username, email, provider, confirmed, blocked, role
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
+enum Provider: String, Codable {
+    case local = "local"
+}
+
+typealias Posts = [Post]

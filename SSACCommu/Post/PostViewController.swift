@@ -53,6 +53,7 @@ class PostViewController: BaseViewController {
         viewModel.getPosts {
             print("postViewmModel:",#function)
         }
+
       
         
     }
@@ -61,8 +62,6 @@ class PostViewController: BaseViewController {
         print(#function)
         let vc = MainViewController()
         self.navigationController?.pushViewController(vc, animated: true)
-        
-       
     }
     
     //self.mainView.emailTextField.addTarget(self, action: #selector(

@@ -41,7 +41,7 @@ class APIService {
         
     }
     
-    // MARK: Change Password
+    // MARK: Change Password [ ]
     static func changePW(email: String, currentPassword: String, newPassword: String, confirmNewPassword: String, completion: @escaping (User?, APIError?) -> Void) {
         
         var request = URLRequest(url: Endpoint.changePW.url)
@@ -52,7 +52,7 @@ class APIService {
     }
     
     // MARK: 포스트 조회(전체 포스트 조회)
-    static func loadPosts(completion: @escaping (Post?, APIError?) -> Void) {
+    static func loadPosts(completion: @escaping (Posts?, APIError?) -> Void) {
         
         var request = URLRequest(url: Endpoint.posts.url)
         let token = UserDefaults.standard.token!
@@ -61,47 +61,37 @@ class APIService {
         
         URLSession.request(endpoint: request, completion: completion)
     }
+
     
-    // MARK: 포스트 작성
-    // 토큰 유효성 검증: https://stackoverflow.com/questions/46031146/swift-3-0-token-expire-how-will-be-call-the-token-automatically
-    
-//    if let authorization = response.response?.allHeaderFields["Authorization"] as? String {
-//
-//                    var newToken : String = authorization
-//                    UserDefaults.standard.set(newToken, forKey: "token")
-//                    UserDefaults.standard.synchronize()
-//                }
-//
-//
-    
-    static func addPosts(text: String, completion: @escaping (User?, APIError?) -> Void) {
-        
-        
+    static func addPosts(text: String, completion: @escaping (Posts?, APIError?) -> Void) {
+        let token = UserDefaults.standard.token!
         var request = URLRequest(url: Endpoint.posts.url)
         request.httpMethod = Method.POST.rawValue
         request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
-        
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
         URLSession.request(endpoint: request, completion: completion)
     }
-    
+
     // MARK: 포스트 수정
-    static func editPost(text: String, completion: @escaping (User?, APIError?) -> Void) {
-        let id = UserDefaults.standard.id
-        
-        var request = URLRequest(url: Endpoint.postDetail(id: id).url)
+    static func editPost(text: String, postId: Int, completion: @escaping (Posts?, APIError?) -> Void) {
+        let token = UserDefaults.standard.token!
+        var request = URLRequest(url: Endpoint.postDetail(id: postId).url)
         request.httpMethod = Method.PUT.rawValue
         request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
-        
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
         URLSession.request(endpoint: request, completion: completion)
     }
-    
+
     // MARK: 포스트 삭제
-    static func deletePost(text: String, completion: @escaping (User?, APIError?) -> Void) {
+    static func deletePost(postId: Int, completion: @escaping (Post?, APIError?) -> Void) {
         let id = UserDefaults.standard.id
-        
+        let token = UserDefaults.standard.token!
         var request = URLRequest(url: Endpoint.postDetail(id: id).url)
         request.httpMethod = Method.DELETE.rawValue
-            
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
         URLSession.request(endpoint: request, completion: completion)
     }
     

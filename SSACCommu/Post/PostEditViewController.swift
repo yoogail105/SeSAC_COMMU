@@ -38,7 +38,7 @@ class PostEditViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        controlKeyboard()
+        
         
         
     }
@@ -47,10 +47,14 @@ class PostEditViewController: BaseViewController {
         super.setupNavigationBar()
 
         self.navigationItem.title = editMode
-       
+
+        let saveButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(saveButtonClicked))
+        self.navigationItem.rightBarButtonItem = saveButton
     }
     
-    func controlKeyboard() {
-       
+    @objc func saveButtonClicked() {
+        
     }
+    
+    
 }
