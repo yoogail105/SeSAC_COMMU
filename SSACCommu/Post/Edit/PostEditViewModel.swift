@@ -11,7 +11,8 @@ class PostEditViewModel {
     
     let savePost: Observable<Post> = Observable(Post(id: 0, text: "",
                                                          user: UserData(id: 0, username: "", email: "", createdAt: "", updatedAt: ""), createdAt: "", updatedAt: "",
-                                                         comments: [Comment]()))
+                                                         comments: [PostComment]()))
+    
     func postAddPosts(text: String, completion: @escaping () -> Void) {
         print(#function)
         
@@ -27,6 +28,30 @@ class PostEditViewModel {
             print(post)
             self.savePost.value = post
 
+            completion()
+        }
+    }
+    
+    func putEditPost(text: String, postId: Int, completion: @escaping () -> Void) {
+        
+        APIService.editPost(text: text, postId: postId) { post, error in
+            
+            guard let post = post else {
+                return
+            }
+            print(post)
+            self.savePost.value = post
+            completion()
+        }
+    }
+    
+    func deleteDeletePost(text: String, postId: Int, completion: @escaping () -> Void) {
+        APIService.deletePost(postId: postId) { post, error in
+            guard let post = post else {
+                return
+            }
+            print(post)
+            self.savePost.value = post
             completion()
         }
     }

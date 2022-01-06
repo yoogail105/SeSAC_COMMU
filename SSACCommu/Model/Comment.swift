@@ -11,11 +11,11 @@ import Foundation
 struct Comment: Codable {
     let id: Int
     let comment: String
-    let user, post: Int
+    let user: UserData
     let createdAt, updatedAt: String
 
     enum CodingKeys: String, CodingKey {
-        case id, comment, user, post
+        case id, comment, user
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }

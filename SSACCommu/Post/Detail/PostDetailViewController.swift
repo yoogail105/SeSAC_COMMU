@@ -8,9 +8,10 @@
 import Foundation
 import UIKit
 class PostDetailViewController: BaseViewController {
-
+    
     let mainView = PostDetailView()
     let viewModel = PostDetailViewModel()
+    
     
     override func loadView() {
         self.view = mainView
@@ -19,20 +20,101 @@ class PostDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
+        mainView.tableView.register(CommentTableViewCell.self, forCellReuseIdentifier: CommentTableViewCell.identifier)
+        mainView.tableView.rowHeight = UITableView.automaticDimension
+        viewModel.getComments(postId: viewModel.selectedPost.value.id) {
+            print("코멘트불러옴")
+        }
+        
+        setDetailPost()
+        
     }
     
-    override func bind() {
+    func setDetailPost() {
         print(viewModel.selectedPost.value)
         let postData = viewModel.selectedPost.value
         mainView.nicknameLabel.text = postData.user.username
         mainView.dateLabel.text = postData.createdAt
         mainView.contentLabel.text = postData.text
-        //mainView.nicknameLabel.text = postData.user.username
-        
+        mainView.commentLabel.text = "댓글 \(postData.comments.count)"
+    }
+    
+    override func bind() {
+        viewModel.loadedComments.bind { comments in
+            self.mainView.tableView.reloadData()
+        }
     }
     
     override func addAction() {
-    
+        
     }
     
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let controlButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.and.pencil.and.ellipsis"), style: .done, target: self, action: #selector(controlButtonClicked))
+        controlButton.tintColor = UIColor(named: "SSACGreen")
+        self.navigationItem.rightBarButtonItem = controlButton
+    }
+    
+    @objc func controlButtonClicked() {
+        setupActionSheet()
+    }
+    
+    func setupActionSheet() {
+        
+        let postData = viewModel.selectedPost.value
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
+            let vc = PostEditViewController()
+            vc.isNewPost = false
+            vc.mainView.textField.text = postData.text
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        let delete = UIAlertAction(title: "삭제하기", style: .default) { _ in
+            self.viewModel.deleteDeletePost(postId: postData.id) {
+                print("삭제 완료")
+            }
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        alert.addAction(edit)
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+}
+
+
+extension PostDetailViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("count:", self.viewModel.loadedComments.value.count)
+            return self.viewModel.loadedComments.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CommentTableViewCell.identifier, for: indexPath) as? CommentTableViewCell else { return UITableViewCell() }
+        let row = viewModel.loadedComments.value[indexPath.row]
+        
+        cell.nicknameLabel.text = row.user.username
+        
+        cell.commentLabel.text = row.comment
+        cell.selectionStyle = .none
+        print("nickname: \(row.user.username), comment: \(row.comment)")
+        return cell
+        
+    }
+
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 100
+//    }
 }

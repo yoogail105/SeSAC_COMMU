@@ -12,7 +12,6 @@ class PostDetailView: UIView {
     
     let headerView: UIView = {
         let view = UIView()
-        //view.backgroundColor = .red
         return view
     }()
     
@@ -104,10 +103,10 @@ class PostDetailView: UIView {
         return textField
     }()
     
-    let headerLineView = UIView()
-    let contentLineView = UIView()
-    let commentStackViewLineView = UIView()
-    let commentTableViewLineView = UIView()
+//    let headerLineView = UIView()
+//    let contentLineView = UIView()
+//    let commentStackViewLineView = UIView()
+//    let commentTableViewLineView = UIView()
     
     
     override init(frame: CGRect) {
@@ -121,25 +120,25 @@ class PostDetailView: UIView {
     }
     
     func configure() {
-        [headerLineView, contentLineView, commentStackViewLineView, commentTableViewLineView].forEach {
-            $0.backgroundColor = UIColor(named: "SSACGray")
-        }
+//        [headerLineView, contentLineView, commentStackViewLineView, commentTableViewLineView].forEach {
+//            $0.backgroundColor = UIColor(named: "SSACGray")
+//        }
     }
     
     func constraints() {
-        [profileImageView, nicknameLabel, dateLabel, headerLineView].forEach {
+        [profileImageView, nicknameLabel, dateLabel].forEach {
             headerView.addSubview($0)
         }
         
-        [contentLabel, contentLineView].forEach {
+        [contentLabel].forEach {
             contentStackView.addArrangedSubview($0)
         }
         
-        [commentImage, commentLabel, contentLineView].forEach {
+        [commentImage, commentLabel].forEach {
             commentStackView.addArrangedSubview($0)
         }
         
-        [headerView, contentStackView, commentStackView, tableView, commentTableViewLineView, addCommentTextField].forEach {
+        [headerView, contentStackView, commentStackView, tableView, addCommentTextField].forEach {
             addSubview($0)
         }
         
@@ -167,12 +166,12 @@ class PostDetailView: UIView {
         }
         
         
-        headerLineView.snp.makeConstraints {
-            $0.bottom.equalTo(headerView.snp.bottom)
-            $0.leading.equalTo(headerView.snp.leading)
-            $0.trailing.equalTo(headerView.snp.trailing)
-            $0.height.equalTo(1)
-        }
+//        headerLineView.snp.makeConstraints {
+//            $0.bottom.equalTo(headerView.snp.bottom)
+//            $0.leading.equalTo(headerView.snp.leading)
+//            $0.trailing.equalTo(headerView.snp.trailing)
+//            $0.height.equalTo(1)
+//        }
         
         contentStackView.snp.makeConstraints {
             $0.top.equalTo(headerView.snp.bottom).offset(20)
@@ -180,31 +179,32 @@ class PostDetailView: UIView {
             $0.trailing.equalTo(headerView.snp.trailing)
         }
         
-        contentLineView.snp.makeConstraints {
-            $0.height.equalTo(1)
-        }
+//        contentLineView.snp.makeConstraints {
+////            $0.top.equalTo(contentLabel.snp.bottom).offset(30)
+//            $0.height.equalTo(1)
+//        }
         
         commentStackView.snp.makeConstraints {
             $0.top.equalTo(contentStackView.snp.bottom).offset(20)
             $0.leading.equalTo(headerView.snp.leading)
-            $0.height.equalTo(20)
         }
         
-        commentStackViewLineView.snp.makeConstraints {
-            $0.height.equalTo(1)
-        }
-        
+//        commentStackViewLineView.snp.makeConstraints {
+//            $0.height.equalTo(1)
+//            $0.top.equalTo(contentStackView.snp.bottom).offset(-1)
+//        }
+//
         tableView.snp.makeConstraints {
-            $0.top.equalTo(commentStackView.snp.bottom).offset(50)
+            $0.top.equalTo(commentStackView.snp.bottom).offset(10)
             $0.leading.equalTo(headerView.snp.leading)
             $0.trailing.equalTo(headerView.snp.trailing)
-            $0.bottom.equalTo(commentTableViewLineView.snp.top).offset(-50)
+            $0.bottom.equalTo(addCommentTextField.snp.top).offset(-10)
         }
 
-        commentTableViewLineView.snp.makeConstraints {
-            $0.height.equalTo(1)
-            $0.bottom.equalTo(addCommentTextField.snp.top).offset(5)
-        }
+//        commentTableViewLineView.snp.makeConstraints {
+//            $0.height.equalTo(1)
+//            $0.top.equalTo(addCommentTextField.snp.top).offset(-5)
+//        }
 //
         addCommentTextField.snp.makeConstraints {
             $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-20)

@@ -74,13 +74,14 @@ class APIService {
     }
 
     // MARK: 포스트 수정
-    static func editPost(text: String, postId: Int, completion: @escaping (Posts?, APIError?) -> Void) {
+    static func editPost(text: String, postId: Int, completion: @escaping (Post?, APIError?) -> Void) {
         let token = UserDefaults.standard.token!
         var request = URLRequest(url: Endpoint.postDetail(id: postId).url)
         request.httpMethod = Method.PUT.rawValue
         request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
         URLSession.request(endpoint: request, completion: completion)
     }
 
@@ -97,41 +98,43 @@ class APIService {
     
     // MARK: 코멘트 조회
     // http://base-URL/comments?post=1
-    static func laodComments(postId: String, completion: @escaping (User?, APIError?) -> Void) {
-        let postId = 1
-        
-        var request = URLRequest(url: Endpoint.comments.url)
+    static func loadComments(postId: Int, completion: @escaping (Comments?, APIError?) -> Void) {
+        let token = UserDefaults.standard.token!
+        var request = URLRequest(url: Endpoint.comments(id: postId).url)
         request.httpMethod = Method.GET.rawValue
-        request.httpBody = "?post=\(postId)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             
         URLSession.request(endpoint: request, completion: completion)
     }
     
     // MARK: 코멘트 작성
-    static func addComment(postId: Int, comment: String, completion: @escaping (User?, APIError?) -> Void) {
-        
+    static func addComment(postId: Int, comment: String, completion: @escaping (Comment?, APIError?) -> Void) {
+        let token = UserDefaults.standard.token!
         var request = URLRequest(url: Endpoint.commentDetail(id: postId).url)
         request.httpMethod = Method.POST.rawValue
         request.httpBody = "comment=\(comment)&post=\(postId)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             
         URLSession.request(endpoint: request, completion: completion)
     }
     
     // MARK: 코멘트 수정
-    static func editComment(postId: Int, comment: String, completion: @escaping (User?, APIError?) -> Void) {
-        
+    static func editComment(postId: Int, comment: String, completion: @escaping (Comment?, APIError?) -> Void) {
+        let token = UserDefaults.standard.token!
         var request = URLRequest(url: Endpoint.commentDetail(id: postId).url)
         request.httpMethod = Method.PUT.rawValue
         request.httpBody = "comment=\(comment)&post=\(postId)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             
         URLSession.request(endpoint: request, completion: completion)
     }
     
     // MARK: 코멘트 삭제
-    static func deleteComment(postId: Int, completion: @escaping (User?, APIError?) -> Void) {
-        
+    static func deleteComment(postId: Int, completion: @escaping (Comment?, APIError?) -> Void) {
+        let token = UserDefaults.standard.token!
         var request = URLRequest(url: Endpoint.commentDetail(id: postId).url)
         request.httpMethod = Method.DELETE.rawValue
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             
         URLSession.request(endpoint: request, completion: completion)
     }

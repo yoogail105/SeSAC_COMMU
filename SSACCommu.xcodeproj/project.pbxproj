@@ -52,6 +52,7 @@
 		23C3ECBE278634790044B44B /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3ECBD278634790044B44B /* PostDetailViewController.swift */; };
 		23C3ECC02786AAC20044B44B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3ECBF2786AAC20044B44B /* Comment.swift */; };
 		23C3ECC32786B5260044B44B /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 23C3ECC22786B5260044B44B /* IQKeyboardManagerSwift */; };
+		23C3ECC52786CF610044B44B /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3ECC42786CF610044B44B /* CommentTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +98,7 @@
 		23C3ECBB278634690044B44B /* PostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewModel.swift; sourceTree = "<group>"; };
 		23C3ECBD278634790044B44B /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		23C3ECBF2786AAC20044B44B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		23C3ECC42786CF610044B44B /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				23C3EC6F278333B00044B44B /* Observable.swift */,
 				23C3ECB727860EB00044B44B /* Model */,
 				23C3ECA92785E8430044B44B /* Profile */,
+				23C3ECC42786CF610044B44B /* CommentTableViewCell.swift */,
 				23C3EC92278415DA0044B44B /* Post */,
 				23C3EC7B278358010044B44B /* Main */,
 				23C3EC6E2783337E0044B44B /* SignIn */,
@@ -384,6 +387,7 @@
 				23C3EC692783336F0044B44B /* SignInView.swift in Sources */,
 				23C3EC782783399C0044B44B /* MainView.swift in Sources */,
 				23185DF22780535F0004FBFF /* SceneDelegate.swift in Sources */,
+				23C3ECC52786CF610044B44B /* CommentTableViewCell.swift in Sources */,
 				23C3EC9D2784E06A0044B44B /* UILabel+Extension.swift in Sources */,
 				23C3ECC02786AAC20044B44B /* Comment.swift in Sources */,
 				23C3EC8C278410D00044B44B /* User.swift in Sources */,

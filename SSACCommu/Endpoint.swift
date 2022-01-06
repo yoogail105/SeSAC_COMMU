@@ -21,7 +21,7 @@ enum Endpoint {
     case posts
     case addPost
     case postDetail(id: Int)
-    case comments
+    case comments(id: Int)
     case commentDetail(id: Int)
 }
 
@@ -40,8 +40,8 @@ extension Endpoint {
             return .makeEndPoint("posts")
        case .postDetail(id: let id):
             return .makeEndPoint("posts/\(id)")
-        case .comments:
-            return .makeEndPoint("comments")
+        case .comments(id: let id):
+            return .makeEndPoint("comments?post=\(id)")
         case .commentDetail(id: let id):
             return .makeEndPoint("comments/\(id)")
         }
@@ -113,7 +113,7 @@ extension URLSession {
                         print(errorDetail.message)
                         return
                     } catch {
-                        print("200아닐떄: do-catch: 여기오류")
+                        print("200아닐 때 do-catch: 여기오류")
                         completion(nil, .invalidData)
                         return
                     }

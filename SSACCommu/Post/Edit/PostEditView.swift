@@ -1,5 +1,5 @@
 //
-//  PostDetailView.swift
+//  PostEditView.swift
 //  SSACCommu
 //
 //  Created by 성민주민주 on 2022/01/05.
@@ -12,8 +12,8 @@ import RxKeyboard
 
 class PostEditView: UIView {
     let disposeBag = DisposeBag()
-    let textField: UITextField = {
-       let textField = UITextField()
+    let textField: UITextView = {
+       let textField = UITextView()
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor(named: "SSACGray")?.cgColor
         textField.layer.cornerRadius = 10

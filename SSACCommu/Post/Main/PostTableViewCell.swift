@@ -27,7 +27,7 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "드라이브가실 분ㅣ 심ㅅ미해요\n드라이브가실 분ㅣ심ㅅ미해요\n드라이브가실 분ㅣ 심ㅅ미해요\n거래완료되었으면................"
         label.textColor = .black
-        label.numberOfLines = 3
+        label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
 
         return label

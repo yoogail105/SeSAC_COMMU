@@ -16,14 +16,18 @@ class PostEditViewController: BaseViewController {
     
     let disposeBag = DisposeBag()
     
-    var editMode = "작성"
+    
+    var editMode = "새싹농장 글쓰기"
     var isNewPost = true {
         didSet {
-            if !isNewPost {
-                editMode = "수정"
+            if isNewPost {
+                editMode = "새싹농장 글쓰기"
+            } else {
+                editMode = "새싹농장 글 수정하기"
             }
         }
     }
+    
     override func loadView() {
         self.view = mainView
     }
@@ -45,24 +49,33 @@ class PostEditViewController: BaseViewController {
         
         self.navigationItem.title = editMode
         
-        let saveButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(saveButtonClicked))
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "SSACGreen")
-        saveButton.tintColor = UIColor(named: "SSCAGreen")
+        let saveButton = UIBarButtonItem(image: UIImage(systemName: "checkmark.circle.fill"), style: .done, target: self, action: #selector(saveButtonClicked))
+        saveButton.tintColor = UIColor(named: "SSACGreen")
         self.navigationItem.rightBarButtonItem = saveButton
     }
     
     
     @objc func saveButtonClicked() {
         print(#function)
+        
         if isNewPost {
             if mainView.textField.text != "" {
                 viewModel.postAddPosts(text: mainView.textField.text!) {
                     self.navigationController?.popViewController(animated: true)
+                    print("alert: 작성완료")
                 }
             } else {
-                
+                print("alert: 내용을 입력해주세요: alert")
             }
+        }else {
+            print("수정하기")
+            viewModel.putEditPost(text: mainView.textField.text!, postId: viewModel.savePost.value.id) {
+                self.navigationController?.popViewController(animated: true)
+                print("alert: 수정완료")
+            }
+               
         }
+        
     }
     
     override func bind() {

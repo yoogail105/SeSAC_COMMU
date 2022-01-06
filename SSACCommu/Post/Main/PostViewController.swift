@@ -129,7 +129,7 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
             commentLabelText = "댓글 \(row.comments.count)"
         }
         cell.commentLabel.text = commentLabelText
-       // cell.selectionStyle = .none
+        cell.selectionStyle = .none
         return cell
     }
 //
@@ -145,6 +145,7 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = PostDetailViewController()
         print("selectedData - index: \(indexPath.row), row: ", row)
         vc.viewModel.selectedPost.value = row
+
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
