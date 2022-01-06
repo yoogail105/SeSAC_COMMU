@@ -10,19 +10,20 @@ import Foundation
 class PostViewModel {
     var loadedPosts: Observable<Posts> = Observable(Posts())
     
-    
     func getPosts(completion: @escaping () -> Void) {
         print(#function)
         
         APIService.loadPosts { post, error in
             if error == APIError.unAuthorized {
-//                UserDefaults.standard.validToken = false
-                UserDefaults.standard.reset()
+                UserDefaults.standard.validToken = false
+               
             }
             
             guard let post = post else {
                 return
             }
+            
+            self.loadedPosts.value = post
 
             completion()
         }

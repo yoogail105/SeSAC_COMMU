@@ -47,10 +47,5 @@ extension UserDefaults {
         get { string(forKey: UserDefaultsKeys.email.rawValue)}
         set { setValue(newValue, forKey: UserDefaultsKeys.email.rawValue)}
     }
-    
-    var confirmed: Bool {
-        get { bool(forKey: UserDefaultsKeys.confirmed.rawValue)}
-        set { setValue(newValue, forKey: UserDefaultsKeys.confirmed.rawValue)}
-    }
 
 }

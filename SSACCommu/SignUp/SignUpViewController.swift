@@ -21,8 +21,7 @@ class SignUpViewController: BaseViewController {
         super.viewDidLoad()
         
         setupNavigationBar()
-        bind()
-        addAction()
+       
     }
     
 
@@ -31,7 +30,7 @@ class SignUpViewController: BaseViewController {
         self.navigationItem.title = "새싹농장 가입하기"
     }
     
-    func bind() {
+    override func bind() {
 
         viewModel.email.bind { text in
             print(text)
@@ -55,7 +54,7 @@ class SignUpViewController: BaseViewController {
         
     }
     
-    func addAction() {
+    override func addAction() {
         
         self.mainView.emailTextField.addTarget(self, action: #selector(
             emailTextFieldDidChange(_:)), for: .editingChanged)

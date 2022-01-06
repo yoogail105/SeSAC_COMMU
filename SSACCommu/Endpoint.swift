@@ -19,6 +19,7 @@ enum Endpoint {
     case signIn
     case changePW
     case posts
+    case addPost
     case postDetail(id: Int)
     case comments
     case commentDetail(id: Int)
@@ -34,6 +35,8 @@ extension Endpoint {
         case .changePW:
             return .makeEndPoint("custom/change-password")
         case .posts:
+            return .makeEndPoint("posts?_start=0&_limit=1000&_sort=created_at:desc")
+        case .addPost:
             return .makeEndPoint("posts")
        case .postDetail(id: let id):
             return .makeEndPoint("posts/\(id)")

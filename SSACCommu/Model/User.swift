@@ -19,27 +19,11 @@ struct  User: Codable {
 struct UserData: Codable {
     let id: Int
     let username, email: String
-    let confirmed: Bool
-    let role: Role
     let createdAt, updatedAt: String
-    let posts, comments: [Int]
     
     enum CodingKeys: String, CodingKey {
-        case id, username, email, confirmed, role
+        case id, username, email
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case posts, comments
-    }
-}
-
-// MARK: Role
-struct Role: Codable {
-    let id: Int
-    let name, roleDescription, type: String
-
-    enum CodingKeys: String, CodingKey {
-        case id, name
-        case roleDescription = "description"
-        case type
     }
 }

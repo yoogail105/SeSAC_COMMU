@@ -20,8 +20,7 @@ class ChangePWViewController: BaseViewController {
         super.viewDidLoad()
         
         setupNavigationBar()
-        bind()
-        addAction()
+     
 
     }
     
@@ -31,7 +30,7 @@ class ChangePWViewController: BaseViewController {
         self.navigationItem.title = "비밀번호 변경하기"
     }
     
-    func bind() {
+    override func bind() {
 //        viewModel.email.bind { text in
 //            print(text)
 //            self.mainView.emailTextField.text = text
@@ -43,7 +42,7 @@ class ChangePWViewController: BaseViewController {
 //        }
     }
     
-    func addAction() {
+    override func addAction() {
         
         self.mainView.changeButton.addTarget(self, action: #selector(changeButtonClicked), for: .touchUpInside)
         self.mainView.logoutButton.addTarget(self, action: #selector(logoutButtonClicked), for: .touchUpInside)

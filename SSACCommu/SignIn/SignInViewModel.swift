@@ -31,7 +31,6 @@ class SignInViewModel {
             self.userDefaults.id = userData.user.id
             self.userDefaults.nickname = userData.user.username
             self.userDefaults.email = userData.user.email
-            self.userDefaults.confirmed = userData.user.confirmed
             
             completion()
         }

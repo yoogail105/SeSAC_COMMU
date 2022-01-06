@@ -17,7 +17,6 @@ class PostEditView: UIView {
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor(named: "SSACGray")?.cgColor
         textField.layer.cornerRadius = 10
-        textField.backgroundColor = .green
         
         return textField
     }()
@@ -45,19 +44,11 @@ class PostEditView: UIView {
             $0.top.equalTo(self.layoutMarginsGuide).offset(10)
             $0.leading.equalToSuperview().offset(10)
             $0.trailing.equalToSuperview().offset(-10)
-            $0.height.equalTo(500)
+            $0.height.equalTo(300)
         }
     
     
-    RxKeyboard.instance.visibleHeight
-        .skip(1)    // 초기 값 버리기
-        .drive(onNext: { keyboardVisibleHeight in
-            self.textField.snp.updateConstraints {
-                        $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(keyboardVisibleHeight)
-                    }
-        })
-        .disposed(by: disposeBag)
-    
+        
     
     }
 }

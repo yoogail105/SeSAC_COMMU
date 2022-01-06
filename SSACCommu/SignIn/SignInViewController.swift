@@ -19,9 +19,6 @@ class SignInViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        bind()
-        addAction()
     }
     
 
@@ -32,7 +29,7 @@ class SignInViewController: BaseViewController {
     }
     
     
-    func bind() {
+    override func bind() {
         viewModel.email.bind { text in
             print(text)
             self.mainView.emailTextField.text = text
@@ -44,7 +41,7 @@ class SignInViewController: BaseViewController {
         }
     }
     
-    func addAction() {
+    override func addAction() {
         
         self.mainView.emailTextField.addTarget(self, action: #selector(
             emailTextFieldDidChange(_:)), for: .editingChanged)
@@ -67,6 +64,7 @@ class SignInViewController: BaseViewController {
     @objc func signInButtonClicked() {
         print(#function)
         viewModel.postUserSignIn {
+            if(UserDefaults.standard.validToken == true){
             DispatchQueue.main.async {
                 guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
                     return
@@ -74,6 +72,7 @@ class SignInViewController: BaseViewController {
                 windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: PostViewController())
                 windowScene.windows.first?.makeKeyAndVisible()
             }
+        }
         }
     }
 }

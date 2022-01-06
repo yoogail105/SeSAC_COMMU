@@ -62,10 +62,10 @@ class APIService {
         URLSession.request(endpoint: request, completion: completion)
     }
 
-    
-    static func addPosts(text: String, completion: @escaping (Posts?, APIError?) -> Void) {
+    // MARK: 포스트 작성
+    static func addPosts(text: String, completion: @escaping (Post?, APIError?) -> Void) {
         let token = UserDefaults.standard.token!
-        var request = URLRequest(url: Endpoint.posts.url)
+        var request = URLRequest(url: Endpoint.addPost.url)
         request.httpMethod = Method.POST.rawValue
         request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")

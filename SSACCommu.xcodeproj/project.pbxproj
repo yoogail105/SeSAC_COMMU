@@ -48,6 +48,10 @@
 		23C3ECB12785F84F0044B44B /* PostEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3ECB02785F84F0044B44B /* PostEditViewModel.swift */; };
 		23C3ECB42785FD490044B44B /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = 23C3ECB32785FD490044B44B /* RxKeyboard */; };
 		23C3ECB627860EA50044B44B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3ECB527860EA50044B44B /* Post.swift */; };
+		23C3ECBC278634690044B44B /* PostDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3ECBB278634690044B44B /* PostDetailViewModel.swift */; };
+		23C3ECBE278634790044B44B /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3ECBD278634790044B44B /* PostDetailViewController.swift */; };
+		23C3ECC02786AAC20044B44B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3ECBF2786AAC20044B44B /* Comment.swift */; };
+		23C3ECC32786B5260044B44B /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 23C3ECC22786B5260044B44B /* IQKeyboardManagerSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +94,9 @@
 		23C3ECAE2785F8060044B44B /* PostEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditViewController.swift; sourceTree = "<group>"; };
 		23C3ECB02785F84F0044B44B /* PostEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditViewModel.swift; sourceTree = "<group>"; };
 		23C3ECB527860EA50044B44B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		23C3ECBB278634690044B44B /* PostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewModel.swift; sourceTree = "<group>"; };
+		23C3ECBD278634790044B44B /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		23C3ECBF2786AAC20044B44B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23C3ECC32786B5260044B44B /* IQKeyboardManagerSwift in Frameworks */,
 				23C3EC76278333E70044B44B /* RxSwift in Frameworks */,
 				23C3ECB42785FD490044B44B /* RxKeyboard in Frameworks */,
 				23C3EC74278333E70044B44B /* RxCocoa in Frameworks */,
@@ -133,8 +141,8 @@
 				23C3EC25278229420044B44B /* LoginViewController.swift */,
 				23C3EC7E278368380044B44B /* Endpoint.swift */,
 				23C3EC7C278366BE0044B44B /* APIService.swift */,
-				23C3ECB727860EB00044B44B /* Model */,
 				23C3EC6F278333B00044B44B /* Observable.swift */,
+				23C3ECB727860EB00044B44B /* Model */,
 				23C3ECA92785E8430044B44B /* Profile */,
 				23C3EC92278415DA0044B44B /* Post */,
 				23C3EC7B278358010044B44B /* Main */,
@@ -200,14 +208,9 @@
 		23C3EC92278415DA0044B44B /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				23C3ECA02785807A0044B44B /* PostDetailView.swift */,
-				23C3EC8E278414A50044B44B /* PostView.swift */,
-				23C3EC9A2784DCFB0044B44B /* PostTableViewCell.swift */,
-				23C3EC90278414AF0044B44B /* PostViewController.swift */,
-				23C3ECAE2785F8060044B44B /* PostEditViewController.swift */,
-				23C3ECB02785F84F0044B44B /* PostEditViewModel.swift */,
-				23C3EC9E27857F120044B44B /* PostEditView.swift */,
-				23C3EC982784DABF0044B44B /* PostViewModel.swift */,
+				23C3ECB92786344A0044B44B /* Main */,
+				23C3ECBA2786345B0044B44B /* Detail */,
+				23C3ECB82786343E0044B44B /* Edit */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -228,8 +231,40 @@
 				23C3EC9427844BF60044B44B /* ErrorDetail.swift */,
 				23C3EC8B278410D00044B44B /* User.swift */,
 				23C3ECB527860EA50044B44B /* Post.swift */,
+				23C3ECBF2786AAC20044B44B /* Comment.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		23C3ECB82786343E0044B44B /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				23C3ECAE2785F8060044B44B /* PostEditViewController.swift */,
+				23C3ECB02785F84F0044B44B /* PostEditViewModel.swift */,
+				23C3EC9E27857F120044B44B /* PostEditView.swift */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
+		23C3ECB92786344A0044B44B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				23C3EC8E278414A50044B44B /* PostView.swift */,
+				23C3EC90278414AF0044B44B /* PostViewController.swift */,
+				23C3EC982784DABF0044B44B /* PostViewModel.swift */,
+				23C3EC9A2784DCFB0044B44B /* PostTableViewCell.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		23C3ECBA2786345B0044B44B /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				23C3ECA02785807A0044B44B /* PostDetailView.swift */,
+				23C3ECBB278634690044B44B /* PostDetailViewModel.swift */,
+				23C3ECBD278634790044B44B /* PostDetailViewController.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +288,7 @@
 				23C3EC73278333E70044B44B /* RxCocoa */,
 				23C3EC75278333E70044B44B /* RxSwift */,
 				23C3ECB32785FD490044B44B /* RxKeyboard */,
+				23C3ECC22786B5260044B44B /* IQKeyboardManagerSwift */,
 			);
 			productName = SSACCommu;
 			productReference = 23185DEC2780535F0004FBFF /* SSACCommu.app */;
@@ -286,6 +322,7 @@
 				23C3EC222782285B0044B44B /* XCRemoteSwiftPackageReference "SnapKit" */,
 				23C3EC72278333E70044B44B /* XCRemoteSwiftPackageReference "RxSwift" */,
 				23C3ECB22785FD490044B44B /* XCRemoteSwiftPackageReference "RxKeyboard" */,
+				23C3ECC12786B5260044B44B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 23185DED2780535F0004FBFF /* Products */;
 			projectDirPath = "";
@@ -318,6 +355,7 @@
 				23C3EC7D278366BE0044B44B /* APIService.swift in Sources */,
 				23C3ECAD2785E85A0044B44B /* ChangePWViewController.swift in Sources */,
 				23C3EC8F278414A50044B44B /* PostView.swift in Sources */,
+				23C3ECBC278634690044B44B /* PostDetailViewModel.swift in Sources */,
 				23185DF42780535F0004FBFF /* ViewController.swift in Sources */,
 				23C3ECAB2785E8540044B44B /* ChangePWViewModel.swift in Sources */,
 				23C3EC21278228450044B44B /* BaseViewController.swift in Sources */,
@@ -327,6 +365,7 @@
 				23C3EC2827822B260044B44B /* SignUpView.swift in Sources */,
 				23C3EC91278414AF0044B44B /* PostViewController.swift in Sources */,
 				23C3ECA12785807A0044B44B /* PostDetailView.swift in Sources */,
+				23C3ECBE278634790044B44B /* PostDetailViewController.swift in Sources */,
 				23C3EC26278229420044B44B /* LoginViewController.swift in Sources */,
 				23C3EC7A278340690044B44B /* MainViewController.swift in Sources */,
 				23C3EC2E2782316A0044B44B /* UIButton+Extension.swift in Sources */,
@@ -346,6 +385,7 @@
 				23C3EC782783399C0044B44B /* MainView.swift in Sources */,
 				23185DF22780535F0004FBFF /* SceneDelegate.swift in Sources */,
 				23C3EC9D2784E06A0044B44B /* UILabel+Extension.swift in Sources */,
+				23C3ECC02786AAC20044B44B /* Comment.swift in Sources */,
 				23C3EC8C278410D00044B44B /* User.swift in Sources */,
 				23C3ECA82785E83B0044B44B /* ChangePWView.swift in Sources */,
 			);
@@ -583,6 +623,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		23C3ECC12786B5260044B44B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -605,6 +653,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 23C3ECB22785FD490044B44B /* XCRemoteSwiftPackageReference "RxKeyboard" */;
 			productName = RxKeyboard;
+		};
+		23C3ECC22786B5260044B44B /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 23C3ECC12786B5260044B44B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -31,6 +31,7 @@ class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("메인화면왔음")
         
         printUserData()
         mainView.signUpButton.addTarget(self, action: #selector(signUpButtonClicked), for: .touchUpInside)
@@ -55,6 +56,6 @@ class MainViewController: BaseViewController {
         print("id:", self.userDefaults.id)
         print("nickname:", self.userDefaults.nickname)
         print("email:", self.userDefaults.email)
-        print("confirmed:", self.userDefaults.confirmed)
+    
     }
 }
