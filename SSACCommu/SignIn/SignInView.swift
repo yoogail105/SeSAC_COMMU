@@ -12,7 +12,7 @@ import UIKit
 import SnapKit
 
 class SignInView: UIView {
-
+    
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -43,6 +43,7 @@ class SignInView: UIView {
         emailTextField.setupTextField(placeholderText: "이메일 주소")
         passwordTextField.setupTextField(placeholderText: "비밀번호")
         signButton.setupButton(title: "입장하기")
+        passwordTextField.isSecureTextEntry = true
         
     }
     

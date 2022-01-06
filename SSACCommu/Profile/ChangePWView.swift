@@ -49,6 +49,10 @@ class ChangePWView: UIView {
         newPasswordTextField.setupTextField(placeholderText: "새로운 비밀번호")
         confirmNewPasswordTextField.setupTextField(placeholderText: "새로운 비밀번호 확인")
         changeButton.setupButton(title: "변경하기")
+        
+        confirmNewPasswordTextField.isSecureTextEntry = true
+        newPasswordTextField.isSecureTextEntry = true
+        currentPasswordTextField.isSecureTextEntry = true
     }
     
     

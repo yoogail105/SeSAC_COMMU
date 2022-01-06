@@ -15,6 +15,7 @@ extension UserDefaults {
         case nickname
         case email
         case confirmed
+        case postId
     }
     
     func reset() {
@@ -46,6 +47,11 @@ extension UserDefaults {
     var email: String? {
         get { string(forKey: UserDefaultsKeys.email.rawValue)}
         set { setValue(newValue, forKey: UserDefaultsKeys.email.rawValue)}
+    }
+    
+    var postId: Int {
+        get { integer(forKey: UserDefaultsKeys.postId.rawValue)}
+        set { setValue(newValue, forKey: UserDefaultsKeys.postId.rawValue)}
     }
 
 }

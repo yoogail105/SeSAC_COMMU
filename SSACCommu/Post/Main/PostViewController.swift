@@ -142,7 +142,8 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
         //postDetailView로 이동하기
         print(#function, "select: \(indexPath.row)")
         let row = self.viewModel.loadedPosts.value[indexPath.row]
-        PostEditViewModel().savePost.value = row
+        UserDefaults.standard.postId = row.id
+        
         print("포스트 아이디: ", row.id)
         let vc = PostDetailViewController()
         print("selectedData - index: \(indexPath.row), row: ", row)

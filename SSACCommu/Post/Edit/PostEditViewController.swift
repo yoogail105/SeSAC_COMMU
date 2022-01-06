@@ -6,15 +6,13 @@
 //
 
 import UIKit
-import RxSwift
-import RxKeyboard
 
 
 class PostEditViewController: BaseViewController {
     let mainView = PostEditView()
     let viewModel = PostEditViewModel()
     
-    var editPostId = 0
+    var editPostId = PostEditViewModel().savePost.value.id
     
     
     var editMode = "새싹농장 글쓰기"
@@ -69,7 +67,7 @@ class PostEditViewController: BaseViewController {
             }
         }else {
             print("수정하기", editPostId)
-            viewModel.putEditPost(text: mainView.textField.text!, postId: 572) {
+            viewModel.putEditPost(text: mainView.textField.text!, postId: UserDefaults.standard.postId) {
                 self.navigationController?.popViewController(animated: true)
                 print("alert: 수정완료")
             }
@@ -80,7 +78,7 @@ class PostEditViewController: BaseViewController {
     
     override func bind() {
         viewModel.savePost.bind { post in
-            self.editPostId = post.id
+            //self.editPostId = post.id
         }
     }
     
