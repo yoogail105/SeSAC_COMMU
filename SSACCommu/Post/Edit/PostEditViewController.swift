@@ -14,7 +14,7 @@ class PostEditViewController: BaseViewController {
     let mainView = PostEditView()
     let viewModel = PostEditViewModel()
     
-    let disposeBag = DisposeBag()
+    var editPostId = 0
     
     
     var editMode = "새싹농장 글쓰기"
@@ -68,8 +68,8 @@ class PostEditViewController: BaseViewController {
                 print("alert: 내용을 입력해주세요: alert")
             }
         }else {
-            print("수정하기")
-            viewModel.putEditPost(text: mainView.textField.text!, postId: viewModel.savePost.value.id) {
+            print("수정하기", editPostId)
+            viewModel.putEditPost(text: mainView.textField.text!, postId: 572) {
                 self.navigationController?.popViewController(animated: true)
                 print("alert: 수정완료")
             }
@@ -79,7 +79,9 @@ class PostEditViewController: BaseViewController {
     }
     
     override func bind() {
-        
+        viewModel.savePost.bind { post in
+            self.editPostId = post.id
+        }
     }
     
     override func addAction() {

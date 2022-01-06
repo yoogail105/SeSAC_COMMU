@@ -14,6 +14,19 @@ class PostDetailViewModel {
                                                          comments: [PostComment]()))
     
     let loadedComments: Observable<Comments> = Observable(Comments())
+    let selectedComment: Observable<Comment> = Observable(Comment(id: 0, comment: "", user: UserData(id: 0, username: "", email: "", createdAt: "", updatedAt: ""), createdAt: "", updatedAt: ""))
+    
+    
+    func deleteDeletePost(postId: Int, completion: @escaping () -> Void) {
+        APIService.deletePost(postId: postId) { post, error in
+            guard let post = post else {
+                return
+            }
+            print(post)
+            self.selectedPost.value = post
+            completion()
+        }
+    }
     
     func getComments(postId: Int, completion: @escaping () -> Void) {
         print(#function)
@@ -26,20 +39,23 @@ class PostDetailViewModel {
             }
 
             self.loadedComments.value = comments
-            print("Comments:", self.loadedComments.value.count)
+           // print("Comments:", self.loadedComments.value.count)
+            completion()
             
         }
     }
     
-    
-    func deleteDeletePost(postId: Int, completion: @escaping () -> Void) {
-        APIService.deletePost(postId: postId) { post, error in
-            guard let post = post else {
+    func postAddComment(postId: Int, text: String, completion: @escaping () -> Void) {
+        print(#function)
+        APIService.addComment(postId: postId, comment: text) { comment, error in
+            guard let comment = comment else {
                 return
             }
-            print(post)
-            self.selectedPost.value = post
+            
+            self.selectedComment.value = comment
+            
             completion()
+
         }
     }
     

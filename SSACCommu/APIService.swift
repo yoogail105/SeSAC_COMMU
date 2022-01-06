@@ -75,8 +75,10 @@ class APIService {
 
     // MARK: 포스트 수정
     static func editPost(text: String, postId: Int, completion: @escaping (Post?, APIError?) -> Void) {
+        
         let token = UserDefaults.standard.token!
         var request = URLRequest(url: Endpoint.postDetail(id: postId).url)
+        print("수정 포스트 id:", postId)
         request.httpMethod = Method.PUT.rawValue
         request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")

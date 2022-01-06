@@ -64,15 +64,9 @@ class SignInViewController: BaseViewController {
     @objc func signInButtonClicked() {
         print(#function)
         viewModel.postUserSignIn {
-            if(UserDefaults.standard.validToken == true){
-            DispatchQueue.main.async {
-                guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
-                    return
-                }
-                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: PostViewController())
-                windowScene.windows.first?.makeKeyAndVisible()
-            }
-        }
+            UserDefaults.standard.validToken = true
+            let vc = PostViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

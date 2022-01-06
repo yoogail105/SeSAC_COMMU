@@ -91,7 +91,7 @@ class PostDetailView: UIView {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .green
+        tableView.backgroundColor = .white
         return tableView
     }()
     
@@ -99,8 +99,14 @@ class PostDetailView: UIView {
         let textField = UITextField()
         textField.backgroundColor = UIColor(named: "SSACGray")
         textField.placeholder = "댓글을 입력해 주세요."
-        textField.layer.cornerRadius = 15
+        textField.layer.cornerRadius = 12
         return textField
+    }()
+    
+    let addCommentButton: UIButton = {
+        let button = UIButton()
+        button.greenButtonImageSize(imageName: "checkmark.rectangle.fill", size: 40)
+        return button
     }()
     
 //    let headerLineView = UIView()
@@ -138,7 +144,7 @@ class PostDetailView: UIView {
             commentStackView.addArrangedSubview($0)
         }
         
-        [headerView, contentStackView, commentStackView, tableView, addCommentTextField].forEach {
+        [headerView, contentStackView, commentStackView, tableView, addCommentTextField, addCommentButton].forEach {
             addSubview($0)
         }
         
@@ -209,8 +215,14 @@ class PostDetailView: UIView {
         addCommentTextField.snp.makeConstraints {
             $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-20)
             $0.leading.equalTo(headerView.snp.leading)
-            $0.trailing.equalTo(headerView.snp.trailing)
+            $0.trailing.equalTo(headerView.snp.trailing).offset(-50)
             $0.height.equalTo(44)
+        }
+        
+        addCommentButton.snp.makeConstraints {
+            $0.top.equalTo(addCommentTextField.snp.top)
+            $0.leading.equalTo(addCommentTextField.snp.trailing).offset(5)
+            $0.trailing.equalToSuperview().offset(-5)
         }
             
         }

@@ -9,7 +9,7 @@ import Foundation
 
 class PostEditViewModel {
     
-    let savePost: Observable<Post> = Observable(Post(id: 0, text: "",
+    var savePost: Observable<Post> = Observable(Post(id: 0, text: "",
                                                          user: UserData(id: 0, username: "", email: "", createdAt: "", updatedAt: ""), createdAt: "", updatedAt: "",
                                                          comments: [PostComment]()))
     
@@ -39,7 +39,8 @@ class PostEditViewModel {
             guard let post = post else {
                 return
             }
-            print(post)
+            
+            print("수정포스")
             self.savePost.value = post
             completion()
         }

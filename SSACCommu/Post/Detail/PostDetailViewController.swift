@@ -45,10 +45,24 @@ class PostDetailViewController: BaseViewController {
         viewModel.loadedComments.bind { comments in
             self.mainView.tableView.reloadData()
         }
+        
+//        viewModel.selectedComment.bind { comment in
+//            self.mainView.tableView.reloadData()
+//        }
     }
     
     override func addAction() {
-        
+        self.mainView.addCommentButton.addTarget(self, action: #selector(addCommentButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func addCommentButtonClicked() {
+        if mainView.commentLabel.text != "" {
+            viewModel.postAddComment(postId: viewModel.selectedPost.value.id, text: mainView.commentLabel.text!) {
+                print("등록 완료")
+            }
+        } else {
+            print("얼럿: 내용을 입력하세요")
+        }
     }
     
     override func setupNavigationBar() {

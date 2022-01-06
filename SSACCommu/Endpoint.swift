@@ -73,7 +73,7 @@ extension URLSession {
     
     static func request<T: Decodable>(_ session: URLSession = .shared, endpoint: URLRequest, completion: @escaping (T?, APIError?) -> Void) {
             session.dataTask(endpoint) { data, response, error in
-            print(data)
+            print(data, response)
                 
             DispatchQueue.main.async {
                 guard error == nil else {
@@ -97,6 +97,8 @@ extension URLSession {
                 guard response.statusCode == 200 else {
                     if response.statusCode == 401 {
                         print("토큰만료: 로그아웃합니다.")
+                        UserDefaults.standard.validToken = false
+                        
                         completion(nil, .unAuthorized)
                         return
                     } else {
