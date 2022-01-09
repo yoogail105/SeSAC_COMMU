@@ -160,7 +160,6 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
         
         print("포스트 아이디: ", row.id)
         let vc = PostDetailViewController()
-        print("selectedData - index: \(indexPath.row), row: ", row)
         vc.viewModel.selectedPost.value = row
         self.navigationController?.pushViewController(vc, animated: true)
         

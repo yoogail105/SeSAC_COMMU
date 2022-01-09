@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 class PostDetailViewModel {
     
     var selectedPost: Observable<Post> = Observable(Post(id: 0, text: "",
@@ -16,6 +17,16 @@ class PostDetailViewModel {
     let loadedComments: Observable<Comments> = Observable(Comments())
     let selectedComment: Observable<Comment> = Observable(Comment(id: 0, comment: "", user: UserData(id: 0, username: "", email: "", createdAt: "", updatedAt: ""), createdAt: "", updatedAt: ""))
     
+    func getSelectedPost(postId: Int, completion: @escaping () -> Void) {
+        APIService.selectedPost(postId: postId) { post, error in
+            guard let post = post else {
+                return
+            }
+
+            self.selectedPost.value = post
+            completion()
+        }
+    }
     
     func deleteDeletePost(postId: Int, completion: @escaping () -> Void) {
         APIService.deletePost(postId: postId) { post, error in

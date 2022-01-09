@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import Toast
+
 class PostDetailViewController: BaseViewController {
     
     let mainView = PostDetailView()
@@ -28,8 +30,12 @@ class PostDetailViewController: BaseViewController {
             print("코멘트불러옴")
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         setDetailPost()
-        
     }
     
     func setDetailPost() {
@@ -94,10 +100,13 @@ class PostDetailViewController: BaseViewController {
         
         let delete = UIAlertAction(title: "삭제하기", style: .default) { _ in
             print("삭제: ",postData.value.id)
-            self.viewModel.deleteDeletePost(postId: self.viewModel.selectedPost.value.id) {
-                print("삭제 완료")
-                self.navigationController?.popViewController(animated: true)
+            self.makeAlert(message: "정말 삭제 하시겠습니까?", okTitle: "확인") { _ in 
+                self.viewModel.deleteDeletePost(postId: self.viewModel.selectedPost.value.id) {
+                    print("삭제 완료")
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
+            
         }
         
         let cancel = UIAlertAction(title: "취소", style: .cancel)

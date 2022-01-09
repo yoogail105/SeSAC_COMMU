@@ -62,7 +62,6 @@ class PostEditViewController: BaseViewController {
                 viewModel.postAddPosts(text: mainView.textField.text!) {
                     self.mainView.makeToast("저장 되었습니다🌱")
                     self.navigationController?.popViewController(animated: true)
-                    
                     print("alert: 작성완료")
                 }
             } else {
@@ -72,13 +71,14 @@ class PostEditViewController: BaseViewController {
             print("수정하기", editPostId)
             viewModel.putEditPost(text: mainView.textField.text!, postId: viewModel.savePost.value.id) {
                 self.navigationController?.popViewController(animated: true)
-                
                 print("alert: 수정완료")
+                }
+                
             }
-               
         }
+      
         
-    }
+    
     
     override func bind() {
 //        viewModel.savePost.bind { post in
