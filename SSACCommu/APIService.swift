@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 enum APIError: Error {
     case invalidResponse
@@ -34,8 +35,8 @@ class APIService {
         
         var request = URLRequest(url: Endpoint.signIn.url)
         request.httpMethod = Method.POST.rawValue
-        request.httpBody = "identifier=\(email)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
-        //request.httpBody = "identifier=lala@sessac.com&password=1234".data(using: .utf8, allowLossyConversion: false)
+        //request.httpBody = "identifier=\(email)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
+        request.httpBody = "identifier=lala@sessac.com&password=1234".data(using: .utf8, allowLossyConversion: false)
         
         URLSession.request(endpoint: request, completion: completion)
         
@@ -52,6 +53,7 @@ class APIService {
     }
     
     // MARK: 포스트 조회(전체 포스트 조회)
+
     static func loadPosts(completion: @escaping (Posts?, APIError?) -> Void) {
         
         var request = URLRequest(url: Endpoint.posts.url)
@@ -89,9 +91,8 @@ class APIService {
 
     // MARK: 포스트 삭제
     static func deletePost(postId: Int, completion: @escaping (Post?, APIError?) -> Void) {
-        let id = UserDefaults.standard.id
         let token = UserDefaults.standard.token!
-        var request = URLRequest(url: Endpoint.postDetail(id: id).url)
+        var request = URLRequest(url: Endpoint.postDetail(id: postId).url)
         request.httpMethod = Method.DELETE.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 

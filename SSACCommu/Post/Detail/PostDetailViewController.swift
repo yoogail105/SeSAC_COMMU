@@ -78,20 +78,25 @@ class PostDetailViewController: BaseViewController {
     }
     
     func setupActionSheet() {
-        
-        let postData = viewModel.selectedPost.value
+        // 현재 포스트 정보
+        let postData = viewModel.selectedPost
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
             let vc = PostEditViewController()
             vc.isNewPost = false
-            vc.mainView.textField.text = postData.text
+            vc.viewModel.savePost = postData
+            vc.viewModel.savePost.value.id = postData.value.id
+            vc.mainView.textField.text = postData.value.text
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        
         let delete = UIAlertAction(title: "삭제하기", style: .default) { _ in
-            self.viewModel.deleteDeletePost(postId: postData.id) {
+            print("삭제: ",postData.value.id)
+            self.viewModel.deleteDeletePost(postId: self.viewModel.selectedPost.value.id) {
                 print("삭제 완료")
+                self.navigationController?.popViewController(animated: true)
             }
         }
         

@@ -70,7 +70,7 @@ class ChangePWView: UIView {
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
         }
-
+        
         
         [currentPasswordTextField, newPasswordTextField, confirmNewPasswordTextField, changeButton].forEach { make in
             make.snp.makeConstraints {
@@ -85,7 +85,7 @@ class ChangePWView: UIView {
             
         }
         
-
+        
     }
     
 }

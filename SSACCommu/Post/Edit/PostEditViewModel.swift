@@ -40,7 +40,7 @@ class PostEditViewModel {
                 return
             }
             
-            print("수정포스")
+            print("수정포스트")
             self.savePost.value = post
             completion()
         }

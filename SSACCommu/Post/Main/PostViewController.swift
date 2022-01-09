@@ -55,7 +55,16 @@ class PostViewController: BaseViewController {
         mainView.tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         mainView.tableView.backgroundColor = .white
         
-       
+        // 당겨서 새로고침
+        mainView.tableView.refreshControl = UIRefreshControl()
+        let refreshControl = mainView.tableView.refreshControl!
+        refreshControl.backgroundColor = .white
+        refreshControl.tintColor = .darkGray
+        refreshControl.attributedTitle = NSAttributedString(string: "당겨서 새로고침")
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
+        
+        
         addAction()
         printUserData()
         
@@ -67,6 +76,10 @@ class PostViewController: BaseViewController {
         viewModel.loadedPosts.bind { post in
             self.mainView.tableView.reloadData()
         }
+    }
+
+    @objc func refresh() {
+        
     }
     
     func invalidToken() {
@@ -137,12 +150,13 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
         return 180
     }
     
+    //postDetailView로 이동하기
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        //postDetailView로 이동하기
         print(#function, "select: \(indexPath.row)")
+        
+        // row: Post  row.id = Post id
         let row = self.viewModel.loadedPosts.value[indexPath.row]
-        UserDefaults.standard.postId = row.id
+        //UserDefaults.standard.postId = row.id// -> observable 만들기
         
         print("포스트 아이디: ", row.id)
         let vc = PostDetailViewController()

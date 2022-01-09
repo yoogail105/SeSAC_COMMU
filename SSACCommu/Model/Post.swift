@@ -9,11 +9,11 @@
 import Foundation
 
 struct Post: Codable {
-    let id: Int
-    let text: String
-    let user: UserData
-    let createdAt, updatedAt: String
-    let comments: [PostComment]
+    var id: Int
+    var text: String
+    var user: UserData
+    var createdAt, updatedAt: String
+    var comments: [PostComment]
 
     enum CodingKeys: String, CodingKey {
         case id, text, user
@@ -24,10 +24,10 @@ struct Post: Codable {
 }
 
 struct PostComment: Codable {
-    let id: Int
-    let comment: String
-    let user, post: Int
-    let createdAt, updatedAt: String
+    var id: Int
+    var comment: String
+    var user, post: Int
+    var createdAt, updatedAt: String
 
     enum CodingKeys: String, CodingKey {
         case id, comment, user, post

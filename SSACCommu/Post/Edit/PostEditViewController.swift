@@ -67,7 +67,7 @@ class PostEditViewController: BaseViewController {
             }
         }else {
             print("수정하기", editPostId)
-            viewModel.putEditPost(text: mainView.textField.text!, postId: UserDefaults.standard.postId) {
+            viewModel.putEditPost(text: mainView.textField.text!, postId: viewModel.savePost.value.id) {
                 self.navigationController?.popViewController(animated: true)
                 print("alert: 수정완료")
             }
@@ -77,9 +77,10 @@ class PostEditViewController: BaseViewController {
     }
     
     override func bind() {
-        viewModel.savePost.bind { post in
-            //self.editPostId = post.id
-        }
+//        viewModel.savePost.bind { post in
+//            self.mainView.textField.text = post.text
+//
+//        }
     }
     
     override func addAction() {

@@ -9,7 +9,7 @@ import Foundation
 
 class PostDetailViewModel {
     
-    let selectedPost: Observable<Post> = Observable(Post(id: 0, text: "",
+    var selectedPost: Observable<Post> = Observable(Post(id: 0, text: "",
                                                          user: UserData(id: 0, username: "", email: "", createdAt: "", updatedAt: ""), createdAt: "", updatedAt: "",
                                                          comments: [PostComment]()))
     
@@ -23,6 +23,7 @@ class PostDetailViewModel {
                 return
             }
             print(post)
+            
             self.selectedPost.value = post
             completion()
         }
