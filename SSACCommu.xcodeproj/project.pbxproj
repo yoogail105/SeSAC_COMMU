@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23082949278B4E5E00C5D6E5 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 23082948278B4E5E00C5D6E5 /* Toast */; };
+		2308294B278B4FC500C5D6E5 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2308294A278B4FC500C5D6E5 /* UINavigationController+Extension.swift */; };
 		23185DF02780535F0004FBFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23185DEF2780535F0004FBFF /* AppDelegate.swift */; };
 		23185DF22780535F0004FBFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23185DF12780535F0004FBFF /* SceneDelegate.swift */; };
 		23185DF42780535F0004FBFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23185DF32780535F0004FBFF /* ViewController.swift */; };
@@ -56,6 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2308294A278B4FC500C5D6E5 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		23185DEC2780535F0004FBFF /* SSACCommu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSACCommu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23185DEF2780535F0004FBFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23185DF12780535F0004FBFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23082949278B4E5E00C5D6E5 /* Toast in Frameworks */,
 				23C3ECC32786B5260044B44B /* IQKeyboardManagerSwift in Frameworks */,
 				23C3ECB42785FD490044B44B /* RxKeyboard in Frameworks */,
 				23C3ECD0278837200044B44B /* RxSwift in Frameworks */,
@@ -181,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				23C3ECA22785825D0044B44B /* UIVeiw+Extension.swift */,
+				2308294A278B4FC500C5D6E5 /* UINavigationController+Extension.swift */,
 				23C3EC2D2782316A0044B44B /* UIButton+Extension.swift */,
 				23C3EC962784CC6A0044B44B /* UserDefaults+Extension.swift */,
 				23C3EC9C2784E06A0044B44B /* UILabel+Extension.swift */,
@@ -292,6 +297,7 @@
 				23C3ECC22786B5260044B44B /* IQKeyboardManagerSwift */,
 				23C3ECCD278837200044B44B /* RxCocoa */,
 				23C3ECCF278837200044B44B /* RxSwift */,
+				23082948278B4E5E00C5D6E5 /* Toast */,
 			);
 			productName = SSACCommu;
 			productReference = 23185DEC2780535F0004FBFF /* SSACCommu.app */;
@@ -326,6 +332,7 @@
 				23C3ECB22785FD490044B44B /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 				23C3ECC12786B5260044B44B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				23C3ECCC278837200044B44B /* XCRemoteSwiftPackageReference "RxSwift" */,
+				23082947278B4E5E00C5D6E5 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = 23185DED2780535F0004FBFF /* Products */;
 			projectDirPath = "";
@@ -380,6 +387,7 @@
 				23C3ECAF2785F8060044B44B /* PostEditViewController.swift in Sources */,
 				23C3EC972784CC6A0044B44B /* UserDefaults+Extension.swift in Sources */,
 				23C3EC9F27857F120044B44B /* PostEditView.swift in Sources */,
+				2308294B278B4FC500C5D6E5 /* UINavigationController+Extension.swift in Sources */,
 				23C3EC6B278333760044B44B /* SignInViewController.swift in Sources */,
 				23C3ECA32785825D0044B44B /* UIVeiw+Extension.swift in Sources */,
 				23C3EC70278333B00044B44B /* Observable.swift in Sources */,
@@ -603,6 +611,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		23082947278B4E5E00C5D6E5 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		23C3EC222782285B0044B44B /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -638,6 +654,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		23082948278B4E5E00C5D6E5 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 23082947278B4E5E00C5D6E5 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
 		23C3EC232782285B0044B44B /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 23C3EC222782285B0044B44B /* XCRemoteSwiftPackageReference "SnapKit" */;
