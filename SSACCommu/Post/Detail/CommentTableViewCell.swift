@@ -20,6 +20,7 @@ class CommentTableViewCell: UITableViewCell {
         stackView.distribution = .equalSpacing
         return stackView
     }()
+    
     var nicknameLabel: UILabel = {
         let label = UILabel()
         label.text = "호호호호"
@@ -67,24 +68,27 @@ class CommentTableViewCell: UITableViewCell {
             addSubview($0)
         }
         
+        controlButton.snp.makeConstraints {
+            $0.top.equalTo(nicknameLabel.snp.top)
+            $0.trailing.equalToSuperview()
+            $0.height.width.equalTo(30)
+        }
+        
         nicknameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
+            $0.top.equalToSuperview().offset(10)
             $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview().offset(-44)
+            $0.trailing.equalTo(controlButton.snp.leading).offset(-5)
         }
         
         
         commentLabel.snp.makeConstraints {
             $0.top.equalTo(nicknameLabel.snp.bottom).offset(5)
             $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview().offset(-44)
+            $0.trailing.equalTo(controlButton.snp.leading).offset(-5)
+            $0.bottom.equalToSuperview().offset(-10)
         }
         
-        controlButton.snp.makeConstraints {
-            $0.top.equalTo(commentLabel.snp.top)
-            $0.trailing.equalToSuperview()
-            $0.height.width.equalTo(30)
-        }
+        
         
     }
     

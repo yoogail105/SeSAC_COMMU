@@ -9,11 +9,47 @@ import UIKit
 
 extension UIViewController {
     
+    
+    
     func makeAlert(message: String, okTitle: String, okAction: @escaping ((UIAlertAction) -> Void)) {
         
+            //UIColor(named: "SSACGreen")
+   
+        self.view.tintColor = UIColor(named: "SSACGreen")
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: okTitle, style: .default, handler: okAction))
-        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        
+        
+//        alert.addAction(UIAlertAction(title: okTitle, style: .default, handler: okAction))
+        let okAction = UIAlertAction(title: okTitle, style: .default, handler: okAction)
+        okAction.changeGreenColor()
+        alert.addAction(okAction)
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        cancelAction.changeGreenColor()
+        alert.addAction(cancelAction)
+        
         self.present(alert, animated: true)
+    }
+    
+ 
+    func makeActionSheet(editAction: @escaping ((UIAlertAction) -> Void), deleteAction:@escaping ((UIAlertAction) -> Void) ) {
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let edit = UIAlertAction(title: "수정하기", style: .default, handler: editAction)
+        edit.changeGreenColor()
+        
+        let delete = UIAlertAction(title: "삭제하기", style: .default, handler: deleteAction)
+        delete.changeGreenColor()
+        
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        cancel.changeGreenColor()
+        
+        alert.addAction(edit)
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
     }
 }

@@ -15,6 +15,7 @@ class PostDetailViewModel {
                                                          comments: [PostComment]()))
     
     let loadedComments: Observable<Comments> = Observable(Comments())
+    
     let selectedComment: Observable<Comment> = Observable(Comment(id: 0, comment: "", user: UserData(id: 0, username: "", email: "", createdAt: "", updatedAt: ""), createdAt: "", updatedAt: ""))
     
     func getSelectedPost(postId: Int, completion: @escaping () -> Void) {
@@ -22,7 +23,7 @@ class PostDetailViewModel {
             guard let post = post else {
                 return
             }
-
+            
             self.selectedPost.value = post
             completion()
         }
@@ -49,9 +50,9 @@ class PostDetailViewModel {
             guard let comments = comments else {
                 return
             }
-
+            
             self.loadedComments.value = comments
-           // print("Comments:", self.loadedComments.value.count)
+            // print("Comments:", self.loadedComments.value.count)
             completion()
             
         }
@@ -67,9 +68,33 @@ class PostDetailViewModel {
             self.selectedComment.value = comment
             
             completion()
-
+            
         }
     }
     
+    func putEditComment(postId: Int, commentId: Int, comment: String, completion: @escaping () -> Void) {
+        print(#function)
+        APIService.editComment(postId: postId, commentId: commentId, comment: comment) { comment, error in
+            guard let comment = comment else {
+                return
+            }
+            
+            self.selectedComment.value = comment
+            
+            completion()
+        }
+    }
+    
+    func deleteComment(commentId: Int, completion: @escaping () -> Void) {
+        print(#function)
+        APIService.deleteComment(commentId: commentId) { comment, error in
+            guard let comment = comment else {
+                return
+            }
+            self.selectedComment.value = comment
+            
+            completion()
+        }
+    }
     
 }

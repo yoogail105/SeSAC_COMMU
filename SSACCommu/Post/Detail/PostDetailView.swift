@@ -87,7 +87,6 @@ class PostDetailView: UIView {
     }()
     
     
-    
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false

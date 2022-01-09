@@ -22,6 +22,7 @@ enum Endpoint {
     case addPost
     case postDetail(id: Int)
     case comments(id: Int)
+    case addComments
     case commentDetail(id: Int)
 }
 
@@ -42,8 +43,12 @@ extension Endpoint {
             return .makeEndPoint("posts/\(id)")
         case .comments(id: let id):
             return .makeEndPoint("comments?post=\(id)")
+        case .addComments:
+            return .makeEndPoint("comments")
         case .commentDetail(id: let id):
             return .makeEndPoint("comments/\(id)")
+    
+            
         }
     }
 }
@@ -73,7 +78,7 @@ extension URLSession {
     
     static func request<T: Decodable>(_ session: URLSession = .shared, endpoint: URLRequest, completion: @escaping (T?, APIError?) -> Void) {
             session.dataTask(endpoint) { data, response, error in
-            print(data, response)
+            //print(data, response)
                 
             DispatchQueue.main.async {
                 guard error == nil else {

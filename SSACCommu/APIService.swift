@@ -25,8 +25,6 @@ class APIService {
         var request = URLRequest(url: Endpoint.signUp.url)
         request.httpMethod = Method.POST.rawValue
         request.httpBody = "username=\(userName)&email=\(email)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
-//        request.httpBody = "username=hoi&email=ss@ss.com&password=1234".data(using: .utf8, allowLossyConversion: false)
-
         URLSession.request(endpoint: request, completion: completion)
     }
     
@@ -36,7 +34,9 @@ class APIService {
         var request = URLRequest(url: Endpoint.signIn.url)
         request.httpMethod = Method.POST.rawValue
         //request.httpBody = "identifier=\(email)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
-        request.httpBody = "identifier=lala@sessac.com&password=1234".data(using: .utf8, allowLossyConversion: false)
+        
+        request.httpBody = "identifier=Hehe@he.com&password=1234".data(using: .utf8, allowLossyConversion: false)
+        //request.httpBody = "identifier=lala@sessac.com&password=1234".data(using: .utf8, allowLossyConversion: false)
         
         URLSession.request(endpoint: request, completion: completion)
         
@@ -52,8 +52,21 @@ class APIService {
         URLSession.request(endpoint: request, completion: completion)
     }
     
-    // MARK: 포스트 조회(전체 포스트 조회)
+    
+    static func selectedPost(postId: Int, completion: @escaping (Post?, APIError?) -> Void) {
+        
+        let token = UserDefaults.standard.token!
+        var request = URLRequest(url: Endpoint.postDetail(id: postId).url)
+        
+        request.httpMethod = Method.GET.rawValue
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.request(endpoint: request, completion: completion)
+    }
 
+    
+    // MARK: 포스트 조회(전체 포스트 조회)
     static func loadPosts(completion: @escaping (Posts?, APIError?) -> Void) {
         
         var request = URLRequest(url: Endpoint.posts.url)
@@ -113,7 +126,7 @@ class APIService {
     // MARK: 코멘트 작성
     static func addComment(postId: Int, comment: String, completion: @escaping (Comment?, APIError?) -> Void) {
         let token = UserDefaults.standard.token!
-        var request = URLRequest(url: Endpoint.commentDetail(id: postId).url)
+        var request = URLRequest(url: Endpoint.addComments.url)
         request.httpMethod = Method.POST.rawValue
         request.httpBody = "comment=\(comment)&post=\(postId)".data(using: .utf8, allowLossyConversion: false)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -122,20 +135,21 @@ class APIService {
     }
     
     // MARK: 코멘트 수정
-    static func editComment(postId: Int, comment: String, completion: @escaping (Comment?, APIError?) -> Void) {
+    static func editComment(postId: Int, commentId: Int, comment: String, completion: @escaping (Comment?, APIError?) -> Void) {
         let token = UserDefaults.standard.token!
-        var request = URLRequest(url: Endpoint.commentDetail(id: postId).url)
+        var request = URLRequest(url: Endpoint.commentDetail(id: commentId).url)
         request.httpMethod = Method.PUT.rawValue
         request.httpBody = "comment=\(comment)&post=\(postId)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             
         URLSession.request(endpoint: request, completion: completion)
     }
     
     // MARK: 코멘트 삭제
-    static func deleteComment(postId: Int, completion: @escaping (Comment?, APIError?) -> Void) {
+    static func deleteComment(commentId: Int, completion: @escaping (Comment?, APIError?) -> Void) {
         let token = UserDefaults.standard.token!
-        var request = URLRequest(url: Endpoint.commentDetail(id: postId).url)
+        var request = URLRequest(url: Endpoint.commentDetail(id: commentId).url)
         request.httpMethod = Method.DELETE.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             

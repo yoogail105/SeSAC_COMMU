@@ -33,12 +33,13 @@ class PostEditViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNavigationBar()
+        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         
     }
@@ -53,6 +54,13 @@ class PostEditViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = saveButton
     }
     
+    @objc override func back() {
+        self.makeAlert(message: "변경사항이 저장되지 않았습니다. 목록으로 이동하시겠습니까?", okTitle: "확인") {_ in
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        
+    }
     
     @objc func saveButtonClicked() {
         print(#function)

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		23082949278B4E5E00C5D6E5 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 23082948278B4E5E00C5D6E5 /* Toast */; };
 		2308294B278B4FC500C5D6E5 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2308294A278B4FC500C5D6E5 /* UINavigationController+Extension.swift */; };
+		2308294D278B5F6100C5D6E5 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2308294C278B5F6100C5D6E5 /* UIViewController+Extension.swift */; };
+		2308294F278B626F00C5D6E5 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2308294E278B626F00C5D6E5 /* DateFormatter+Extension.swift */; };
+		23082951278B76E800C5D6E5 /* UIAlertAction+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23082950278B76E800C5D6E5 /* UIAlertAction+Extension.swift */; };
 		23185DF02780535F0004FBFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23185DEF2780535F0004FBFF /* AppDelegate.swift */; };
 		23185DF22780535F0004FBFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23185DF12780535F0004FBFF /* SceneDelegate.swift */; };
 		23185DF42780535F0004FBFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23185DF32780535F0004FBFF /* ViewController.swift */; };
@@ -59,6 +62,9 @@
 
 /* Begin PBXFileReference section */
 		2308294A278B4FC500C5D6E5 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
+		2308294C278B5F6100C5D6E5 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		2308294E278B626F00C5D6E5 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
+		23082950278B76E800C5D6E5 /* UIAlertAction+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Extension.swift"; sourceTree = "<group>"; };
 		23185DEC2780535F0004FBFF /* SSACCommu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSACCommu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23185DEF2780535F0004FBFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23185DF12780535F0004FBFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,7 +156,6 @@
 				23C3EC6F278333B00044B44B /* Observable.swift */,
 				23C3ECB727860EB00044B44B /* Model */,
 				23C3ECA92785E8430044B44B /* Profile */,
-				23C3ECC42786CF610044B44B /* CommentTableViewCell.swift */,
 				23C3EC92278415DA0044B44B /* Post */,
 				23C3EC7B278358010044B44B /* Main */,
 				23C3EC6E2783337E0044B44B /* SignIn */,
@@ -184,12 +189,15 @@
 		23C3EC31278234260044B44B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				23082950278B76E800C5D6E5 /* UIAlertAction+Extension.swift */,
 				23C3ECA22785825D0044B44B /* UIVeiw+Extension.swift */,
 				2308294A278B4FC500C5D6E5 /* UINavigationController+Extension.swift */,
 				23C3EC2D2782316A0044B44B /* UIButton+Extension.swift */,
 				23C3EC962784CC6A0044B44B /* UserDefaults+Extension.swift */,
 				23C3EC9C2784E06A0044B44B /* UILabel+Extension.swift */,
 				23C3EC2B27822FE00044B44B /* UITextField+Extension.swift */,
+				2308294C278B5F6100C5D6E5 /* UIViewController+Extension.swift */,
+				2308294E278B626F00C5D6E5 /* DateFormatter+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -268,6 +276,7 @@
 		23C3ECBA2786345B0044B44B /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				23C3ECC42786CF610044B44B /* CommentTableViewCell.swift */,
 				23C3ECA02785807A0044B44B /* PostDetailView.swift */,
 				23C3ECBB278634690044B44B /* PostDetailViewModel.swift */,
 				23C3ECBD278634790044B44B /* PostDetailViewController.swift */,
@@ -378,6 +387,7 @@
 				23C3ECBE278634790044B44B /* PostDetailViewController.swift in Sources */,
 				23C3EC26278229420044B44B /* LoginViewController.swift in Sources */,
 				23C3EC7A278340690044B44B /* MainViewController.swift in Sources */,
+				23082951278B76E800C5D6E5 /* UIAlertAction+Extension.swift in Sources */,
 				23C3EC2E2782316A0044B44B /* UIButton+Extension.swift in Sources */,
 				23C3EC7F278368380044B44B /* Endpoint.swift in Sources */,
 				23C3ECB12785F84F0044B44B /* PostEditViewModel.swift in Sources */,
@@ -387,6 +397,7 @@
 				23C3ECAF2785F8060044B44B /* PostEditViewController.swift in Sources */,
 				23C3EC972784CC6A0044B44B /* UserDefaults+Extension.swift in Sources */,
 				23C3EC9F27857F120044B44B /* PostEditView.swift in Sources */,
+				2308294D278B5F6100C5D6E5 /* UIViewController+Extension.swift in Sources */,
 				2308294B278B4FC500C5D6E5 /* UINavigationController+Extension.swift in Sources */,
 				23C3EC6B278333760044B44B /* SignInViewController.swift in Sources */,
 				23C3ECA32785825D0044B44B /* UIVeiw+Extension.swift in Sources */,
@@ -397,6 +408,7 @@
 				23185DF22780535F0004FBFF /* SceneDelegate.swift in Sources */,
 				23C3ECC52786CF610044B44B /* CommentTableViewCell.swift in Sources */,
 				23C3EC9D2784E06A0044B44B /* UILabel+Extension.swift in Sources */,
+				2308294F278B626F00C5D6E5 /* DateFormatter+Extension.swift in Sources */,
 				23C3ECC02786AAC20044B44B /* Comment.swift in Sources */,
 				23C3EC8C278410D00044B44B /* User.swift in Sources */,
 				23C3ECA82785E83B0044B44B /* ChangePWView.swift in Sources */,
