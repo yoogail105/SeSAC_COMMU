@@ -24,7 +24,7 @@ class CommentTableViewCell: UITableViewCell {
     var nicknameLabel: UILabel = {
         let label = UILabel()
         label.text = "호호호호"
-        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         label.textColor = .black
         return label
     }()
@@ -32,7 +32,7 @@ class CommentTableViewCell: UITableViewCell {
     var commentLabel: UILabel = {
         let label = UILabel()
         label.text = "댓글\n댓글\n댓글\n댓글\n\n\n\n댓글"
-        label.font = UIFont.systemFont(ofSize: 13, weight: .light)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         label.numberOfLines = 0
         return label
     }()
@@ -43,6 +43,14 @@ class CommentTableViewCell: UITableViewCell {
         button.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
         button.tintColor = .black
         return button
+    }()
+    
+    var dateLabel: UILabel = {
+       let label = UILabel()
+        label.text = "01/11 06:16"
+        label.font = UIFont.systemFont(ofSize: 10, weight: .light)
+        label.textColor = .darkGray
+        return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -64,7 +72,7 @@ class CommentTableViewCell: UITableViewCell {
         
     
     
-        [nicknameLabel, commentLabel, controlButton].forEach {
+        [nicknameLabel, commentLabel, dateLabel, controlButton].forEach {
             addSubview($0)
         }
         
@@ -80,12 +88,17 @@ class CommentTableViewCell: UITableViewCell {
             $0.trailing.equalTo(controlButton.snp.leading).offset(-5)
         }
         
-        
         commentLabel.snp.makeConstraints {
-            $0.top.equalTo(nicknameLabel.snp.bottom).offset(5)
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(3)
             $0.leading.equalToSuperview()
             $0.trailing.equalTo(controlButton.snp.leading).offset(-5)
             $0.bottom.equalToSuperview().offset(-10)
+        }
+        
+        dateLabel.snp.makeConstraints {
+            $0.top.equalTo(commentLabel.snp.bottom).offset(5)
+            $0.leading.equalToSuperview()
+            $0.height.equalTo(20)
         }
         
         

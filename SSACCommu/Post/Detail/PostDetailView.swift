@@ -90,7 +90,7 @@ class PostDetailView: UIView {
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.separatorStyle = .none
+        //tableView.separatorStyle = .none
         tableView.backgroundColor = .white
         return tableView
     }()

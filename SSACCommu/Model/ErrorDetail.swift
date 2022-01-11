@@ -10,7 +10,7 @@ import Foundation
 struct ErrorDetail: Codable {
     let statusCode: Int
     let error: String
-    let message: [Datum]
+    let message: String
 }
 
 // MARK: - Datum

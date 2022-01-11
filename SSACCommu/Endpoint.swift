@@ -78,19 +78,17 @@ extension URLSession {
     
     static func request<T: Decodable>(_ session: URLSession = .shared, endpoint: URLRequest, completion: @escaping (T?, APIError?) -> Void) {
             session.dataTask(endpoint) { data, response, error in
-            //print(data, response)
+            print("결과:::::::\n data: \(data)\n response: \(response)\n error: \(error)")
                 
             DispatchQueue.main.async {
                 guard error == nil else {
                     completion(nil, .failed)
                     return
-                    
                 }
                 
                 guard let data = data else {
                     completion(nil, .noData)
                     return
-                    
                 }
                 
                 guard let response = response as? HTTPURLResponse else {
@@ -100,15 +98,13 @@ extension URLSession {
                 }
                 
                 guard response.statusCode == 200 else {
-                    if response.statusCode == 401 {
-                        print("토큰만료: 로그아웃합니다.")
-                        UserDefaults.standard.validToken = false
-                        
-                        completion(nil, .unAuthorized)
-                        return
-                    } else {
-                        completion(nil, .failed)
-                    }
+//                    if response.statusCode == 401 {
+//                        UserDefaults.standard.validToken = false
+//                        completion(nil, .unAuthorized)
+//                        return
+//                    } else {
+//                        completion(nil, .failed)
+//                    }
                     
                     // 오류 확인
                     do {
@@ -117,10 +113,11 @@ extension URLSession {
                         let decoder = JSONDecoder()
                         let errorDetail = try decoder.decode(ErrorDetail.self, from: data)
                         completion(nil, .failed)
-                        print(errorDetail.message)
+                        print("error:", errorDetail.message)
                         return
                     } catch {
-                        print("200아닐 때 do-catch: 여기오류")
+                        print("status code do-catch: 여기오류")
+                        
                         completion(nil, .invalidData)
                         return
                     }

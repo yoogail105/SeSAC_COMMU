@@ -28,26 +28,34 @@ class APIService {
         URLSession.request(endpoint: request, completion: completion)
     }
     
+    
     // MARK: SignIn
     static func signIn(email: String, password: String, completion: @escaping (User?, APIError?) -> Void) {
         
         var request = URLRequest(url: Endpoint.signIn.url)
         request.httpMethod = Method.POST.rawValue
-        //request.httpBody = "identifier=\(email)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
+        request.httpBody = "identifier=\(email)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
         
-        request.httpBody = "identifier=Hehe@he.com&password=1234".data(using: .utf8, allowLossyConversion: false)
+        //request.httpBody = "identifier=Hehe@he.com&password=12".data(using: .utf8, allowLossyConversion: false)
         //request.httpBody = "identifier=lala@sessac.com&password=1234".data(using: .utf8, allowLossyConversion: false)
         
         URLSession.request(endpoint: request, completion: completion)
         
     }
     
-    // MARK: Change Password [ ]
-    static func changePW(email: String, currentPassword: String, newPassword: String, confirmNewPassword: String, completion: @escaping (User?, APIError?) -> Void) {
+    // MARK: Change Password
+    static func changePW(currentPassword: String, newPassword: String, confirmNewPassword: String, completion: @escaping (UserData?, APIError?) -> Void) {
         
+        let token = UserDefaults.standard.token
         var request = URLRequest(url: Endpoint.changePW.url)
+        
         request.httpMethod = Method.POST.rawValue
-        request.httpBody = "currentPassword=\(currentPassword)&newPassword=\(newPassword)&confirmNewPassword=\(confirmNewPassword)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue("Bearer \(String(describing: token))", forHTTPHeaderField: "Authorization")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpBody = "currentPassword=\(currentPassword)&newPassword=\(newPassword)&confirmNewPassword=\(confirmNewPassword)"
+            .data(using: .utf8, allowLossyConversion: false)
+        
+        print("비밀번호 변경하기: currentPassword=\(currentPassword)&newPassword=\(newPassword)&confirmNewPassword=\(confirmNewPassword)")
         
         URLSession.request(endpoint: request, completion: completion)
     }
@@ -60,7 +68,6 @@ class APIService {
         
         request.httpMethod = Method.GET.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         
         URLSession.request(endpoint: request, completion: completion)
     }

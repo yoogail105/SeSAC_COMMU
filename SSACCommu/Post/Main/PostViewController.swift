@@ -28,6 +28,7 @@ class PostViewController: BaseViewController {
         self.view = mainView
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -86,19 +87,17 @@ class PostViewController: BaseViewController {
         print("토큰만료:", #function)
         
         let vc = MainViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    //self.mainView.emailTextField.addTarget(self, action: #selector(
-    //emailTextFieldDidChange(_:)), for: .editingChanged)
     
     func printUserData() {
         print(#function)
         print("validToken:",self.userDefaults.validToken)
-        print("token:",self.userDefaults.token)
+        print("token:",self.userDefaults.token!)
         print("id:", self.userDefaults.id)
-        print("nickname:", self.userDefaults.nickname)
-        print("email:", self.userDefaults.email)
+        print("nickname:", self.userDefaults.nickname!)
+        print("email:", self.userDefaults.email!)
 
     }
     
@@ -106,6 +105,7 @@ class PostViewController: BaseViewController {
         self.mainView.profileButton.addTarget(self, action: #selector(profileButtonClicked), for: .touchUpInside)
         self.mainView.addPostButton.addTarget(self, action: #selector(addPostButtonClicked), for: .touchUpInside)
     }
+    
     @objc func profileButtonClicked() {
         // 비밀번호 변경페이지로 이동
         let vc = ChangePWViewController()
@@ -154,12 +154,13 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(#function, "select: \(indexPath.row)")
         
-        // row: Post  row.id = Post id
-        let row = self.viewModel.loadedPosts.value[indexPath.row]
-        //UserDefaults.standard.postId = row.id// -> observable 만들기
-        
-        print("포스트 아이디: ", row.id)
         let vc = PostDetailViewController()
+        let row = self.viewModel.loadedPosts.value[indexPath.row]
+        if userDefaults.id == row.user.id {
+            vc.isMyPost = true
+        } else {
+            vc.isMyPost = false
+        }
         vc.viewModel.selectedPost.value = row
         self.navigationController?.pushViewController(vc, animated: true)
         

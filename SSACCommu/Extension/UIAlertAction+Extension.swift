@@ -10,7 +10,11 @@ import UIKit
 
 extension UIAlertAction {
     
-    func changeGreenColor() {
+    func greenAlertText() {
         self.setValue(UIColor(named: "SSACGreen"), forKey: "titleTextColor")
+    }
+    
+    func redAlertText() {
+        self.setValue(UIColor.red, forKey: "titleTextColor")
     }
 }

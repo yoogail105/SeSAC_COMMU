@@ -14,7 +14,6 @@
 		23082951278B76E800C5D6E5 /* UIAlertAction+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23082950278B76E800C5D6E5 /* UIAlertAction+Extension.swift */; };
 		23185DF02780535F0004FBFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23185DEF2780535F0004FBFF /* AppDelegate.swift */; };
 		23185DF22780535F0004FBFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23185DF12780535F0004FBFF /* SceneDelegate.swift */; };
-		23185DF42780535F0004FBFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23185DF32780535F0004FBFF /* ViewController.swift */; };
 		23185DF9278053610004FBFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23185DF8278053610004FBFF /* Assets.xcassets */; };
 		23185DFC278053610004FBFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23185DFA278053610004FBFF /* LaunchScreen.storyboard */; };
 		23C3EC21278228450044B44B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3EC20278228450044B44B /* BaseViewController.swift */; };
@@ -68,7 +67,6 @@
 		23185DEC2780535F0004FBFF /* SSACCommu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSACCommu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23185DEF2780535F0004FBFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23185DF12780535F0004FBFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		23185DF32780535F0004FBFF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		23185DF8278053610004FBFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23185DFB278053610004FBFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		23185DFD278053610004FBFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -149,15 +147,14 @@
 				23C3EC302782340B0044B44B /* Support */,
 				23C3EC31278234260044B44B /* Extension */,
 				23C3EC20278228450044B44B /* BaseViewController.swift */,
-				23185DF32780535F0004FBFF /* ViewController.swift */,
 				23C3EC25278229420044B44B /* LoginViewController.swift */,
 				23C3EC7E278368380044B44B /* Endpoint.swift */,
 				23C3EC7C278366BE0044B44B /* APIService.swift */,
 				23C3EC6F278333B00044B44B /* Observable.swift */,
 				23C3ECB727860EB00044B44B /* Model */,
-				23C3ECA92785E8430044B44B /* Profile */,
 				23C3EC92278415DA0044B44B /* Post */,
 				23C3EC7B278358010044B44B /* Main */,
+				23C3ECA92785E8430044B44B /* Profile */,
 				23C3EC6E2783337E0044B44B /* SignIn */,
 				23C3EC2F278233EB0044B44B /* SignUp */,
 				23185DF8278053610004FBFF /* Assets.xcassets */,
@@ -375,7 +372,6 @@
 				23C3ECAD2785E85A0044B44B /* ChangePWViewController.swift in Sources */,
 				23C3EC8F278414A50044B44B /* PostView.swift in Sources */,
 				23C3ECBC278634690044B44B /* PostDetailViewModel.swift in Sources */,
-				23185DF42780535F0004FBFF /* ViewController.swift in Sources */,
 				23C3ECAB2785E8540044B44B /* ChangePWViewModel.swift in Sources */,
 				23C3EC21278228450044B44B /* BaseViewController.swift in Sources */,
 				23C3EC3327823A870044B44B /* SignUpViewModel.swift in Sources */,

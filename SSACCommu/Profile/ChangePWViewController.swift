@@ -31,15 +31,17 @@ class ChangePWViewController: BaseViewController {
     }
     
     override func bind() {
-//        viewModel.email.bind { text in
-//            print(text)
-//            self.mainView.emailTextField.text = text
-//        }
-//
-//        viewModel.password.bind { text in
-//            print(text)
-//            self.mainView.passwordTextField.text = text
-//        }
+        viewModel.currentPassword.bind { text in
+            self.mainView.currentPasswordTextField.text = text
+        }
+
+        viewModel.newPassword.bind { text in
+            self.mainView.newPasswordTextField.text = text
+        }
+        
+        viewModel.confirmNewPassword.bind { text in
+            self.mainView.confirmNewPasswordTextField.text = text
+        }
     }
     
     override func addAction() {
@@ -51,15 +53,22 @@ class ChangePWViewController: BaseViewController {
     
     @objc func changeButtonClicked() {
         print("비밀번호 변경하기 버튼 클릭")
+
+        viewModel.postChangePassword(currentPassword: mainView.currentPasswordTextField.text!, newPassword: mainView.newPasswordTextField.text!, confirmNewPassword: mainView.confirmNewPasswordTextField.text!) {
+            print("성공했다.")
+        }
         
     }
     @objc func logoutButtonClicked() {
-            
-        // userDefaults 정보 지우기
-        UserDefaults.standard.reset()
-        print("지웠다:",UserDefaults.standard.validToken, UserDefaults.standard.id)
         
-        let vc = MainViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        self.makeAlert(message: "로그아웃 하시겠습니까?", okTitle: "로그아웃") { _ in
+            // userDefaults 정보 지우기
+            UserDefaults.standard.reset()
+            print("지웠다:",UserDefaults.standard.validToken, UserDefaults.standard.id)
+            
+            let vc = MainViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+     
     }
 }

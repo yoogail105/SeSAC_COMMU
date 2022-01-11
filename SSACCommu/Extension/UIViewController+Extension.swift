@@ -21,11 +21,11 @@ extension UIViewController {
         
 //        alert.addAction(UIAlertAction(title: okTitle, style: .default, handler: okAction))
         let okAction = UIAlertAction(title: okTitle, style: .default, handler: okAction)
-        okAction.changeGreenColor()
+        okAction.redAlertText()
         alert.addAction(okAction)
         
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
-        cancelAction.changeGreenColor()
+        cancelAction.greenAlertText()
         alert.addAction(cancelAction)
         
         self.present(alert, animated: true)
@@ -37,14 +37,14 @@ extension UIViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let edit = UIAlertAction(title: "수정하기", style: .default, handler: editAction)
-        edit.changeGreenColor()
+        edit.greenAlertText()
         
         let delete = UIAlertAction(title: "삭제하기", style: .default, handler: deleteAction)
-        delete.changeGreenColor()
+        delete.redAlertText()
         
         
         let cancel = UIAlertAction(title: "취소", style: .cancel)
-        cancel.changeGreenColor()
+        cancel.greenAlertText()
         
         alert.addAction(edit)
         alert.addAction(delete)

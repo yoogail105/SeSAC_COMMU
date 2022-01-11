@@ -14,6 +14,8 @@ class PostDetailViewController: BaseViewController {
     let mainView = PostDetailView()
     let viewModel = PostDetailViewModel()
     var isEditComment = false
+    var isMyPost = false
+    var isMyComment = false
     
     override func loadView() {
         self.view = mainView
@@ -21,6 +23,8 @@ class PostDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
@@ -106,10 +110,11 @@ class PostDetailViewController: BaseViewController {
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
-        
-        let controlButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.and.pencil.and.ellipsis"), style: .done, target: self, action: #selector(controlButtonClicked))
-        controlButton.tintColor = UIColor(named: "SSACGreen")
-        self.navigationItem.rightBarButtonItem = controlButton
+        if isMyPost {
+            let controlButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.and.pencil.and.ellipsis"), style: .done, target: self, action: #selector(controlButtonClicked))
+            controlButton.tintColor = UIColor(named: "SSACGreen")
+            self.navigationItem.rightBarButtonItem = controlButton
+        }
     }
     
     @objc func controlButtonClicked() {
@@ -143,7 +148,7 @@ class PostDetailViewController: BaseViewController {
             
         } deleteAction: { _ in
             //삭제하기 -> alert
-            self.makeAlert(message: "삭제 하시겠습니까?", okTitle: "확인") { _ in
+            self.makeAlert(message: "댓글을 삭제 하시겠습니까?", okTitle: "확인") { _ in
                 self.viewModel.deleteComment(commentId: comment.id) {
                     print("삭제완료")
                     self.getComments()
@@ -172,8 +177,15 @@ extension PostDetailViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.nicknameLabel.text = row.user.username
         cell.commentLabel.text = row.comment
-        cell.selectionStyle = .none
+        //cell.selectionStyle = .none
         print("nickname: \(row.user.username), comment: \(row.comment)")
+        
+        if UserDefaults.standard.id == row.user.id {
+            cell.controlButton.isHidden = false
+        } else {
+            cell.controlButton.isHidden = true
+            cell
+        }
         
         //cell.controlButton.addTarget(self, action: #selector(controlCommentButtonClicked(sender:)), for: .touchUpInside)
         
