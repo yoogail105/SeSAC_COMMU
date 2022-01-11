@@ -9,11 +9,14 @@ import UIKit
 
 extension DateFormatter {
     
-    // 2021-12-30T10:01:48.503Z
+    // string: 2021-12-30T10:01:48.503Z
+    // date: 2022-01-11 06:32:32 +0000
     
-    func fullDatetString(date: Date) -> String {
+    func fullDateString(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd a hh:mm"
+        dateFormatter.timeZone = TimeZone(identifier: "KST")
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
         
         return dateFormatter.string(from: date)
     }
@@ -31,4 +34,6 @@ extension DateFormatter {
         
         return dateFormatter.string(from: date)
     }
+    
 }
+

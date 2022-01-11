@@ -46,7 +46,7 @@ class APIService {
     // MARK: Change Password
     static func changePW(currentPassword: String, newPassword: String, confirmNewPassword: String, completion: @escaping (UserData?, APIError?) -> Void) {
         
-        let token = UserDefaults.standard.token
+        let token = UserDefaults.standard.token!
         var request = URLRequest(url: Endpoint.changePW.url)
         
         request.httpMethod = Method.POST.rawValue
@@ -55,7 +55,7 @@ class APIService {
         request.httpBody = "currentPassword=\(currentPassword)&newPassword=\(newPassword)&confirmNewPassword=\(confirmNewPassword)"
             .data(using: .utf8, allowLossyConversion: false)
         
-        print("비밀번호 변경하기: currentPassword=\(currentPassword)&newPassword=\(newPassword)&confirmNewPassword=\(confirmNewPassword)")
+        print("비밀번호 변경하기: 전송토큰=\(String(describing: token)),  currentPassword=\(currentPassword)&newPassword=\(newPassword)&confirmNewPassword=\(confirmNewPassword)")
         
         URLSession.request(endpoint: request, completion: completion)
     }
@@ -74,9 +74,9 @@ class APIService {
 
     
     // MARK: 포스트 조회(전체 포스트 조회)
-    static func loadPosts(completion: @escaping (Posts?, APIError?) -> Void) {
+    static func loadPosts(sort: Sort, completion: @escaping (Posts?, APIError?) -> Void) {
         
-        var request = URLRequest(url: Endpoint.posts.url)
+        var request = URLRequest(url: Endpoint.posts(startIndex: 0, endIndex: 1000, sort: sort.rawValue).url)
         let token = UserDefaults.standard.token!
         request.httpMethod = Method.GET.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -86,6 +86,7 @@ class APIService {
 
     // MARK: 포스트 작성
     static func addPosts(text: String, completion: @escaping (Post?, APIError?) -> Void) {
+        
         let token = UserDefaults.standard.token!
         var request = URLRequest(url: Endpoint.addPost.url)
         request.httpMethod = Method.POST.rawValue

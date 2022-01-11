@@ -10,13 +10,12 @@ import Foundation
 class PostViewModel {
     var loadedPosts: Observable<Posts> = Observable(Posts())
     
-    func getPosts(completion: @escaping () -> Void) {
+    func getPosts(sort: Sort, completion: @escaping () -> Void) {
         print(#function)
-        
-        APIService.loadPosts { post, error in
+        APIService.loadPosts(sort: sort) { post, error in
             if error == APIError.unAuthorized {
                 UserDefaults.standard.validToken = false
-               
+                
             }
             
             guard let post = post else {
@@ -24,7 +23,7 @@ class PostViewModel {
             }
             
             self.loadedPosts.value = post
-
+            
             completion()
         }
     }

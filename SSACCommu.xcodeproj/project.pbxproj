@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230612FE278D5D4400B27A85 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230612FD278D5D4400B27A85 /* String+Extension.swift */; };
 		23082949278B4E5E00C5D6E5 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 23082948278B4E5E00C5D6E5 /* Toast */; };
 		2308294B278B4FC500C5D6E5 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2308294A278B4FC500C5D6E5 /* UINavigationController+Extension.swift */; };
 		2308294D278B5F6100C5D6E5 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2308294C278B5F6100C5D6E5 /* UIViewController+Extension.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		230612FD278D5D4400B27A85 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		2308294A278B4FC500C5D6E5 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		2308294C278B5F6100C5D6E5 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		2308294E278B626F00C5D6E5 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		23C3EC31278234260044B44B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				230612FD278D5D4400B27A85 /* String+Extension.swift */,
 				23082950278B76E800C5D6E5 /* UIAlertAction+Extension.swift */,
 				23C3ECA22785825D0044B44B /* UIVeiw+Extension.swift */,
 				2308294A278B4FC500C5D6E5 /* UINavigationController+Extension.swift */,
@@ -408,6 +411,7 @@
 				23C3ECC02786AAC20044B44B /* Comment.swift in Sources */,
 				23C3EC8C278410D00044B44B /* User.swift in Sources */,
 				23C3ECA82785E83B0044B44B /* ChangePWView.swift in Sources */,
+				230612FE278D5D4400B27A85 /* String+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

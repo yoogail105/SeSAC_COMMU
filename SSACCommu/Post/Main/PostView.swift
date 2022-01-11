@@ -29,10 +29,17 @@ class PostView: UIView {
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         return label
     }()
+
     
     let profileButton: UIButton = {
        let button = UIButton()
         button.greenButtonImageSize(imageName: "person", size: 25)
+        return button
+    }()
+    
+    let sortButton: UIButton = {
+       let button = UIButton()
+        button.greenButtonImageSize(imageName: "arrow.up.arrow.down", size: 25)
         return button
     }()
     
@@ -65,7 +72,7 @@ class PostView: UIView {
         [headerView, tableView, addPostButton].forEach {
             addSubview($0)
         }
-        [titleLabel, profileButton].forEach {
+        [titleLabel, profileButton, sortButton].forEach {
             headerView.addSubview($0)
         }
         
@@ -89,6 +96,11 @@ class PostView: UIView {
         profileButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        sortButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalTo(profileButton.snp.leading).offset(-5)
         }
         
         addPostButton.snp.makeConstraints {

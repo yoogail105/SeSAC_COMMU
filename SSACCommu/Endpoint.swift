@@ -18,12 +18,17 @@ enum Endpoint {
     case signUp
     case signIn
     case changePW
-    case posts
+    case posts(startIndex: Int, endIndex: Int, sort: String)
     case addPost
     case postDetail(id: Int)
     case comments(id: Int)
     case addComments
     case commentDetail(id: Int)
+}
+
+enum Sort: String {
+    case asc
+    case desc
 }
 
 extension Endpoint {
@@ -35,8 +40,8 @@ extension Endpoint {
             return .makeEndPoint("auth/local")
         case .changePW:
             return .makeEndPoint("custom/change-password")
-        case .posts:
-            return .makeEndPoint("posts?_start=0&_limit=1000&_sort=created_at:desc")
+        case .posts(startIndex: let startIndex, endIndex: let endIndex, sort: let sort):
+            return .makeEndPoint("posts?_start=\(startIndex)&_limit=\(endIndex)&_sort=created_at:\(sort)")
         case .addPost:
             return .makeEndPoint("posts")
        case .postDetail(id: let id):
@@ -78,7 +83,9 @@ extension URLSession {
     
     static func request<T: Decodable>(_ session: URLSession = .shared, endpoint: URLRequest, completion: @escaping (T?, APIError?) -> Void) {
             session.dataTask(endpoint) { data, response, error in
-            print("결과:::::::\n data: \(data)\n response: \(response)\n error: \(error)")
+                
+            let str = String(decoding: data!, as: UTF8.self)
+            print("결과:::::::\n data: \(str)\n response: \(response)\n error: \(error)")
                 
             DispatchQueue.main.async {
                 guard error == nil else {
@@ -98,13 +105,13 @@ extension URLSession {
                 }
                 
                 guard response.statusCode == 200 else {
-//                    if response.statusCode == 401 {
-//                        UserDefaults.standard.validToken = false
-//                        completion(nil, .unAuthorized)
-//                        return
-//                    } else {
-//                        completion(nil, .failed)
-//                    }
+                    if response.statusCode == 401 {
+                        UserDefaults.standard.validToken = false
+                        completion(nil, .unAuthorized)
+                        return
+                    } else {
+                        completion(nil, .failed)
+                    }
                     
                     // 오류 확인
                     do {

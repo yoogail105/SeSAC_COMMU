@@ -33,6 +33,7 @@ class SignInViewModel {
             self.userDefaults.id = userData.user.id
             self.userDefaults.nickname = userData.user.username
             self.userDefaults.email = userData.user.email
+            print("로그인 지금 받은 토큰: \(userData.jwt), 유저디폴트저장되어있는 토큰: \(self.userDefaults.token)")
             
             completion()
         }

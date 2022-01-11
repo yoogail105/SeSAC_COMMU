@@ -11,6 +11,7 @@ import UIKit
 class PostViewController: BaseViewController {
     
     let userDefaults = UserDefaults.standard
+    var sortMode = Sort.desc
     
     let mainView = PostView()
     let viewModel = PostViewModel()
@@ -35,9 +36,7 @@ class PostViewController: BaseViewController {
         self.navigationController?.isNavigationBarHidden = true
         
         bind()
-        viewModel.getPosts {
-            print("postViewmModel:",#function)
-        }
+        refresh()
         
     }
     
@@ -68,8 +67,7 @@ class PostViewController: BaseViewController {
         
         addAction()
         printUserData()
-        
-        
+
         
     }
     
@@ -78,8 +76,11 @@ class PostViewController: BaseViewController {
             self.mainView.tableView.reloadData()
         }
     }
-
+    
     @objc func refresh() {
+        viewModel.getPosts(sort: sortMode) {
+            print("포스트 조회 완료")
+        }
         
     }
     
@@ -98,12 +99,13 @@ class PostViewController: BaseViewController {
         print("id:", self.userDefaults.id)
         print("nickname:", self.userDefaults.nickname!)
         print("email:", self.userDefaults.email!)
-
+        
     }
     
     override func addAction() {
         self.mainView.profileButton.addTarget(self, action: #selector(profileButtonClicked), for: .touchUpInside)
         self.mainView.addPostButton.addTarget(self, action: #selector(addPostButtonClicked), for: .touchUpInside)
+        self.mainView.sortButton.addTarget(self, action: #selector(sortButtonClicked), for: .touchUpInside)
     }
     
     @objc func profileButtonClicked() {
@@ -112,15 +114,56 @@ class PostViewController: BaseViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc func sortButtonClicked() {
+        
+        sortActionSheet()
+    }
+    
+    
     @objc func addPostButtonClicked() {
         let vc = PostEditViewController()
         vc.isNewPost = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func sortActionSheet() {
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let edit = UIAlertAction(title: "수정하기", style: .default) { _ in
+            let vc = PostEditViewController()
+            vc.isNewPost = false
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        let descMode = UIAlertAction(title: "최신 글부터 보기", style: .default) { _ in
+            self.sortMode = Sort.desc
+            self.refresh()
+        }
+        
+        let ascMode = UIAlertAction(title: "오래된 글부터 보기", style: .default) { _ in
+            self.sortMode = Sort.asc
+            
+            self.refresh()
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        [descMode, ascMode, cancel].forEach {
+            $0.greenAlertText()
+        }
+            
+        
+        alert.addAction(descMode)
+        alert.addAction(ascMode)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 extension PostViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.loadedPosts.value.count
     }
@@ -133,7 +176,9 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = .white
         cell.nicknameLabel.text = row.user.username
         cell.contentLabel.text = row.text
-        cell.dateLabel.text = row.createdAt
+        
+        let dateFormat = row.createdAt.StringToDate()!
+        cell.dateLabel.text = DateFormatter().simpleDateString(date: dateFormat)
         
         var commentLabelText = ""
         if row.comments.count == 0 {
@@ -145,7 +190,7 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-//
+    //
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 180
     }

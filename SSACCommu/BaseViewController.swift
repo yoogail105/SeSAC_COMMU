@@ -71,5 +71,15 @@ class BaseViewController: UIViewController {
     func addAction() {
         
     }
+    
+    func setDateLabel(dateString: String) -> String{
+        let dateFormatter = DateFormatter()
+        let changedDateFormat = dateString.StringToDate()!
+        
+        let result = dateFormatter.fullDateString(date: changedDateFormat)
+        
+        
+        return result
+    }
 
 }

@@ -24,8 +24,6 @@ class PostDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         mainView.tableView.register(CommentTableViewCell.self, forCellReuseIdentifier: CommentTableViewCell.identifier)
@@ -46,9 +44,11 @@ class PostDetailViewController: BaseViewController {
         print(viewModel.selectedPost.value)
         let postData = viewModel.selectedPost.value
         mainView.nicknameLabel.text = postData.user.username
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd a hh:mm"
-        let dateStr = postData.createdAt
+        
+
+        let CreateDateString = postData.createdAt.StringToDate()!
+        let dateStr = DateFormatter().fullDateString(date: CreateDateString)
+    
         print(Date())
         
         // let resultDate = dateFormatter.date(from: dateStr)
@@ -177,7 +177,9 @@ extension PostDetailViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.nicknameLabel.text = row.user.username
         cell.commentLabel.text = row.comment
-        //cell.selectionStyle = .none
+        cell.dateLabel.text = self.setDateLabel(dateString: row.createdAt)
+        
+        cell.selectionStyle = .none
         print("nickname: \(row.user.username), comment: \(row.comment)")
         
         if UserDefaults.standard.id == row.user.id {
