@@ -86,7 +86,7 @@ extension URLSession {
             session.dataTask(endpoint) { data, response, error in
                 
             let str = String(decoding: data!, as: UTF8.self)
-            print("결과:::::::\n data: \(str)\n response: \(response)\n error: \(error)")
+            print("결과:::::::\n data: \(data)\n response: \(response)\n error: \(error)")
                 
             DispatchQueue.main.async {
                 guard error == nil else {
@@ -108,7 +108,10 @@ extension URLSession {
                 guard response.statusCode == 200 else {
                     
                     if response.statusCode == 401 {
+                        print("토큰이 만료되었습니다.")
                         UserDefaults.standard.reset()
+                        BaseViewController().isTokenExpired = true
+                                        
                         completion(nil, .unAuthorized)
                         return
                     }

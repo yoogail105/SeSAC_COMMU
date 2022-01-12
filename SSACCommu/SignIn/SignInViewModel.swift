@@ -25,7 +25,7 @@ class SignInViewModel {
 //            if error ==  {
 //                self.showToast(message: "이미 등록된 이메일 입니다.")
 //            }
-//            
+//
             print("SignInViewModel 정보:",self.email.value, self.password.value)
             print("SignInViewModel userData:",userData)
             print("SignInViewModel error:",error)
@@ -39,7 +39,6 @@ class SignInViewModel {
             self.userDefaults.id = userData.user.id
             self.userDefaults.nickname = userData.user.username
             self.userDefaults.email = userData.user.email
-            print("로그인 지금 받은 토큰: \(userData.jwt), 유저디폴트저장되어있는 토큰: \(self.userDefaults.token)")
             
             completion()
         }

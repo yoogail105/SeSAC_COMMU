@@ -151,6 +151,7 @@ class PostDetailViewController: BaseViewController {
             self.makeAlert(message: "댓글을 삭제 하시겠습니까?", okTitle: "확인") { _ in
                 self.viewModel.deleteComment(commentId: comment.id) {
                     print("삭제완료")
+                    self.mainView.makeToast("댓글이 삭제 되었습니다.")
                     self.getComments()
                 }
                 

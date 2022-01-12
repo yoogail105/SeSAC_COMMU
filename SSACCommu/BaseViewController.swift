@@ -19,21 +19,21 @@ import Toast
 
 class BaseViewController: UIViewController {
     
-    var toast = SimpleToastView()
+    // var toast = SimpleToastView()
     
-    var validToken = UserDefaults.standard.validToken {
+    var isTokenExpired = false {
         didSet {
-            print("토큰 설정 바뀜")
-            if validToken == false {
-                invalidToken()
-                print("validToken:", validToken)
+            print("토큰만료로 ")
+            if isTokenExpired == true {
+                backToMain()
+                UserDefaults.standard.isTokenExpired = true
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        
         setupNavigationBar()
         configure()
         bind()
@@ -47,7 +47,7 @@ class BaseViewController: UIViewController {
     func setupConstraints() {
         
     }
-
+    
     
     func setupNavigationBar() {
         self.navigationItem.title = ""
@@ -62,19 +62,33 @@ class BaseViewController: UIViewController {
         
     }
     
-    func invalidToken() {
+    func backToMain() {
         print("토큰만료:", #function)
-        makeAlertWithoutCancel(message: "로그인 정보가 만료되었습니다. 다시 로그인을 해주세요😇", okTitle: "확인") { _ in
-            let vc = MainViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+        
+        DispatchQueue.main.async {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
+            windowScene.windows.first?.makeKeyAndVisible()
         }
-       
     }
+         
+    
+    
     
     func showToast(message: String) {
-        self.view.addSubview(toast)
-        UIView.animate(withDuration: 10.0, delay: 0.1, options: .curveEaseOut, animations: { self.toast.alpha = 0.0}, completion: {_ in
-             self.toast.removeFromSuperview()})
+        let window = UIApplication.shared.windows.last!
+        let toastView = SimpleToastView()
+        window.addSubview(toastView)
+        //        window.addSubview(v)
+        //        v.backgroundColor = UIColor.blackColor()
+        //        let v2 = UIView(frame: CGRect(x: 50, y: 50, width: 100, height: 50))
+        //        v2.backgroundColor = UIColor.whiteColor()
+        //        window.addSubview(v2)
+        //self.view.addSubview(toast)
+        
+        
+        UIView.animate(withDuration: 10.0, delay: 0.1, options: .curveEaseOut, animations: { toastView.alpha = 0.0}, completion: {_ in
+            toastView.removeFromSuperview()})
     }
     
     func showToast22(message : String, font: UIFont = UIFont.systemFont(ofSize: 14.0)) {
@@ -108,5 +122,6 @@ class BaseViewController: UIViewController {
         
         return result
     }
-
+    
+    
 }

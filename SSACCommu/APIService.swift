@@ -33,9 +33,9 @@ class APIService {
         
         var request = URLRequest(url: Endpoint.signIn.url)
         request.httpMethod = Method.POST.rawValue
-        request.httpBody = "identifier=\(email)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
+//        request.httpBody = "identifier=\(email)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
         
-        //request.httpBody = "identifier=heeh@sessac.com&password=1234".data(using: .utf8, allowLossyConversion: false)
+        request.httpBody = "identifier=heeh@sessac.com&password=1234".data(using: .utf8, allowLossyConversion: false)
         
         URLSession.request(endpoint: request, completion: completion)
         
@@ -52,8 +52,6 @@ class APIService {
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpBody = "currentPassword=\(currentPassword)&newPassword=\(newPassword)&confirmNewPassword=\(confirmNewPassword)"
             .data(using: .utf8, allowLossyConversion: false)
-        
-        print("비밀번호 변경하기: 전송토큰=\(String(describing: token)),  currentPassword=\(currentPassword)&newPassword=\(newPassword)&confirmNewPassword=\(confirmNewPassword)")
         
         URLSession.request(endpoint: request, completion: completion)
     }
@@ -75,7 +73,7 @@ class APIService {
     static func loadPosts(sort: Sort, completion: @escaping (Posts?, APIError?) -> Void) {
         
         var request = URLRequest(url: Endpoint.posts(startIndex: 0, endIndex: 1000, sort: sort.rawValue).url)
-        let token = UserDefaults.standard.token!
+        let token = UserDefaults.standard.token
         request.httpMethod = Method.GET.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         

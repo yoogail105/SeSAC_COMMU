@@ -17,6 +17,7 @@ open class SimpleToastView: UIView {
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         label.textAlignment = .center
+        label.layer.cornerRadius = 10
         return label
     }()
     
@@ -41,8 +42,10 @@ open class SimpleToastView: UIView {
        addSubview(message)
             
         message.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
             $0.top.equalToSuperview().offset(40)
-            $0.centerX.equalToSuperview()
+            //$0.centerX.equalToSuperview()
             $0.height.equalTo(44)
         }
     }

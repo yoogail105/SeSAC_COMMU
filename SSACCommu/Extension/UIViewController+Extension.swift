@@ -31,7 +31,7 @@ extension UIViewController {
         self.present(alert, animated: true)
     }
     
-    func makeAlertWithoutCancel(message: String, okTitle: String, okAction: @escaping ((UIAlertAction) -> Void)) {
+    func makeAlertWithoutCancel(message: String, okTitle: String, okAction: ((UIAlertAction) -> Void)?) {
         
             //UIColor(named: "SSACGreen")
    
@@ -43,6 +43,7 @@ extension UIViewController {
         let okAction = UIAlertAction(title: okTitle, style: .default, handler: okAction)
         okAction.redAlertText()
         alert.addAction(okAction)
+
         
         self.present(alert, animated: true)
     }

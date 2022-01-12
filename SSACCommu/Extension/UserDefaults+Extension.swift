@@ -10,12 +10,13 @@ import Foundation
 extension UserDefaults {
     private enum UserDefaultsKeys: String, CaseIterable {
         case validToken
+        case isTokenExpired
         case token
         case id
         case nickname
         case email
         case confirmed
-        case postId
+
     }
     
     func reset() {
@@ -27,6 +28,11 @@ extension UserDefaults {
     var validToken: Bool {
         get { bool(forKey: UserDefaultsKeys.validToken.rawValue)}
         set { setValue(newValue, forKey: UserDefaultsKeys.validToken.rawValue)}
+    }
+
+    var isTokenExpired: Bool {
+        get { bool(forKey: UserDefaultsKeys.isTokenExpired.rawValue)}
+        set { setValue(newValue, forKey: UserDefaultsKeys.isTokenExpired.rawValue)}
     }
     
     var token: String? {
@@ -48,10 +54,4 @@ extension UserDefaults {
         get { string(forKey: UserDefaultsKeys.email.rawValue)}
         set { setValue(newValue, forKey: UserDefaultsKeys.email.rawValue)}
     }
-    
-    var postId: Int {
-        get { integer(forKey: UserDefaultsKeys.postId.rawValue)}
-        set { setValue(newValue, forKey: UserDefaultsKeys.postId.rawValue)}
-    }
-
 }

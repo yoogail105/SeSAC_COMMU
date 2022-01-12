@@ -18,6 +18,16 @@ class MainViewController: BaseViewController {
         self.view = mainView
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if userDefaults.isTokenExpired == true {
+            self.makeAlertWithoutCancel(message: "로그인 정보가 만료되었습니다.\n다시 로그인 해주세요😇",
+                                        okTitle: "확인") { _ in
+                self.userDefaults.isTokenExpired.toggle()
+            }
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -45,7 +55,6 @@ class MainViewController: BaseViewController {
     }
     
     @objc func signInButtonClicked() {
-        showToast(message: "연습메세지입니다.")
         let vc = SignInViewController()
         navigationController?.pushViewController(vc, animated: true)
         
@@ -58,6 +67,6 @@ class MainViewController: BaseViewController {
         print("id:", self.userDefaults.id)
         print("nickname:", self.userDefaults.nickname)
         print("email:", self.userDefaults.email)
-    
+        
     }
 }

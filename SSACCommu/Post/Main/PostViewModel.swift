@@ -15,8 +15,8 @@ class PostViewModel {
         APIService.loadPosts(sort: sort) { post, error in
             
             if error == APIError.unAuthorized {
-                UserDefaults.standard.reset()
                 
+//                
                 
             }
             
