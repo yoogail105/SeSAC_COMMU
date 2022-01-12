@@ -17,6 +17,7 @@
 		23185DF22780535F0004FBFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23185DF12780535F0004FBFF /* SceneDelegate.swift */; };
 		23185DF9278053610004FBFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23185DF8278053610004FBFF /* Assets.xcassets */; };
 		23185DFC278053610004FBFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23185DFA278053610004FBFF /* LaunchScreen.storyboard */; };
+		2348E28E278EB20000DE9529 /* SimpleToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2348E28D278EB20000DE9529 /* SimpleToastView.swift */; };
 		23C3EC21278228450044B44B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3EC20278228450044B44B /* BaseViewController.swift */; };
 		23C3EC242782285B0044B44B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 23C3EC232782285B0044B44B /* SnapKit */; };
 		23C3EC26278229420044B44B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3EC25278229420044B44B /* LoginViewController.swift */; };
@@ -72,6 +73,7 @@
 		23185DF8278053610004FBFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23185DFB278053610004FBFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		23185DFD278053610004FBFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2348E28D278EB20000DE9529 /* SimpleToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleToastView.swift; sourceTree = "<group>"; };
 		23C3EC20278228450044B44B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		23C3EC25278229420044B44B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		23C3EC2727822B260044B44B /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				23C3EC7E278368380044B44B /* Endpoint.swift */,
 				23C3EC7C278366BE0044B44B /* APIService.swift */,
 				23C3EC6F278333B00044B44B /* Observable.swift */,
+				2348E28D278EB20000DE9529 /* SimpleToastView.swift */,
 				23C3ECB727860EB00044B44B /* Model */,
 				23C3EC92278415DA0044B44B /* Post */,
 				23C3EC7B278358010044B44B /* Main */,
@@ -409,6 +412,7 @@
 				23C3EC9D2784E06A0044B44B /* UILabel+Extension.swift in Sources */,
 				2308294F278B626F00C5D6E5 /* DateFormatter+Extension.swift in Sources */,
 				23C3ECC02786AAC20044B44B /* Comment.swift in Sources */,
+				2348E28E278EB20000DE9529 /* SimpleToastView.swift in Sources */,
 				23C3EC8C278410D00044B44B /* User.swift in Sources */,
 				23C3ECA82785E83B0044B44B /* ChangePWView.swift in Sources */,
 				230612FE278D5D4400B27A85 /* String+Extension.swift in Sources */,

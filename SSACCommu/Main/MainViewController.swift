@@ -13,6 +13,7 @@ class MainViewController: BaseViewController {
     let userDefaults = UserDefaults.standard
     var mainView = MainView()
     
+    
     override func loadView() {
         self.view = mainView
     }
@@ -32,7 +33,6 @@ class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("메인화면왔음")
-        
         printUserData()
         mainView.signUpButton.addTarget(self, action: #selector(signUpButtonClicked), for: .touchUpInside)
         mainView.signInButton.addTarget(self, action: #selector(signInButtonClicked), for: .touchUpInside)
@@ -45,8 +45,10 @@ class MainViewController: BaseViewController {
     }
     
     @objc func signInButtonClicked() {
+        showToast(message: "연습메세지입니다.")
         let vc = SignInViewController()
         navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     func printUserData() {

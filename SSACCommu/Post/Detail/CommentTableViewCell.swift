@@ -32,7 +32,7 @@ class CommentTableViewCell: UITableViewCell {
     var commentLabel: UILabel = {
         let label = UILabel()
         label.text = "댓글\n댓글\n댓글\n댓글\n\n\n\n댓글"
-        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .light)
         label.numberOfLines = 0
         return label
     }()
@@ -50,6 +50,7 @@ class CommentTableViewCell: UITableViewCell {
         label.text = "01/11 06:16"
         label.font = UIFont.systemFont(ofSize: 10, weight: .light)
         label.textColor = .darkGray
+
         return label
     }()
     
@@ -77,28 +78,30 @@ class CommentTableViewCell: UITableViewCell {
         }
         
         controlButton.snp.makeConstraints {
-            $0.top.equalTo(nicknameLabel.snp.top)
-            $0.trailing.equalToSuperview()
-            $0.height.width.equalTo(30)
+            $0.centerY.equalTo(nicknameLabel.snp.centerY)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.width.equalTo(20)
         }
         
         nicknameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalTo(controlButton.snp.leading).offset(-5)
+            $0.leading.equalToSuperview().offset(10)
+            $0.trailing.equalTo(controlButton.snp.leading)
+            $0.height.equalTo(20)
         }
         
         commentLabel.snp.makeConstraints {
-            $0.top.equalTo(nicknameLabel.snp.bottom).offset(3)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalTo(controlButton.snp.leading).offset(-5)
-            $0.bottom.equalToSuperview().offset(-10)
+            $0.top.equalTo(nicknameLabel.snp.bottom)
+            $0.leading.equalTo(nicknameLabel.snp.leading)
+            $0.trailing.equalTo(nicknameLabel.snp.trailing)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(commentLabel.snp.bottom).offset(5)
-            $0.leading.equalToSuperview()
-            $0.height.equalTo(20)
+            $0.top.equalTo(commentLabel.snp.bottom)
+            $0.leading.equalTo(nicknameLabel.snp.leading)
+            $0.trailing.equalTo(nicknameLabel.snp.trailing)
+            $0.height.equalTo(15)
+            $0.bottom.equalToSuperview().offset(-10)
         }
         
         

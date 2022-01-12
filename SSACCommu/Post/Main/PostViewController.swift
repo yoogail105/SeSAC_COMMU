@@ -66,7 +66,7 @@ class PostViewController: BaseViewController {
         
         
         addAction()
-        printUserData()
+        
 
         
     }
@@ -78,9 +78,14 @@ class PostViewController: BaseViewController {
     }
     
     @objc func refresh() {
-        viewModel.getPosts(sort: sortMode) {
-            print("포스트 조회 완료")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.viewModel.getPosts(sort: self.sortMode) {
+                self.mainView.tableView.refreshControl?.endRefreshing()
+                        print("포스트 조회 완료")
+                    }
         }
+//
         
     }
     

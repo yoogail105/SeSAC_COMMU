@@ -19,6 +19,8 @@ import Toast
 
 class BaseViewController: UIViewController {
     
+    var toast = SimpleToastView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
             
@@ -50,7 +52,13 @@ class BaseViewController: UIViewController {
         
     }
     
-    func showToast(message : String, font: UIFont = UIFont.systemFont(ofSize: 14.0)) {
+    func showToast(message: String) {
+        self.view.addSubview(toast)
+        UIView.animate(withDuration: 10.0, delay: 0.1, options: .curveEaseOut, animations: { self.toast.alpha = 0.0}, completion: {_ in
+             self.toast.removeFromSuperview()})
+    }
+    
+    func showToast22(message : String, font: UIFont = UIFont.systemFont(ofSize: 14.0)) {
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLabel.textColor = UIColor.white

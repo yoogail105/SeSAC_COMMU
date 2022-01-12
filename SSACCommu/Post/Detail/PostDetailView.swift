@@ -1,10 +1,3 @@
-//
-//  PostDetailView.swift
-//  SSACCommu
-//
-//  Created by 성민주민주 on 2022/01/05.
-//
-
 import UIKit
 import SnapKit
 import Toast
