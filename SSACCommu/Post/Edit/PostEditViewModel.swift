@@ -9,7 +9,7 @@ import Foundation
 
 class PostEditViewModel {
     
-    var savePost: Observable<Post> = Observable(Post(id: 0, text: "",
+    var savePost: myObservable<Post> = myObservable(Post(id: 0, text: "",
                                                          user: UserData(id: 0, username: "", email: "", createdAt: "", updatedAt: ""), createdAt: "", updatedAt: "",
                                                          comments: [PostComment]()))
     

@@ -5,13 +5,16 @@
 //  Created by 성민주민주 on 2022/01/03.
 //
 import Foundation
+import RxSwift
+import RxRelay
+
 
 class SignUpViewModel {
-   
-    var email: Observable<String> = Observable("")
-    var userName: Observable<String> = Observable("")
-    var password: Observable<String> = Observable("")
-    var confirmPassword: Observable<String> = Observable("")
+    
+    var emailObserver = BehaviorRelay<String>(value: "")
+    var userNameObserver = BehaviorRelay<String>(value: "")
+    var passwordObserver = BehaviorRelay<String>(value: "")
+    var confirmPasswordObserver = BehaviorRelay<String>(value: "")
     
     func postUserSignUp(completion: @escaping () -> Void) {
         print(#function)

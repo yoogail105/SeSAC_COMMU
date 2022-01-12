@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class SignInViewController: BaseViewController {
     
     var mainView = SignInView()
     var viewModel = SignInViewModel()
+    let disposeBag = DisposeBag()
    
+
     
     override func loadView() {
         self.view = mainView
@@ -23,6 +27,7 @@ class SignInViewController: BaseViewController {
     }
     
 
+
     override func setupNavigationBar() {
         super.setupNavigationBar()
         self.navigationItem.title = "새싹농장 입장하기"
@@ -31,40 +36,58 @@ class SignInViewController: BaseViewController {
     
     
     override func bind() {
-        viewModel.email.bind { text in
-            print(text)
-            self.mainView.emailTextField.text = text
-        }
         
-        viewModel.password.bind { text in
-            print(text)
-            self.mainView.passwordTextField.text = text
-        }
+        mainView.emailTextField.rx.text
+            .map { $0 ?? "" }
+            .bind(to: viewModel.emailObserver)
+            .disposed(by: disposeBag)
+        
+        mainView.passwordTextField.rx.text
+            .map { $0 ?? "" }
+            .bind(to: viewModel.passwordObserver)
+            .disposed(by: disposeBag)
+        
+        viewModel.isValidEmail
+            .map { $0 ? UIColor(named: "SSACGreen") : UIColor.red }
+            .bind(to: mainView.emailTextField.rx.textColor)
+            .disposed(by: disposeBag)
+        
+        viewModel.isValidPassword
+            .map { $0 ? UIColor(named: "SSACGreen") : UIColor.red }
+            .bind(to: mainView.passwordTextField.rx.textColor)
+            .disposed(by: disposeBag)
+        
+        
+        viewModel.isValidForm
+            .bind(to: mainView.signButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+            
+        viewModel.isValidForm
+            .map{ $0 ? 1.0 : 0.3}
+            .bind(to: mainView.signButton.rx.alpha)
+            .disposed(by: disposeBag)
+        
+        
     }
     
     override func addAction() {
         
-        self.mainView.emailTextField.addTarget(self, action: #selector(
-            emailTextFieldDidChange(_:)), for: .editingChanged)
-        
-        self.mainView.passwordTextField.addTarget(self, action: #selector(
-            passwordTextFieldDidChange(_:)), for: .editingChanged)
-        
+
         self.mainView.signButton.addTarget(self, action: #selector(signInButtonClicked), for: .touchUpInside)
         
     }
     
-    @objc func emailTextFieldDidChange(_ textfield: UITextField) {
-        viewModel.email.value = textfield.text ?? ""
-    }
-    
-    @objc func passwordTextFieldDidChange(_ textfield: UITextField) {
-        viewModel.password.value = textfield.text ?? ""
-    }
+//    @objc func emailTextFieldDidChange(_ textfield: UITextField) {
+//        viewModel.emailObserver.value = textfield.text ?? ""
+//    }
+//
+//    @objc func passwordTextFieldDidChange(_ textfield: UITextField) {
+//        viewModel.passwordObserver.value = textfield.text ?? ""
+//    }
     
     @objc func signInButtonClicked() {
         print(#function)
-        viewModel.postUserSignIn { 
+        viewModel.postUserSignIn { error in
             UserDefaults.standard.validToken = true
             let vc = PostViewController()
             self.navigationController?.pushViewController(vc, animated: true)

@@ -8,7 +8,7 @@
 import Foundation
 
 class PostViewModel {
-    var loadedPosts: Observable<Posts> = Observable(Posts())
+    var loadedPosts: myObservable<Posts> = myObservable(Posts())
     
     func getPosts(sort: Sort, completion: @escaping () -> Void) {
         print(#function)

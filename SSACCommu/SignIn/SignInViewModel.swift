@@ -8,25 +8,57 @@
 // lala@sessac.com
 
 import Foundation
+import RxSwift
+import RxRelay
+
+
 
 class SignInViewModel {
     
     let userDefaults = UserDefaults.standard
-    var email: Observable<String> = Observable("")
-    var password:Observable<String> = Observable("")
+    var emailObserver = BehaviorRelay<String>(value: "")
+    var passwordObserver = BehaviorRelay<String>(value: "")
+    
+    var isValidEmail: Observable<Bool> {
+        return emailObserver.map { $0.validateEmail() }
+    }
+    var isValidPassword: Observable<Bool> {
+        return passwordObserver.map { $0.validatePassword() }
+    }
+    
+    var isValidForm: Observable<Bool> {
+        return Observable.combineLatest(emailObserver, passwordObserver)
+            .map { email, password in
+                
+                return email.validateEmail() &&  password.validatePassword()
+            }
+    }
+    
+
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        return !email.isEmpty && email.validateEmail()
+    }
+    
+    private func isValidPassword(_ password: String) -> Bool {
+        return !password.isEmpty && password.validatePassword()
+    }
     
     
-    func postUserSignIn(completion: @escaping () -> Void) {
+    
+    
+    
+    func postUserSignIn(completion: @escaping (APIError?) -> ()) {
         print(#function)
         
-        APIService.signIn(email: email.value, password: password.value) { userData, error in
+        APIService.signIn(email: emailObserver.value, password: passwordObserver.value) { userData, error in
             
             
-//            if error ==  {
-//                self.showToast(message: "이미 등록된 이메일 입니다.")
-//            }
-//
-            print("SignInViewModel 정보:",self.email.value, self.password.value)
+            //            if error ==  {
+            //                self.showToast(message: "이미 등록된 이메일 입니다.")
+            //            }
+            
+            print("SignInViewModel 정보:",self.emailObserver.value, self.passwordObserver.value)
             print("SignInViewModel userData:",userData)
             print("SignInViewModel error:",error)
             
@@ -40,27 +72,69 @@ class SignInViewModel {
             self.userDefaults.nickname = userData.user.username
             self.userDefaults.email = userData.user.email
             
-            completion()
+            completion(error)
         }
     }
     
 }
 
+extension String {
+    func validateEmail() -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let predicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
+        return predicate.evaluate(with: self)
+    }
+    
+    func validatePassword() -> Bool {
+        let passwordRegex = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,15}$"
+        let predicate = NSPredicate(format:"SELF MATCHES %@", passwordRegex)
+        return predicate.evaluate(with: self)
+    }
+}
+
 /*
+ import Foundation
+ import RxSwift
+ import RxRelay
+ 
+ 
+ 
+ class SignInViewModel {
+ 
  var input = Input()
  var output = Output()
- 
+ let disposeBag = DisposeBag()
  struct Input {
- let email = PublishSubject<String>()
- let password = PublishSubject<String>()
- let tapSignInButton = PublishSubject<Void>() // 버튼을 누르는 것도 입력
- 
+ var email = PublishSubject<String>()
+ var password = PublishSubject<String>()
+ var tapSignIn = PublishSubject<Void>()
  }
  
  struct Output {
- let activeSignInButton = PublishRelay<Bool>()
- let errorMessage = PublishRelay<String>()
- let access = PublishRelay<Void>()
+ var enableSignInButton = PublishRelay<Bool>()
+ var errorMessage = PublishRelay<String>()
+ var goToMain = PublishRelay<Void>()
  }
  
+ init() {
+ Observable.combineLatest(input.email, input.password)
+ .map { !$0.0.isEmpty && !$0.1.isEmpty && $0.0.contains("@") && $0.0.contains(".") && $0.1.count >= 8 }
+ .bind(to: output.enableSignInButton)
+ .disposed(by: disposeBag)
+ 
+ input.tapSignIn.withLatestFrom(Observable.combineLatest(input.email, input.password)).bind { [weak self] (email, password) in
+ guard let self = self else { return }
+ if !email.contains("@") || !email.contains(".") {
+ self.output.errorMessage.accept("올바른 이메일을 입력해주세요")
+ }else if
+ password.count < 8 {
+ self.output.errorMessage.accept("8자리 이상 비밀번호를 입력해주세요.")
+ } else {
+ // API 태우기
+ self.output.goToMain.accept(())
+ }
+ }.disposed(by: disposeBag)
+ 
+ }
+ }
  */

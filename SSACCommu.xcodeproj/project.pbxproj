@@ -29,7 +29,7 @@
 		23C3EC692783336F0044B44B /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3EC682783336F0044B44B /* SignInView.swift */; };
 		23C3EC6B278333760044B44B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3EC6A278333760044B44B /* SignInViewController.swift */; };
 		23C3EC6D2783337B0044B44B /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3EC6C2783337B0044B44B /* SignInViewModel.swift */; };
-		23C3EC70278333B00044B44B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3EC6F278333B00044B44B /* Observable.swift */; };
+		23C3EC70278333B00044B44B /* myObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3EC6F278333B00044B44B /* myObservable.swift */; };
 		23C3EC782783399C0044B44B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3EC772783399C0044B44B /* MainView.swift */; };
 		23C3EC7A278340690044B44B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3EC79278340690044B44B /* MainViewController.swift */; };
 		23C3EC7D278366BE0044B44B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3EC7C278366BE0044B44B /* APIService.swift */; };
@@ -84,7 +84,7 @@
 		23C3EC682783336F0044B44B /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		23C3EC6A278333760044B44B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		23C3EC6C2783337B0044B44B /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
-		23C3EC6F278333B00044B44B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		23C3EC6F278333B00044B44B /* myObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myObservable.swift; sourceTree = "<group>"; };
 		23C3EC772783399C0044B44B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		23C3EC79278340690044B44B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		23C3EC7C278366BE0044B44B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 				23C3EC25278229420044B44B /* LoginViewController.swift */,
 				23C3EC7E278368380044B44B /* Endpoint.swift */,
 				23C3EC7C278366BE0044B44B /* APIService.swift */,
-				23C3EC6F278333B00044B44B /* Observable.swift */,
+				23C3EC6F278333B00044B44B /* myObservable.swift */,
 				2348E28D278EB20000DE9529 /* SimpleToastView.swift */,
 				23C3ECB727860EB00044B44B /* Model */,
 				23C3EC92278415DA0044B44B /* Post */,
@@ -403,7 +403,7 @@
 				2308294B278B4FC500C5D6E5 /* UINavigationController+Extension.swift in Sources */,
 				23C3EC6B278333760044B44B /* SignInViewController.swift in Sources */,
 				23C3ECA32785825D0044B44B /* UIVeiw+Extension.swift in Sources */,
-				23C3EC70278333B00044B44B /* Observable.swift in Sources */,
+				23C3EC70278333B00044B44B /* myObservable.swift in Sources */,
 				23C3EC2A27822EE30044B44B /* SignUpViewController.swift in Sources */,
 				23C3EC692783336F0044B44B /* SignInView.swift in Sources */,
 				23C3EC782783399C0044B44B /* MainView.swift in Sources */,

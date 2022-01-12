@@ -10,13 +10,13 @@ import Foundation
 
 class PostDetailViewModel {
     
-    var selectedPost: Observable<Post> = Observable(Post(id: 0, text: "",
+    var selectedPost: myObservable<Post> = myObservable(Post(id: 0, text: "",
                                                          user: UserData(id: 0, username: "", email: "", createdAt: "", updatedAt: ""), createdAt: "", updatedAt: "",
                                                          comments: [PostComment]()))
     
-    let loadedComments: Observable<Comments> = Observable(Comments())
+    let loadedComments: myObservable<Comments> = myObservable(Comments())
     
-    let selectedComment: Observable<Comment> = Observable(Comment(id: 0, comment: "", user: UserData(id: 0, username: "", email: "", createdAt: "", updatedAt: ""), createdAt: "", updatedAt: ""))
+    let selectedComment: myObservable<Comment> = myObservable(Comment(id: 0, comment: "", user: UserData(id: 0, username: "", email: "", createdAt: "", updatedAt: ""), createdAt: "", updatedAt: ""))
     
     func getSelectedPost(postId: Int, completion: @escaping () -> Void) {
         APIService.selectedPost(postId: postId) { post, error in

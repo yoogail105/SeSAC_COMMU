@@ -10,9 +10,9 @@ import Foundation
 class ChangePWViewModel {
     
     let userDefaults = UserDefaults.standard
-    var currentPassword: Observable<String> = Observable("")
-    var newPassword: Observable<String> = Observable("")
-    var confirmNewPassword: Observable<String> = Observable("")
+    var currentPassword: myObservable<String> = myObservable("")
+    var newPassword: myObservable<String> = myObservable("")
+    var confirmNewPassword: myObservable<String> = myObservable("")
     
     func postChangePassword(currentPassword: String, newPassword: String, confirmNewPassword: String, completion: @escaping () -> Void) {
         print(#function)
