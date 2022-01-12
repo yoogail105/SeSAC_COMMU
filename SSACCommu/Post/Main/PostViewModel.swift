@@ -13,8 +13,10 @@ class PostViewModel {
     func getPosts(sort: Sort, completion: @escaping () -> Void) {
         print(#function)
         APIService.loadPosts(sort: sort) { post, error in
+            
             if error == APIError.unAuthorized {
-                UserDefaults.standard.validToken = false
+                UserDefaults.standard.reset()
+                
                 
             }
             

@@ -82,6 +82,7 @@ extension URLSession {
     }
     
     static func request<T: Decodable>(_ session: URLSession = .shared, endpoint: URLRequest, completion: @escaping (T?, APIError?) -> Void) {
+        
             session.dataTask(endpoint) { data, response, error in
                 
             let str = String(decoding: data!, as: UTF8.self)
@@ -105,13 +106,13 @@ extension URLSession {
                 }
                 
                 guard response.statusCode == 200 else {
+                    
                     if response.statusCode == 401 {
-                        UserDefaults.standard.validToken = false
+                        UserDefaults.standard.reset()
                         completion(nil, .unAuthorized)
                         return
-                    } else {
-                        completion(nil, .failed)
                     }
+                    //                    else { completion(nil, .failed) }
                     
                     // 오류 확인
                     do {

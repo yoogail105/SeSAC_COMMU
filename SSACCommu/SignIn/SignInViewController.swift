@@ -63,7 +63,7 @@ class SignInViewController: BaseViewController {
     
     @objc func signInButtonClicked() {
         print(#function)
-        viewModel.postUserSignIn {
+        viewModel.postUserSignIn { 
             UserDefaults.standard.validToken = true
             let vc = PostViewController()
             self.navigationController?.pushViewController(vc, animated: true)

@@ -21,6 +21,16 @@ class BaseViewController: UIViewController {
     
     var toast = SimpleToastView()
     
+    var validToken = UserDefaults.standard.validToken {
+        didSet {
+            print("토큰 설정 바뀜")
+            if validToken == false {
+                invalidToken()
+                print("validToken:", validToken)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
             
@@ -50,6 +60,15 @@ class BaseViewController: UIViewController {
     @objc func back() {
         self.navigationController?.popViewController(animated: true)
         
+    }
+    
+    func invalidToken() {
+        print("토큰만료:", #function)
+        makeAlertWithoutCancel(message: "로그인 정보가 만료되었습니다. 다시 로그인을 해주세요😇", okTitle: "확인") { _ in
+            let vc = MainViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+       
     }
     
     func showToast(message: String) {

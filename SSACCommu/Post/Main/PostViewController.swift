@@ -15,15 +15,7 @@ class PostViewController: BaseViewController {
     
     let mainView = PostView()
     let viewModel = PostViewModel()
-    var validToken = UserDefaults.standard.validToken {
-        didSet {
-            print("토큰 설정 바뀜")
-            if validToken == false {
-                invalidToken()
-                print("validToken:", validToken)
-            }
-        }
-    }
+   
     
     override func loadView() {
         self.view = mainView
@@ -89,12 +81,7 @@ class PostViewController: BaseViewController {
         
     }
     
-    func invalidToken() {
-        print("토큰만료:", #function)
-        
-        let vc = MainViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+   
     
     
     func printUserData() {

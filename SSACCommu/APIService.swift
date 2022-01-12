@@ -14,7 +14,6 @@ enum APIError: Error {
     case failed
     case invalidData
     case unAuthorized
-    
 }
 
 
@@ -34,9 +33,9 @@ class APIService {
         
         var request = URLRequest(url: Endpoint.signIn.url)
         request.httpMethod = Method.POST.rawValue
-        //request.httpBody = "identifier=\(email)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
+        request.httpBody = "identifier=\(email)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
         
-        request.httpBody = "identifier=heeh@sessac.com&password=1234".data(using: .utf8, allowLossyConversion: false)
+        //request.httpBody = "identifier=heeh@sessac.com&password=1234".data(using: .utf8, allowLossyConversion: false)
         
         URLSession.request(endpoint: request, completion: completion)
         

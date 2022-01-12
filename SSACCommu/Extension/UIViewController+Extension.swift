@@ -31,6 +31,22 @@ extension UIViewController {
         self.present(alert, animated: true)
     }
     
+    func makeAlertWithoutCancel(message: String, okTitle: String, okAction: @escaping ((UIAlertAction) -> Void)) {
+        
+            //UIColor(named: "SSACGreen")
+   
+        self.view.tintColor = UIColor(named: "SSACGreen")
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        
+        
+//        alert.addAction(UIAlertAction(title: okTitle, style: .default, handler: okAction))
+        let okAction = UIAlertAction(title: okTitle, style: .default, handler: okAction)
+        okAction.redAlertText()
+        alert.addAction(okAction)
+        
+        self.present(alert, animated: true)
+    }
+    
  
     func makeActionSheet(editAction: @escaping ((UIAlertAction) -> Void), deleteAction:@escaping ((UIAlertAction) -> Void) ) {
         

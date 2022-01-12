@@ -42,6 +42,7 @@ class SignInView: UIView {
     func configure() {
         emailTextField.setupTextField(placeholderText: "이메일 주소")
         passwordTextField.setupTextField(placeholderText: "비밀번호")
+        emailTextField.keyboardType = .emailAddress
         signButton.setupButton(title: "입장하기")
         passwordTextField.isSecureTextEntry = true
         

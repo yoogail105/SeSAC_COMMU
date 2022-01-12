@@ -10,7 +10,7 @@
 import Foundation
 
 class SignInViewModel {
-   
+    
     let userDefaults = UserDefaults.standard
     var email: Observable<String> = Observable("")
     var password:Observable<String> = Observable("")
@@ -20,6 +20,12 @@ class SignInViewModel {
         print(#function)
         
         APIService.signIn(email: email.value, password: password.value) { userData, error in
+            
+            
+//            if error ==  {
+//                self.showToast(message: "이미 등록된 이메일 입니다.")
+//            }
+//            
             print("SignInViewModel 정보:",self.email.value, self.password.value)
             print("SignInViewModel userData:",userData)
             print("SignInViewModel error:",error)
@@ -42,20 +48,20 @@ class SignInViewModel {
 }
 
 /*
-var input = Input()
-var output = Output()
-
-struct Input {
-let email = PublishSubject<String>()
-let password = PublishSubject<String>()
-let tapSignInButton = PublishSubject<Void>() // 버튼을 누르는 것도 입력
-    
-}
-
-struct Output {
-    let activeSignInButton = PublishRelay<Bool>()
-    let errorMessage = PublishRelay<String>()
-    let access = PublishRelay<Void>()
-}
-
-*/
+ var input = Input()
+ var output = Output()
+ 
+ struct Input {
+ let email = PublishSubject<String>()
+ let password = PublishSubject<String>()
+ let tapSignInButton = PublishSubject<Void>() // 버튼을 누르는 것도 입력
+ 
+ }
+ 
+ struct Output {
+ let activeSignInButton = PublishRelay<Bool>()
+ let errorMessage = PublishRelay<String>()
+ let access = PublishRelay<Void>()
+ }
+ 
+ */
