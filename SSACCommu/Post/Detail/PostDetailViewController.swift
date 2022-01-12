@@ -23,11 +23,13 @@ class PostDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         mainView.tableView.register(CommentTableViewCell.self, forCellReuseIdentifier: CommentTableViewCell.identifier)
         mainView.tableView.rowHeight = UITableView.automaticDimension
+        mainView.tableView.keyboardDismissMode = .onDrag
+        mainView.addCommentTextField.autocorrectionType = .no
         
         
     }
@@ -80,7 +82,7 @@ class PostDetailViewController: BaseViewController {
     
     @objc func addCommentButtonClicked() {
         let comment = mainView.addCommentTextField.text!
-        
+        view.endEditing(true)
         if comment != "" {
             if !isEditComment {
                 print("작성한 코멘트: \(comment), post id: \(viewModel.selectedPost.value.id)")
@@ -102,6 +104,7 @@ class PostDetailViewController: BaseViewController {
             
         }
         else {
+            mainView.makeToast("내용을 입력해주세요.")
             print("얼럿: 내용을 입력하세요")
         }
     }
@@ -132,6 +135,9 @@ class PostDetailViewController: BaseViewController {
             self.makeAlert(message: "삭제하시겠습니까?", okTitle: "확인") { _ in
                 self.viewModel.deleteDeletePost(postId: self.viewModel.selectedPost.value.id) {
                     print("삭제 완료")
+                    DispatchQueue.main.async {
+                        self.view.makeToast("글이 삭제되었습니다.")
+                    }
                     self.navigationController?.popViewController(animated: true)
                 }
             }

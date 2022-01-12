@@ -40,9 +40,13 @@ class PostEditViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        //self.hideKeyboardWhenTapped()
+        mainView.textField.autocorrectionType = .no
+        mainView.textField.becomeFirstResponder()
         
     }
+    
+    
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
@@ -55,7 +59,7 @@ class PostEditViewController: BaseViewController {
     }
     
     @objc override func back() {
-        self.makeAlert(message: "변경사항이 저장되지 않았습니다. 목록으로 이동하시겠습니까?", okTitle: "확인") {_ in
+        self.makeAlert(message: "글이 저장되지 않았습니다. 목록으로 이동하시겠습니까?", okTitle: "확인") {_ in
             self.navigationController?.popViewController(animated: true)
         }
         

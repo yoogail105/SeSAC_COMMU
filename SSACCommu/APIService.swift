@@ -73,7 +73,7 @@ class APIService {
     static func loadPosts(sort: Sort, completion: @escaping (Posts?, APIError?) -> Void) {
         
         var request = URLRequest(url: Endpoint.posts(startIndex: 0, endIndex: 1000, sort: sort.rawValue).url)
-        let token = UserDefaults.standard.token
+        let token = UserDefaults.standard.token!
         request.httpMethod = Method.GET.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         

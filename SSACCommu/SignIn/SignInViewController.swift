@@ -19,6 +19,7 @@ class SignInViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         mainView.emailTextField.becomeFirstResponder()
     }
     
 

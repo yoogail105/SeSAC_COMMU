@@ -21,6 +21,7 @@ class SignUpViewController: BaseViewController {
         super.viewDidLoad()
         
         setupNavigationBar()
+        mainView.emailTextField.becomeFirstResponder()
        
     }
     

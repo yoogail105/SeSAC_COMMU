@@ -29,7 +29,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let rootNavigationController = UINavigationController(rootViewController: rootViewController)
         self.window?.rootViewController = rootNavigationController
         self.window?.makeKeyAndVisible()
-        // MARK: 랄라
         
     }
 

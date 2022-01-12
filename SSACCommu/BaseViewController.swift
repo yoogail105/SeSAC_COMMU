@@ -72,10 +72,11 @@ class BaseViewController: UIViewController {
         }
     }
          
-    
-    
-    
     func showToast(message: String) {
+        self.view.makeToast(message, duration: 3.0, position: .center)
+    }
+    
+    func showToast33(message: String) {
         let window = UIApplication.shared.windows.last!
         let toastView = SimpleToastView()
         window.addSubview(toastView)
@@ -123,5 +124,8 @@ class BaseViewController: UIViewController {
         return result
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
+        }
     
 }
