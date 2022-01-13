@@ -49,6 +49,24 @@ class ChangePWViewController: BaseViewController {
             .bind(to: viewModel.confirmNewPasswordObserver)
             .disposed(by: disposeBag)
         
+        mainView.currentPasswordTextField.rx.text.orEmpty
+            .subscribe(onNext: {
+                self.limitCurrentPasswordTextField($0)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.newPasswordTextField.rx.text.orEmpty
+            .subscribe(onNext: {
+                self.limitNewPasswordTextField($0)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.confirmNewPasswordTextField.rx.text.orEmpty
+            .subscribe(onNext: {
+                self.limitConfirmNewPasswordTextField($0)
+            })
+            .disposed(by: disposeBag)
+        
         
         viewModel.isValidCurrentPassword
             .map { $0 ? UIColor(named: "SSACGreen") : UIColor.red }
@@ -107,5 +125,26 @@ class ChangePWViewController: BaseViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
      
+    }
+    
+    private func limitCurrentPasswordTextField(_ password: String) {
+        if password.count > 15 {
+            let index = password.index(password.startIndex, offsetBy: 15)
+            mainView.currentPasswordTextField.text = String(password[..<index])
+        }
+    }
+    
+    private func limitNewPasswordTextField(_ password: String) {
+        if password.count > 15 {
+            let index = password.index(password.startIndex, offsetBy: 15)
+            mainView.newPasswordTextField.text = String(password[..<index])
+        }
+    }
+    
+    private func limitConfirmNewPasswordTextField(_ password: String) {
+        if password.count > 15 {
+            let index = password.index(password.startIndex, offsetBy: 15)
+            mainView.confirmNewPasswordTextField.text = String(password[..<index])
+        }
     }
 }

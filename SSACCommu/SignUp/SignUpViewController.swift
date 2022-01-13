@@ -55,12 +55,26 @@ class SignUpViewController: BaseViewController {
             .bind(to: viewModel.confirmPasswordObserver)
             .disposed(by: disposeBag)
         
+        //글자수제한
         mainView.userNameTextField.rx.text.orEmpty
             .subscribe(onNext: {
                 self.limitNickname($0)
             })
             .disposed(by: disposeBag)
         
+        mainView.passwordTextField.rx.text.orEmpty
+            .subscribe(onNext: {
+                self.limitPassword($0)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.confirmPasswordTextField.rx.text.orEmpty
+            .subscribe(onNext: {
+                self.limitConfirmPassword($0)
+            })
+            .disposed(by: disposeBag)
+        
+        //: 글자수제한
         viewModel.isValidNickname
             .map { $0 ? UIColor(named: "SSACGreen") : UIColor.red }
             .bind(to: mainView.userNameTextField.rx.textColor)
@@ -96,36 +110,8 @@ class SignUpViewController: BaseViewController {
     
     override func addAction() {
         
-        //        self.mainView.emailTextField.addTarget(self, action: #selector(
-        //            emailTextFieldDidChange(_:)), for: .editingChanged)
-        //
-        //        self.mainView.userNameTextField.addTarget(self, action: #selector(
-        //            userNameTextFieldDidChange(_:)), for: .editingChanged)
-        //
-        //        self.mainView.passwordTextField.addTarget(self, action: #selector(
-        //            passwordTextFieldDidChange(_:)), for: .editingChanged)
-        //
-        //        self.mainView.confirmPasswordTextField.addTarget(self, action: #selector(
-        //            confirmPasswordTextFieldDidChange(_:)), for: .editingChanged)
-        
         self.mainView.signButton.addTarget(self, action: #selector(signInButtonClicked), for: .touchUpInside)
     }
-    
-    //    @objc func emailTextFieldDidChange(_ textfield: UITextField) {
-    //        viewModel.email.value = textfield.text ?? ""
-    //    }
-    //
-    //    @objc func userNameTextFieldDidChange(_ textfield: UITextField) {
-    //        viewModel.userName.value = textfield.text ?? ""
-    //    }
-    //
-    //    @objc func passwordTextFieldDidChange(_ textfield: UITextField) {
-    //        viewModel.password.value = textfield.text ?? ""
-    //    }
-    //
-    //    @objc func confirmPasswordTextFieldDidChange(_ textfield: UITextField) {
-    //        viewModel.confirmPassword.value = textfield.text ?? ""
-    //    }
     
     
     
@@ -147,6 +133,27 @@ class SignUpViewController: BaseViewController {
         }
     }
     
+    
+    
+    private func limitConfirmPassword(_ password: String) {
+        if password.count > 15 {
+            let index = password.index(password.startIndex, offsetBy: 15)
+            mainView.confirmPasswordTextField.text = String(password[..<index])
+        }
+    }
+    
+    private func limitPassword(_ password: String) {
+        if password.count > 15 {
+            let index = password.index(password.startIndex, offsetBy: 15)
+            mainView.passwordTextField.text = String(password[..<index])
+        }
+    }
+    
+//    private func checkPasswordCount(_ password: String) -> Bool {
+//        return password.count > 15
+//    }
+    
+    
     private func limitNickname(_ userName: String) {
         if userName.count > 8 {
             let index = userName.index(userName.startIndex, offsetBy: 8)
@@ -154,8 +161,8 @@ class SignUpViewController: BaseViewController {
         }
     }
     
-    private func checkUserNameCount(_ userName: String) -> Bool {
-        return userName.count > 8
-    }
+//    private func checkUserNameCount(_ userName: String) -> Bool {
+//        return userName.count > 8
+//    }
 }
 

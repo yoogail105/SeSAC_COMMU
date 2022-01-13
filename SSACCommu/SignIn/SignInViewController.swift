@@ -49,6 +49,12 @@ class SignInViewController: BaseViewController {
             .bind(to: viewModel.passwordObserver)
             .disposed(by: disposeBag)
         
+        mainView.passwordTextField.rx.text.orEmpty
+            .subscribe(onNext: {
+                self.limitPassword($0)
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.isValidEmail
             .map { $0 ? UIColor(named: "SSACGreen") : UIColor.red }
             .bind(to: mainView.emailTextField.rx.textColor)
@@ -58,7 +64,6 @@ class SignInViewController: BaseViewController {
             .map { $0 ? UIColor(named: "SSACGreen") : UIColor.red }
             .bind(to: mainView.passwordTextField.rx.textColor)
             .disposed(by: disposeBag)
-        
         
         viewModel.isValidForm
             .bind(to: mainView.signButton.rx.isEnabled)
@@ -92,6 +97,14 @@ class SignInViewController: BaseViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             
+        }
+    }
+    
+    
+    private func limitPassword(_ password: String) {
+        if password.count > 15 {
+            let index = password.index(password.startIndex, offsetBy: 15)
+            mainView.passwordTextField.text = String(password[..<index])
         }
     }
 }
