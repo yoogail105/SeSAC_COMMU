@@ -55,7 +55,7 @@ extension UIViewController {
         
         self.present(alert, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            return
+            self.dismiss(animated: true)
         }
     }
     

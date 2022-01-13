@@ -20,13 +20,19 @@ class ChangePWViewModel {
         return currentPasswordObserver.map { $0.validatePassword() }
     }
     
+    var isValidChanged: Observable<Bool> {
+        return Observable.combineLatest(currentPasswordObserver, newPasswordObserver)
+            .map { currentPassword, newPassword in
+                return currentPassword != newPassword
+            }
+    }
+    
+    
     var isValidNewPassword: Observable<Bool> {
         return Observable.combineLatest(currentPasswordObserver, newPasswordObserver)
-            .map { curentPassword, newPassword in
-                return newPassword.validatePassword() && curentPassword != newPassword
-                
+            .map { currentPassword, newPassword in
+                return newPassword.validatePassword() && currentPassword == newPassword
             }
-            
     }
     
     var isValidConfirmPassword: Observable<Bool> {

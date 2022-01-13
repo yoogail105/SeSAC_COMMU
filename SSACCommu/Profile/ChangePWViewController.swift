@@ -49,6 +49,7 @@ class ChangePWViewController: BaseViewController {
             .bind(to: viewModel.confirmNewPasswordObserver)
             .disposed(by: disposeBag)
         
+        
         viewModel.isValidCurrentPassword
             .map { $0 ? UIColor(named: "SSACGreen") : UIColor.red }
             .bind(to: mainView.currentPasswordTextField.rx.textColor)

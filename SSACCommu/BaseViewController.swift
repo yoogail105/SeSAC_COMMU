@@ -76,35 +76,6 @@ class BaseViewController: UIViewController {
         self.view.makeToast(message, duration: 3.0, position: .center)
     }
     
-    func showToast33(message: String) {
-        let window = UIApplication.shared.windows.last!
-        let toastView = SimpleToastView()
-        window.addSubview(toastView)
-        //        window.addSubview(v)
-        //        v.backgroundColor = UIColor.blackColor()
-        //        let v2 = UIView(frame: CGRect(x: 50, y: 50, width: 100, height: 50))
-        //        v2.backgroundColor = UIColor.whiteColor()
-        //        window.addSubview(v2)
-        //self.view.addSubview(toast)
-        
-        
-        UIView.animate(withDuration: 10.0, delay: 0.1, options: .curveEaseOut, animations: { toastView.alpha = 0.0}, completion: {_ in
-            toastView.removeFromSuperview()})
-    }
-    
-    func showToast22(message : String, font: UIFont = UIFont.systemFont(ofSize: 14.0)) {
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toastLabel.textColor = UIColor.white
-        toastLabel.font = font
-        toastLabel.textAlignment = .center
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10
-        toastLabel.clipsToBounds = true
-        self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 10.0, delay: 0.1, options: .curveEaseOut, animations: { toastLabel.alpha = 0.0 }, completion: {(isCompleted) in toastLabel.removeFromSuperview() })
-    }
     
     func bind() {
         
