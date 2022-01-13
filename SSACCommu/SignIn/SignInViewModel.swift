@@ -34,29 +34,14 @@ class SignInViewModel {
             }
     }
     
-
-    
-    private func isValidEmail(_ email: String) -> Bool {
-        return !email.isEmpty && email.validateEmail()
-    }
-    
-    private func isValidPassword(_ password: String) -> Bool {
-        return !password.isEmpty && password.validatePassword()
-    }
-    
-    
-    
-    
-    
     func postUserSignIn(completion: @escaping (APIError?) -> ()) {
         print(#function)
         
         APIService.signIn(email: emailObserver.value, password: passwordObserver.value) { userData, error in
-            
-            
-            //            if error ==  {
-            //                self.showToast(message: "이미 등록된 이메일 입니다.")
-            //            }
+           
+            if error != nil {
+                completion(error)
+            }
             
             print("SignInViewModel 정보:",self.emailObserver.value, self.passwordObserver.value)
             print("SignInViewModel userData:",userData)

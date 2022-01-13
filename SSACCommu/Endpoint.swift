@@ -44,7 +44,7 @@ extension Endpoint {
             return .makeEndPoint("posts?_start=\(startIndex)&_limit=\(endIndex)&_sort=created_at:\(sort)")
         case .addPost:
             return .makeEndPoint("posts")
-       case .postDetail(id: let id):
+        case .postDetail(id: let id):
             return .makeEndPoint("posts/\(id)")
         case .comments(id: let id):
             return .makeEndPoint("comments?post=\(id)")
@@ -52,7 +52,7 @@ extension Endpoint {
             return .makeEndPoint("comments")
         case .commentDetail(id: let id):
             return .makeEndPoint("comments/\(id)")
-    
+            
             
         }
     }
@@ -67,7 +67,7 @@ extension URL {
         URL(string: baseURL + endpoint)!
         
     }
-
+    
 }
 
 extension URLSession {
@@ -83,11 +83,12 @@ extension URLSession {
     
     static func request<T: Decodable>(_ session: URLSession = .shared, endpoint: URLRequest, completion: @escaping (T?, APIError?) -> Void) {
         
-            session.dataTask(endpoint) { data, response, error in
-                
+        session.dataTask(endpoint) { data, response, error in
+            
             let str = String(decoding: data!, as: UTF8.self)
-            print("결과:::::::\n data: \(data)\n response: \(response)\n error: \(error)")
-                
+            //print("결과:::::::\n data: \(str)")
+            print("결과:::::::\n response: \(response)\n error: \(error)")
+            
             DispatchQueue.main.async {
                 guard error == nil else {
                     completion(nil, .failed)
@@ -111,10 +112,17 @@ extension URLSession {
                         print("토큰이 만료되었습니다.")
                         UserDefaults.standard.reset()
                         BaseViewController().isTokenExpired = true
-                                        
+                        
                         completion(nil, .unAuthorized)
                         return
                     }
+                    
+                    if response.statusCode == 400 {
+                        completion(nil, .invalidData)
+                        return
+                    }
+                    
+                    
                     //                    else { completion(nil, .failed) }
                     
                     // 오류 확인
@@ -133,7 +141,7 @@ extension URLSession {
                         return
                     }
                 }
-
+                
                 
                 do {
                     let decoder = JSONDecoder()

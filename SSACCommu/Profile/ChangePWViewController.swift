@@ -7,11 +7,14 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ChangePWViewController: BaseViewController {
     
     var mainView = ChangePWView()
     var viewModel = ChangePWViewModel()
+    let disposeBag = DisposeBag()
     override func loadView() {
         self.view = mainView
     }
@@ -31,17 +34,40 @@ class ChangePWViewController: BaseViewController {
     }
     
     override func bind() {
-        viewModel.currentPassword.bind { text in
-            self.mainView.currentPasswordTextField.text = text
-        }
-
-        viewModel.newPassword.bind { text in
-            self.mainView.newPasswordTextField.text = text
-        }
         
-        viewModel.confirmNewPassword.bind { text in
-            self.mainView.confirmNewPasswordTextField.text = text
-        }
+        mainView.currentPasswordTextField.rx.text.map { $0 ?? ""}
+        .bind(to: viewModel.currentPasswordObserver)
+        .disposed(by: disposeBag)
+        
+        mainView.newPasswordTextField.rx.text
+            .map { $0 ?? "" }
+            .bind(to: viewModel.newPasswordObserver)
+            .disposed(by: disposeBag)
+        
+        mainView.confirmNewPasswordTextField.rx.text
+            .map { $0 ?? "" }
+            .bind(to: viewModel.confirmNewPasswordObserver)
+            .disposed(by: disposeBag)
+        
+        viewModel.isValidCurrentPassword
+            .map { $0 ? UIColor(named: "SSACGreen") : UIColor.red }
+            .bind(to: mainView.currentPasswordTextField.rx.textColor)
+            .disposed(by: disposeBag)
+        
+        viewModel.isValidNewPassword
+            .map { $0 ? UIColor(named: "SSACGreen") : UIColor.red }
+            .bind(to: mainView.newPasswordTextField.rx.textColor)
+            .disposed(by: disposeBag)
+        
+        viewModel.isValidConfirmPassword
+            .map { $0 ? UIColor(named: "SSACGreen") : UIColor.red }
+            .bind(to: mainView.confirmNewPasswordTextField.rx.textColor)
+            .disposed(by: disposeBag)
+        
+        viewModel.isValidForm
+            .map{ $0 ? 1.0 : 0.3}
+            .bind(to: mainView.changeButton.rx.alpha)
+            .disposed(by: disposeBag)
     }
     
     override func addAction() {
@@ -54,8 +80,18 @@ class ChangePWViewController: BaseViewController {
     @objc func changeButtonClicked() {
         print("비밀번호 변경하기 버튼 클릭")
 
-        viewModel.postChangePassword(currentPassword: mainView.currentPasswordTextField.text!, newPassword: mainView.newPasswordTextField.text!, confirmNewPassword: mainView.confirmNewPasswordTextField.text!) {
-            print("성공했다.")
+        viewModel.postChangePassword(currentPassword: mainView.currentPasswordTextField.text!, newPassword: mainView.newPasswordTextField.text!, confirmNewPassword: mainView.confirmNewPasswordTextField.text!) { error in
+            
+            if error != nil {
+                self.makeAlertWithoutCancel(message: "현재 비밀번호를 정확하게 입력해주세요😲", okTitle: "확인", okAction: nil)
+            } else {
+                self.makeAlertWithoutCancel(message: "비밀번호가 변경되었습니다! 다시 로그인을 해주세요😇", okTitle: "확인") { _ in
+                    self.backToMain()
+                }
+            }
+            
+            
+            
         }
         
     }

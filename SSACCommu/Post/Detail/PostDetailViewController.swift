@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import Toast
+import RxSwift
+import RxCocoa
 
 class PostDetailViewController: BaseViewController {
     
@@ -56,13 +58,14 @@ class PostDetailViewController: BaseViewController {
         // let resultDate = dateFormatter.date(from: dateStr)
         mainView.dateLabel.text = dateStr
         mainView.contentLabel.text = postData.text
-        mainView.commentLabel.text = "댓글 \(postData.comments.count)"
+        
     }
     
     func getComments() {
         viewModel.getComments(postId: viewModel.selectedPost.value.id) {
             print("코멘트불러옴")
             self.mainView.tableView.reloadData()
+            self.mainView.commentLabel.text = "댓글 \(self.viewModel.loadedComments.value.count)"
         }
     }
     
@@ -88,15 +91,15 @@ class PostDetailViewController: BaseViewController {
                 print("작성한 코멘트: \(comment), post id: \(viewModel.selectedPost.value.id)")
                 viewModel.postAddComment(postId: viewModel.selectedPost.value.id, text: comment) {
                     self.getComments()
-                    print("코멘트 등록 완료")
                     self.mainView.addCommentTextField.text = ""
+                    self.makeToast(message: "댓글이 등록되었습니다.")
                 }
             } else { // 코멘트 수정하고 등록 누름
                 print("postID: \(self.viewModel.selectedPost.value.id), commentID: \(self.viewModel.selectedComment.value.id), comment: \(comment)")
                 self.viewModel.putEditComment(postId: self.viewModel.selectedPost.value.id, commentId: self.viewModel.selectedComment.value.id, comment: comment) {
                     self.isEditComment = false
                     self.getComments()
-                    print("수정완료")
+                    self.makeToast(message: "댓글이 수정되었습니다.")
                     self.mainView.addCommentTextField.text = ""
                     
                 }
@@ -104,7 +107,7 @@ class PostDetailViewController: BaseViewController {
             
         }
         else {
-            mainView.makeToast("내용을 입력해주세요.")
+            self.makeToast(message: "내용을 입력해 주세요.")
             print("얼럿: 내용을 입력하세요")
         }
     }
@@ -135,10 +138,8 @@ class PostDetailViewController: BaseViewController {
             self.makeAlert(message: "삭제하시겠습니까?", okTitle: "확인") { _ in
                 self.viewModel.deleteDeletePost(postId: self.viewModel.selectedPost.value.id) {
                     print("삭제 완료")
-                    DispatchQueue.main.async {
-                        self.view.makeToast("글이 삭제되었습니다.")
-                    }
-                    self.navigationController?.popViewController(animated: true)
+                    //self.mainView.commentLabel.text = "댓글 \(postData.comments.count)"
+                    self.makeToastAndPop(message: "글이 삭제되었습니다.")
                 }
             }
         }
@@ -157,7 +158,7 @@ class PostDetailViewController: BaseViewController {
             self.makeAlert(message: "댓글을 삭제 하시겠습니까?", okTitle: "확인") { _ in
                 self.viewModel.deleteComment(commentId: comment.id) {
                     print("삭제완료")
-                    self.mainView.makeToast("댓글이 삭제 되었습니다.")
+                    self.makeToast(message: "댓글이 삭제되었습니다.")
                     self.getComments()
                 }
                 
@@ -193,7 +194,6 @@ extension PostDetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.controlButton.isHidden = false
         } else {
             cell.controlButton.isHidden = true
-            cell
         }
         
         //cell.controlButton.addTarget(self, action: #selector(controlCommentButtonClicked(sender:)), for: .touchUpInside)
@@ -206,7 +206,13 @@ extension PostDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = self.viewModel.loadedComments.value[indexPath.row]
         self.viewModel.selectedComment.value = row
-        controlCommentButtonClicked(comment: viewModel.selectedComment.value)
+        
+        if row.user.id == UserDefaults.standard.id {
+            
+            controlCommentButtonClicked(comment: viewModel.selectedComment.value)
+        } else {
+            return
+        }
     }
     
     //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

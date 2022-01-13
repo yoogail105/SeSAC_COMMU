@@ -48,6 +48,32 @@ extension UIViewController {
         self.present(alert, animated: true)
     }
     
+    func makeToast(message: String) {
+        
+        self.view.tintColor = UIColor(named: "SSACGreen")
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        
+        self.present(alert, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            return
+        }
+    }
+    
+    func makeToastAndPop(message: String) {
+        
+        self.view.tintColor = UIColor(named: "SSACGreen")
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        
+        self.present(alert, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            self.dismiss(animated: true) {
+                self.navigationController?.popViewController(animated: true)
+            }
+        })
+        
+    }
+    
  
     func makeActionSheet(editAction: @escaping ((UIAlertAction) -> Void), deleteAction:@escaping ((UIAlertAction) -> Void) ) {
         

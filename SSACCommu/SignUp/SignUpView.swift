@@ -39,13 +39,17 @@ class SignUpView: UIView {
     
     func configure() {
         emailTextField.setupTextField(placeholderText: "이메일 주소")
-        userNameTextField.setupTextField(placeholderText: "닉네임")
-        passwordTextField.setupTextField(placeholderText: "비밀번호")
+        userNameTextField.setupTextField(placeholderText: "닉네임(2~8 글자)")
+        passwordTextField.setupTextField(placeholderText: "비밀번호(대, 소문자, 특수문자, 숫자를 모두 포함한 8~15자리)")
         confirmPasswordTextField.setupTextField(placeholderText: "비밀번호 확인")
         signButton.setupButton(title: "가입하기")
         emailTextField.keyboardType = .emailAddress
         passwordTextField.isSecureTextEntry = true
         confirmPasswordTextField.isSecureTextEntry = true
+        [emailTextField, userNameTextField, passwordTextField, confirmPasswordTextField].forEach {
+            $0.autocorrectionType = .no
+            
+        }
     }
     
     

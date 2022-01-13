@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import RxRelay
 
 
 class PostDetailViewModel {
+    
+    
     
     var selectedPost: myObservable<Post> = myObservable(Post(id: 0, text: "",
                                                          user: UserData(id: 0, username: "", email: "", createdAt: "", updatedAt: ""), createdAt: "", updatedAt: "",

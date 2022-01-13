@@ -14,8 +14,8 @@ class SignInViewController: BaseViewController {
     var mainView = SignInView()
     var viewModel = SignInViewModel()
     let disposeBag = DisposeBag()
-   
-
+    
+    
     
     override func loadView() {
         self.view = mainView
@@ -23,11 +23,13 @@ class SignInViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         mainView.emailTextField.becomeFirstResponder()
+        
+        mainView.emailTextField.becomeFirstResponder()
+        
     }
     
-
-
+    
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         self.navigationItem.title = "새싹농장 입장하기"
@@ -61,36 +63,34 @@ class SignInViewController: BaseViewController {
         viewModel.isValidForm
             .bind(to: mainView.signButton.rx.isEnabled)
             .disposed(by: disposeBag)
-            
+        
         viewModel.isValidForm
             .map{ $0 ? 1.0 : 0.3}
             .bind(to: mainView.signButton.rx.alpha)
             .disposed(by: disposeBag)
         
         
+        
     }
     
     override func addAction() {
         
-
+        
         self.mainView.signButton.addTarget(self, action: #selector(signInButtonClicked), for: .touchUpInside)
         
     }
-    
-//    @objc func emailTextFieldDidChange(_ textfield: UITextField) {
-//        viewModel.emailObserver.value = textfield.text ?? ""
-//    }
-//
-//    @objc func passwordTextFieldDidChange(_ textfield: UITextField) {
-//        viewModel.passwordObserver.value = textfield.text ?? ""
-//    }
+   
     
     @objc func signInButtonClicked() {
         print(#function)
         viewModel.postUserSignIn { error in
-            UserDefaults.standard.validToken = true
-            let vc = PostViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+            if error != nil {
+                self.makeAlertWithoutCancel(message: "아이디와 비밀번호를 정확히 입력해주세요 🤧", okTitle: "확인", okAction: nil)
+            } else {
+                UserDefaults.standard.validToken = true
+                let vc = PostViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
             
         }
     }

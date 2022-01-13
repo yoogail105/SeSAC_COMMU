@@ -87,10 +87,10 @@ class PostViewController: BaseViewController {
     func printUserData() {
         print(#function)
         print("validToken:",self.userDefaults.validToken)
-        print("token:",self.userDefaults.token!)
+        print("token:",self.userDefaults.token)
         print("id:", self.userDefaults.id)
-        print("nickname:", self.userDefaults.nickname!)
-        print("email:", self.userDefaults.email!)
+        print("nickname:", self.userDefaults.nickname)
+        print("email:", self.userDefaults.email)
         
     }
     

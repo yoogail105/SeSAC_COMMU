@@ -35,8 +35,8 @@ extension UserDefaults {
         set { setValue(newValue, forKey: UserDefaultsKeys.isTokenExpired.rawValue)}
     }
     
-    var token: String? {
-        get { string(forKey: UserDefaultsKeys.token.rawValue)}
+    var token: String {
+        get { string(forKey: UserDefaultsKeys.token.rawValue) ?? ""}
         set { setValue(newValue, forKey: UserDefaultsKeys.token.rawValue)}
     }
     
@@ -45,13 +45,13 @@ extension UserDefaults {
         set { setValue(newValue, forKey: UserDefaultsKeys.id.rawValue)}
     }
     
-    var nickname: String? {
-        get { string(forKey: UserDefaultsKeys.nickname.rawValue)}
+    var nickname: String {
+        get { string(forKey: UserDefaultsKeys.nickname.rawValue) ?? ""}
         set { setValue(newValue, forKey: UserDefaultsKeys.nickname.rawValue)}
     }
     
-    var email: String? {
-        get { string(forKey: UserDefaultsKeys.email.rawValue)}
+    var email: String {
+        get { string(forKey: UserDefaultsKeys.email.rawValue) ?? ""}
         set { setValue(newValue, forKey: UserDefaultsKeys.email.rawValue)}
     }
 }

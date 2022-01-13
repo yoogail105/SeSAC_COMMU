@@ -17,7 +17,7 @@ class PostEditView: UIView {
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor(named: "SSACGray")?.cgColor
         textField.layer.cornerRadius = 10
-        
+        textField.autocorrectionType = .no
         return textField
     }()
     
@@ -32,7 +32,6 @@ class PostEditView: UIView {
     }
     
     func configure() {
-        
     }
     
     func constraints() {

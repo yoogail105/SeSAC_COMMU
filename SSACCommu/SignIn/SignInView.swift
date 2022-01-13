@@ -43,7 +43,9 @@ class SignInView: UIView {
         emailTextField.keyboardType = .emailAddress
         signButton.setupButton(title: "입장하기")
         passwordTextField.isSecureTextEntry = true
-        
+        [emailTextField, passwordTextField].forEach {
+            $0.autocorrectionType = .no
+        }
     }
     
     

@@ -22,3 +22,8 @@ struct Datum: Codable {
 struct Message: Codable {
     let id, message: String
 }
+
+enum ErrorMessage: String {
+    case invalidIdPassword = "아디디와 비밀번호를 확인해주세요."
+    
+}

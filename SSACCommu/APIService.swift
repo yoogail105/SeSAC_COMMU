@@ -44,7 +44,7 @@ class APIService {
     // MARK: Change Password
     static func changePW(currentPassword: String, newPassword: String, confirmNewPassword: String, completion: @escaping (UserData?, APIError?) -> Void) {
         
-        let token = UserDefaults.standard.token!
+        let token = UserDefaults.standard.token
         var request = URLRequest(url: Endpoint.changePW.url)
         
         request.httpMethod = Method.POST.rawValue
@@ -59,7 +59,7 @@ class APIService {
     
     static func selectedPost(postId: Int, completion: @escaping (Post?, APIError?) -> Void) {
         
-        let token = UserDefaults.standard.token!
+        let token = UserDefaults.standard.token
         var request = URLRequest(url: Endpoint.postDetail(id: postId).url)
         
         request.httpMethod = Method.GET.rawValue
@@ -73,7 +73,8 @@ class APIService {
     static func loadPosts(sort: Sort, completion: @escaping (Posts?, APIError?) -> Void) {
         
         var request = URLRequest(url: Endpoint.posts(startIndex: 0, endIndex: 1000, sort: sort.rawValue).url)
-        let token = UserDefaults.standard.token!
+        let token = UserDefaults.standard.token
+
         request.httpMethod = Method.GET.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
@@ -83,7 +84,7 @@ class APIService {
     // MARK: 포스트 작성
     static func addPosts(text: String, completion: @escaping (Post?, APIError?) -> Void) {
         
-        let token = UserDefaults.standard.token!
+        let token = UserDefaults.standard.token
         var request = URLRequest(url: Endpoint.addPost.url)
         request.httpMethod = Method.POST.rawValue
         request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
@@ -95,7 +96,7 @@ class APIService {
     // MARK: 포스트 수정
     static func editPost(text: String, postId: Int, completion: @escaping (Post?, APIError?) -> Void) {
         
-        let token = UserDefaults.standard.token!
+        let token = UserDefaults.standard.token
         var request = URLRequest(url: Endpoint.postDetail(id: postId).url)
         print("수정 포스트 id:", postId)
         request.httpMethod = Method.PUT.rawValue
@@ -108,7 +109,7 @@ class APIService {
 
     // MARK: 포스트 삭제
     static func deletePost(postId: Int, completion: @escaping (Post?, APIError?) -> Void) {
-        let token = UserDefaults.standard.token!
+        let token = UserDefaults.standard.token
         var request = URLRequest(url: Endpoint.postDetail(id: postId).url)
         request.httpMethod = Method.DELETE.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -119,7 +120,7 @@ class APIService {
     // MARK: 코멘트 조회
     // http://base-URL/comments?post=1
     static func loadComments(postId: Int, completion: @escaping (Comments?, APIError?) -> Void) {
-        let token = UserDefaults.standard.token!
+        let token = UserDefaults.standard.token
         var request = URLRequest(url: Endpoint.comments(id: postId).url)
         request.httpMethod = Method.GET.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -129,7 +130,7 @@ class APIService {
     
     // MARK: 코멘트 작성
     static func addComment(postId: Int, comment: String, completion: @escaping (Comment?, APIError?) -> Void) {
-        let token = UserDefaults.standard.token!
+        let token = UserDefaults.standard.token
         var request = URLRequest(url: Endpoint.addComments.url)
         request.httpMethod = Method.POST.rawValue
         request.httpBody = "comment=\(comment)&post=\(postId)".data(using: .utf8, allowLossyConversion: false)
@@ -140,7 +141,7 @@ class APIService {
     
     // MARK: 코멘트 수정
     static func editComment(postId: Int, commentId: Int, comment: String, completion: @escaping (Comment?, APIError?) -> Void) {
-        let token = UserDefaults.standard.token!
+        let token = UserDefaults.standard.token
         var request = URLRequest(url: Endpoint.commentDetail(id: commentId).url)
         request.httpMethod = Method.PUT.rawValue
         request.httpBody = "comment=\(comment)&post=\(postId)".data(using: .utf8, allowLossyConversion: false)
@@ -152,7 +153,7 @@ class APIService {
     
     // MARK: 코멘트 삭제
     static func deleteComment(commentId: Int, completion: @escaping (Comment?, APIError?) -> Void) {
-        let token = UserDefaults.standard.token!
+        let token = UserDefaults.standard.token
         var request = URLRequest(url: Endpoint.commentDetail(id: commentId).url)
         request.httpMethod = Method.DELETE.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
