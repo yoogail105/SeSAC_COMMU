@@ -46,8 +46,9 @@ class ChangePWView: UIView {
     
     func configure() {
         currentPasswordTextField.setupTextField(placeholderText: "현재 비밀번호")
-        newPasswordTextField.setupTextField(placeholderText: "새로운 비밀번호")
+        newPasswordTextField.setupTextField(placeholderText: "새로운 비밀번호(대, 소문자, 숫자, 특수문자(!@#$%^)를 모두 포함한 8~15자리)")
         confirmNewPasswordTextField.setupTextField(placeholderText: "새로운 비밀번호 확인")
+        
         changeButton.setupButton(title: "변경하기")
         
         confirmNewPasswordTextField.isSecureTextEntry = true
