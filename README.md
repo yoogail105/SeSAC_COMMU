@@ -139,4 +139,71 @@
   }
   ```
 
- 
+ ### 3. 도전과제1: MVVM 패턴
+
+- 지금까지 MVC패턴으로만 코드를 작성해왔다. 만보랑 출시 프로젝트를 MVC패턴으로 작성하면서, `ViewController`가 주체할 수 없게 길어지는 것을 경험하며.. 자연스럽게 MVVM의 필요성에 대해서 느꼈던 것 같다. 이번 프로젝트에는 이에 대해 공부하여 적용하려고 노력했다.
+
+  1. View와 Model의 분리
+
+     간단하게 말하면, 뷰는 뷰를! 모델은 데이터를 담당하게 해 주면 된다. (말은 쉽다...)
+
+     내가 이해한 것은.. 앞서 말한 것처럼 view는 화면을 그리는 역할에 충실하도록, 그리고 model은 화면에 보여질 데이터와 로직을 가지고 있으면서, viewController는 그 둘을 연결`bind`해 주면 된다.
+
+  2. 그래서 구현은?
+
+     View()는 말그대로 화면을 그리는 역할만을 수행하게 했고, ViewModel에서는 API 통신 등의 처리를 하도록 구현했다. 최대한 뷰컨트롤러가 어떠한 로직을 수행하지 않게 하려고 노력했다. 하지만 여전히 ViewController의 역할을 완전히 덜어내지 못한 것 같다. 더 공부하며 리팩토링을 해야겠다.
+
+### 4. 도전과제2: RxSwift
+
+- 이전에 내가 사용한 옵저버라 하면,, `notificaion center`가 있다. 사용자의 어떠한 행동에 대해서 즉각 반응하는 UI는 앱을 사용하는 사람이라면 자연스럽게, 중요하게 느끼고 있을 것이다. 그리고 개인적으로는 Swift를 공부하면서 어쩌면 가장 마음처럼 되지 않고, 구현하는 데에 어려움을 겪었던 부분이기도 하다. 그래서 `RxSwift`를 활용해 보려고 노력했다.
+
+  1. RxSwift를 통해 텍스트필드의 유효성 검증하기
+
+     ```swift
+     // ViewModel
+     var passwordObserver = BehaviorRelay<String>(value: "")
+     var isValidConfirmPassword: Observable<Bool> {
+             return Observable.combineLatest(passwordObserver, confirmPasswordObserver)
+                 .map { password, confirmPassword in
+                     return password == confirmPassword
+                 }
+     }
+     
+     // ViewController
+     mainView.passwordTextField.rx.text
+                 .map { $0 ?? "" }
+                 .bind(to: viewModel.passwordObserver)
+                 .disposed(by: disposeBag)
+     
+     viewModel.isValidConfirmPassword
+                 .map { $0 ? UIColor(named: "SSACGreen") : UIColor.red }
+                 .bind(to: mainView.confirmPasswordTextField.rx.textColor)
+                 .disposed(by: disposeBag)
+     
+     
+     ```
+
+     - 정규식을 통해 비밀번호의 유효성을 검증한 후, 유효하다면`isValidConfirmPassword`, 텍스트의 색상을 녹색으로, 유효하지 않다면 빨간 색으로 바꾸어주도록 했다.
+
+  2. RxSwift를 통해 버튼 활성화 시키기
+
+     ```swift
+     // ViewModel
+     var isValidForm: Observable<Bool> {
+             return Observable.combineLatest(userNameObserver, emailObserver, passwordObserver, confirmPasswordObserver)
+                 .map { userName, email, password, confirmPassword in
+                     return userName.count > 1 && email.validateEmail() && password.validatePassword() && password == confirmPassword
+                 }
+     }
+     
+     // ViewController
+     viewModel.isValidForm
+                 .bind(to: mainView.signButton.rx.isEnabled)
+                 .disposed(by: disposeBag)
+     viewModel.isValidForm
+                 .map{ $0 ? 1.0 : 0.3}
+                 .bind(to: mainView.signButton.rx.alpha)
+                 .disposed(by: disposeBag)
+     ```
+
+     - 회원가입 시 입력되어야 하는 이메일, 비밀번호, 이름 등의 항목들이 올바르게 채워지면, 회원가입버튼이 활성화 되도록 구현했다.  이렇게 RxSwift를 통해 유효성을 검증하며 클라이언트 단계에서 사용자의 입력값 오류를 최대한 걸러낼 수 있도록 했다.
