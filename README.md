@@ -94,7 +94,7 @@
      이런 오류를 만난다면 구조체로 달려가 내가 보내고 있는 것이 무엇인지 확인하기
      
 
-### 2. Toast message / Alert 표시 후 화면 전환이 일어날 때
+### 2. Toast message 표시 후 화면 전환이 일어날 때
 
 - 댓글을 수정/삭제 하고 나서 '수정되었습니다.', '삭제되었습니다.' 등의 메세지를 표시하는 것에서는 같은 뷰에서 일어나는 일이기 때문에 문제가 없었다. 하지만 토스트 메세지를 띄운 후에 화면을 전환하는 경우에는 추가적인 처리를 해 주어야 했다.
 
@@ -138,8 +138,65 @@
     self.makeToastAndPop(message: "저장 되었습니다🌱")
   }
   ```
+  
+ ###  3. Toast message, Alert 모듈화
 
- ### 3. 도전과제1: MVVM 패턴
+- 이어서, 이 프로젝트에는 다양한 Alert의 형태가 필요했고, 반복적으로 사용되었다.
+
+  먼저 내가 Toast message로 사용한 액션이 없는 Alert, 그리고 토큰이 만료되었거나 회원가입 만료 시 등 유저가 `확인` 버튼만을 누르는 Alert, 마지막으로 `취소`와 `확인`이 모두 있는 Alert.
+
+  👉 필요할 때 간단하게 호출해서 사용할 수 있도록, `모듈화`를 통해 구현했다.
+
+  ```swift
+  func makeAlert(message: String, okTitle: String, okAction: @escaping ((UIAlertAction) -> Void)) {
+         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+         let okAction = UIAlertAction(title: okTitle, style: .default, handler: okAction)
+         okAction.redAlertText()
+         alert.addAction(okAction)
+          
+         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+         cancelAction.greenAlertText()
+         alert.addAction(cancelAction)
+          
+          self.present(alert, animated: true)
+  }
+  
+  func makeAlertWithoutCancel(message: String, okTitle: String, okAction: ((UIAlertAction) -> Void)?) {
+     
+          self.view.tintColor = UIColor(named: "SSACGreen")
+          let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+          let okAction = UIAlertAction(title: okTitle, style: .default, handler: okAction)
+          okAction.redAlertText()
+          alert.addAction(okAction)
+    
+          self.present(alert, animated: true)
+  }
+  
+  func makeToast(message: String) {
+          let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+          
+          self.present(alert, animated: true)
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+              self.dismiss(animated: true)
+          }
+  }
+  
+  func makeToastAndPop(message: String) {
+    
+          let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+          self.present(alert, animated: true)
+          
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+              self.dismiss(animated: true) {
+                  self.navigationController?.popViewController(animated: true)
+              }
+          })
+  }
+  ```
+
+   
+
+ ### 4. 도전과제1: MVVM 패턴
 
 - 지금까지 MVC패턴으로만 코드를 작성해왔다. 만보랑 출시 프로젝트를 MVC패턴으로 작성하면서, `ViewController`가 주체할 수 없게 길어지는 것을 경험하며.. 자연스럽게 MVVM의 필요성에 대해서 느꼈던 것 같다. 이번 프로젝트에는 이에 대해 공부하여 적용하려고 노력했다.
 
@@ -157,7 +214,7 @@
 
    지금 나의 코드는 하나의 화면에 `View, ViewModel, ViewController`가 한 쌍이다. 그런데 굳이 `1:1` 관계를 유지해야할 필요가 있을까? 만약 회원가입 뷰가 한 페이지에 작성되지 않고 여러 화면에 걸쳐서 진행되었다면, 이 때의 나는 해당되는 뷰 만큼의 viewModel을 만들었을 것 같다. 유사한 기능의 viewModel들을 통합해서 `1대 다`로 수정해볼 필요가 있다.
 
-### 4. 도전과제2: RxSwift
+### 5. 도전과제2: RxSwift
 
 - 이전에 내가 사용한 옵저버라 하면,, `notificaion center`가 있다. 사용자의 어떠한 행동에 대해서 즉각 반응하는 UI는 앱을 사용하는 사람이라면 자연스럽게, 중요하게 느끼고 있을 것이다. 그리고 개인적으로는 Swift를 공부하면서 어쩌면 가장 마음처럼 되지 않고, 구현하는 데에 어려움을 겪었던 부분이기도 하다. 그래서 `RxSwift`를 활용해 보려고 노력했다.
 
