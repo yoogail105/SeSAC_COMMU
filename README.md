@@ -20,12 +20,6 @@
 <br/>
 <br/>
 
-# Video
-
-
-<br/>
-<br/>
-
 # Issues
 
 ### 1. API 통신 오류 찾기
